@@ -11,38 +11,23 @@ local tagicon = function(icon)
 end
 
 shifty.config.tags = {
+   home = {
+      position = 1,
+      exclusive = true,
+      init = true
+   },
    www = {
       position = 3,
       mwfact = 0.7,
       exclusive = true,
-      max_clients = 1,
-      screen = math.max(screen.count(), 2),
       spawn = config.browser,
       icon = tagicon("web")
    },
-   emacs = {
+   term = {
       position = 2,
-      mwfact = 0.6,
-      exclusive = true,
-      screen = 1,
-      spawn = "emacs",
-      icon = tagicon("dev"),
-   },
-   xterm = {
-      position = 1,
-      layout = awful.layout.suit.fair,
       exclusive = true,
       slave = true,
       spawn = config.terminal,
-      icon = tagicon("main"),
-   },
-   im = {
-      position = 4,
-      mwfact = 0.2,
-      exclusive = true,
-      screen = math.max(screen.count(), 2),
-      icon = tagicon("im"),
-      nopopup = true,           -- don't give focus on creation
    }
 }
 
@@ -52,46 +37,13 @@ shifty.config.apps = {
       match = { role = { "browser" } },
       tag = "www",
    },
-   {
-      match = { "emacs" },
-      tag = "emacs",
-   },
-   {
-      match = { role = { "conversation", "buddy_list" } },
-      tag = "im",
-   },
-   {
-      match = { class = { "Skype" } },
-      tag = "im",
-   },
-   {
-      match = { config.termclass },
-      startup = {
-         tag = "xterm"
-      },
-      intrusive = true,         -- Display even on exclusive tags
-   },
-   {
-      match = { class = { "Keepassx", "Key[-]mon" },
-                role = { "pop[-]up" },
-                name = { "Firebug" },
-                check = function (c)
-                   return awful.rules.match(c,
-                                            { instance = "chromium",
-                                              class = "Chromium",
-                                              name = "Chromium",
-                                              fullscreen = true })
-                end,
-                instance = { "plugin[-]container", "exe" } },
-      intrusive = true,
-   },
 }
 
 shifty.config.defaults = {
    layout = config.layouts[1],
    mwfact = 0.6,
    ncol = 1,
-   sweep_delay = 1,
+   persist = false,
 }
 
 shifty.taglist = config.taglist -- Set in widget.lua

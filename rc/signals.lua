@@ -47,7 +47,6 @@ client.add_signal("manage",
 				     for _, state in pairs(buttons) do
 					if state then return end
 				     end
-				     mouse_follow_focus(c)
 				  end)
 
 		     -- Setup icon if none exists
@@ -74,7 +73,6 @@ client.add_signal("focus", function(c)
 		     c.opacity = 1
 
 		     if focus_from_mouse ~= c then
-			mouse_follow_focus(c)
                         c:raise()
 		     end
 		     focus_from_mouse = false

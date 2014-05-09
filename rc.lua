@@ -21,10 +21,10 @@ function loadrc(name, mod)
    success, result = pcall(function() return dofile(path) end)
    if not success then
       naughty.notify({ title = "Error while loading an RC file",
-		       text = "When loading `" .. name ..
-			  "`, got the following error:\n" .. result,
-		       preset = naughty.config.presets.critical
-		     })
+             text = "When loading `" .. name ..
+           "`, got the following error:\n" .. result,
+             preset = naughty.config.presets.critical
+           })
       return print("E: error loading RC file '" .. name .. "': " .. result)
    end
 
@@ -36,7 +36,7 @@ function loadrc(name, mod)
    return result
 end
 
-loadrc("errors")		-- errors and debug stuff
+loadrc("errors")     -- errors and debug stuff
 
 -- Create cache directory
 os.execute("test -d " .. awful.util.getdir("cache") ..
@@ -45,32 +45,32 @@ os.execute("test -d " .. awful.util.getdir("cache") ..
 -- Global configuration
 modkey = "Mod4"
 config = {}
-config.terminal = "urxvtcd --perl-lib " .. awful.util.getdir("config") .. "/lib/rxvt"
+config.terminal = "urxvtc"
 config.termclass = "URxvt"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,
    awful.layout.suit.tile.bottom,
-   awful.layout.suit.fair,
-   awful.layout.suit.floating,
+   awful.layout.suit.magnifier,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
-config.browser = "chromium"
+config.browser = "google-chrome"
+config.filebrowser = "gnome-commander"
 
 -- Remaining modules
-loadrc("xrun")			-- xrun function
-loadrc("appearance")		-- theme and appearance settings
-loadrc("debug")			-- debugging primitive `dbg()`
+loadrc("xrun")       -- xrun function
+loadrc("appearance")    -- theme and appearance settings
+loadrc("debug")         -- debugging primitive `dbg()`
 
-loadrc("start")			-- programs to run on start
-loadrc("bindings")		-- keybindings
-loadrc("wallpaper")		-- wallpaper settings
-loadrc("widgets")		-- widgets configuration
-loadrc("tags")			-- tags handling
-loadrc("xlock")			-- lock screen
-loadrc("signals")		-- window manager behaviour
-loadrc("rules")			-- window rules
-loadrc("quake")			-- quake console
-loadrc("xrandr")		-- xrandr menu
+loadrc("start")         -- programs to run on start
+loadrc("bindings")      -- keybindings
+-- loadrc("wallpaper")     -- wallpaper settings
+loadrc("widgets")    -- widgets configuration
+loadrc("tags")       -- tags handling
+-- loadrc("xlock")         -- lock screen
+loadrc("signals")    -- window manager behaviour
+loadrc("rules")         -- window rules
+-- loadrc("quake")         -- quake console
+-- loadrc("xrandr")     -- xrandr menu
 
 root.keys(config.keys.global)

@@ -4,12 +4,14 @@ require("vicious")
 local icons = loadrc("icons", "vbe/icons")
 
 -- Separators
-local sepopen = widget({ type = "imagebox" })
-sepopen.image = image(beautiful.icons .. "/widgets/left.png")
-local sepclose = widget({ type = "imagebox" })
-sepclose.image = image(beautiful.icons .. "/widgets/right.png")
-local spacer = widget({ type = "imagebox" })
-spacer.image = image(beautiful.icons .. "/widgets/spacer.png")
+local sepopen = widget({ type = "textbox" })
+sepopen.text = "[ "
+local sepclose = widget({ type = "textbox" })
+sepclose.text = " ]"
+local spacer = widget({ type = "textbox" })
+spacer.text = " ][ "
+local sepblank = widget({ type = "textbox" })
+sepblank.text = " "
 
 -- Date
 local datewidget = widget({ type = "textbox" })
@@ -58,7 +60,7 @@ local cal = (
 	 calendar = naughty.notify(
 	    {
 	       text = string.format('<span font="%s">%s</span>',
-				    "Terminus 8",
+				    "DejaVu Sans Mono 8",
 				    cal:gsub(" +\n","\n")),
 	       timeout = 0, hover_timeout = 0.5,
 	       width = 160,
@@ -88,34 +90,33 @@ cpuicon.image = image(beautiful.icons .. "/widgets/cpu.png")
 
 -- Battery
 local batwidget = { widget = "" }
-if config.hostname == "guybrush" then
-   batwidget.widget = widget({ type = "textbox" })
-   vicious.register(batwidget.widget, vicious.widgets.bat,
-		    function (widget, args)
-		       local color = beautiful.fg_widget_value
-		       local current = args[2]
-		       if current < 10 and args[1] == "-" then
-			  color = beautiful.fg_widget_value_important
-			  -- Maybe we want to display a small warning?
-			  if current ~= batwidget.lastwarn then
-			     batwidget.lastid = naughty.notify(
-				{ title = "Battery low!",
-				  preset = naughty.config.presets.critical,
-				  timeout = 20,
-				  text = "Battery level is currently " ..
-				     current .. "%.\n" .. args[3] ..
-				     " left before running out of power.",
-				  icon = icons.lookup({name = "battery-caution",
-						       type = "status"}),
-				  replaces_id = batwidget.lastid }).id
-			     batwidget.lastwarn = current
-			  end
-		       end
-		       return string.format('<span color="' .. color ..
+batwidget.widget = widget({ type = "textbox" })
+vicious.register(batwidget.widget, vicious.widgets.bat,
+	function (widget, args)
+		local color = beautiful.fg_widget_value
+		local current = args[2]
+		if current < 10 and args[1] == "-" then
+			color = beautiful.fg_widget_value_important
+			-- Maybe we want to display a small warning?
+			if current ~= batwidget.lastwarn then
+				batwidget.lastid = naughty.notify({
+					title = "Battery low!",
+					preset = naughty.config.presets.critical,
+					timeout = 20,
+					text = "Battery level is currently " ..
+						current .. "%.\n" .. args[3] ..
+						" left before running out of power.",
+					icon = icons.lookup({
+						name = "battery-caution",
+						type = "status"}),
+					replaces_id = batwidget.lastid }).id
+				batwidget.lastwarn = current
+			end
+		end
+		return string.format('<span color="' .. color ..
 			     '">%s%d%%</span>', args[1], current)
-		    end,
-		    59, "BAT1")
-end
+    end,
+    59, "BAT0")
 local baticon = widget({ type = "imagebox" })
 baticon.image = image(beautiful.icons .. "/widgets/bat.png")
 
@@ -271,32 +272,35 @@ for s = 1, screen.count() do
 
     wibox[s].widgets = {
         {
-	   screen.count() > 1 and sepopen or "",
-	   taglist[s],
-	   screen.count() > 1 and spacer or "",
-	   layoutbox[s],
-	   screen.count() > 1 and sepclose or "",
-	   promptbox[s],
-	   layout = awful.widget.layout.horizontal.leftright
-	},
-	on(1, systray),
-	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
-	on(2, volwidget), screen.count() > 1 and on(2, volicon) or "", on(2, spacer),
+		   	layoutbox[s],
+		   	taglist[s],
+		   	sepblank,
+		   	promptbox[s],
+		   	layout = awful.widget.layout.horizontal.leftright
+		},
+	sepclose,
+	datewidget,
+	spacer,
+	volwidget,
+	-- volicon,
+	spacer,
+	batwidget.widget,
+	sepopen,
+	sepblank,
+	systray,
+	-- on(2, batwidget.widget ~= "" and baticon or ""),
+	-- on(2, batwidget.widget ~= "" and spacer or ""),
 
-	on(2, batwidget.widget),
-	on(2, batwidget.widget ~= "" and baticon or ""),
-	on(2, batwidget.widget ~= "" and spacer or ""),
+	-- on(2, fswidget), screen.count() > 1 and on(2, fsicon) or "",
+	-- screen.count() > 1 and on(2, sepopen) or on(2, spacer),
 
-	on(2, fswidget), screen.count() > 1 and on(2, fsicon) or "",
-	screen.count() > 1 and on(2, sepopen) or on(2, spacer),
+	-- screen.count() > 1 and on(1, netgraph.widget) or "",
+	-- on(1, netdownicon), on(1, netdown),
+	-- on(1, netupicon), on(1, netup), on(1, spacer),
 
-	screen.count() > 1 and on(1, netgraph.widget) or "",
-	on(1, netdownicon), on(1, netdown),
-	on(1, netupicon), on(1, netup), on(1, spacer),
-
-	on(1, memwidget), on(1, memicon), on(1, spacer),
-	on(1, cpuwidget), on(1, cpuicon), on(1, sepopen),
-	tasklist[s],
+	-- on(1, memwidget), on(1, memicon), on(1, spacer),
+	-- on(1, cpuwidget), on(1, cpuicon), on(1, sepopen),
+	-- tasklist[s],
 	layout = awful.widget.layout.horizontal.rightleft }
 end
 
