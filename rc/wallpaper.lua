@@ -1,25 +1,19 @@
 -- Change wallpaper
 
-local wtimer = timer { timeout = 0 }
-
 config.wallpaper = {}
-config.wallpaper.directory = awful.util.getdir("config") .. "/wallpapers"
+config.wallpaper.directory = awful.util.getdir("config") .. "/wallpapers/"
 config.wallpaper.current = awful.util.getdir("cache") .. "/current-wallpaper.png"
 
--- We use fvwm-root because default backend for awsetbg does not seem
--- to accept to set multiscreen wallpapers.
-local change = function()
-   awful.util.spawn_with_shell(
-      awful.util.getdir("config") .. "/bin/build-wallpaper " ..
-	 "--crop --directory " .. config.wallpaper.directory ..
-	 " --target " .. config.wallpaper.current ..
-	 "&& fvwm-root -r " .. config.wallpaper.current)
-end
+-- Find all avalaible wallpapers
+wallpapers = awful.util.pread("ls -1 " .. config.wallpaper.directory)
+-- Fetch one randomly
+local sep = "\n"
+local wallpapers_list = {wallpapers:match((wallpapers:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))}
+math.randomseed(os.time())
+local wallpaper = wallpapers_list[math.random(0, #wallpapers_list)]
 
-wtimer:add_signal("timeout", function()
-		     change()
-		     wtimer:stop()
-		     wtimer.timeout = math.random(3000, 3600)
-		     wtimer:start()
-			     end)
-wtimer:start()
+-- Create a new symbolic link to the selected wallpaper
+os.execute(
+	"rm -f " .. config.wallpaper.current .. ";" ..
+	"ln -s " .. config.wallpaper.directory .. wallpaper .. " " .. config.wallpaper.current
+)
