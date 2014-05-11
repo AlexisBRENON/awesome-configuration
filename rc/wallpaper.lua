@@ -10,7 +10,7 @@ wallpapers = awful.util.pread("ls -1 " .. config.wallpaper.directory)
 local sep = "\n"
 local wallpapers_list = {wallpapers:match((wallpapers:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))}
 math.randomseed(os.time())
-local wallpaper = wallpapers_list[math.random(0, #wallpapers_list)]
+local wallpaper = wallpapers_list[math.random(0, ((#wallpapers_list)-1))]
 
 -- Create a new symbolic link to the selected wallpaper
 os.execute(
