@@ -1,5 +1,4 @@
 -- Change wallpaper
-
 config.wallpaper = {}
 config.wallpaper.directory = awful.util.getdir("config") .. "/wallpapers/"
 config.wallpaper.current = awful.util.getdir("cache") .. "/current-wallpaper.png"
@@ -13,12 +12,13 @@ math.randomseed(os.time())
 local wallpaper_idx = math.random(1, #wallpapers_list)
 print(wallpaper_idx)
 for i,line in ipairs(wallpapers_list) do
-	print(i, line)
+  print(i, line)
 end
 local wallpaper = wallpapers_list[wallpaper_idx]
 
 -- Create a new symbolic link to the selected wallpaper
 os.execute(
-	"rm -f " .. config.wallpaper.current .. ";" ..
-	"ln -s " .. config.wallpaper.directory .. wallpaper .. " " .. config.wallpaper.current
+  "rm -f " .. config.wallpaper.current .. ";" ..
+  "ln -s " .. config.wallpaper.directory .. wallpaper .. " " .. config.wallpaper.current
 )
+

@@ -13,8 +13,8 @@ local function screenshot(client)
     client = ""
   end
   local path = awful.util.getdir("config") .. "/screenshots/" ..
-    "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
-    awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
+  "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
+  awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
 end
 
 
@@ -24,7 +24,7 @@ end
 -- we undo previous actions (hence "toggle"). This function returns a
 -- function that will effectively toggle things.
 local function toggle_window(filter)
-  local undo = {}		-- undo stack
+  local undo = {} -- undo stack
   client.add_signal('unmanage',
     function(c)
       -- If the client is in the undo stack, remove it
@@ -34,8 +34,9 @@ local function toggle_window(filter)
         table.remove(undo, idx)
       end
     end
-  )
-  local toggle = function()
+    )
+  local toggle =
+  function()
     -- "Current" screen
     local s = client.focus and client.focus.screen or mouse.screen
     local cl = filter()	-- Client to toggle
@@ -72,13 +73,14 @@ local function toggle_window(filter)
       end
       i = i - 1
     end
+    
     -- Clean up...
     while #undo > 10 do
       table.remove(undo, 1)
     end
   end
 end
-  return toggle
+return toggle
 end
 
 -- Toggle urgent window
@@ -86,50 +88,56 @@ local toggle_urgent = toggle_window(awful.client.urgent.get)
 
 -- Focus a relative screen (similar to `awful.screen.focus_relative`)
 local function screen_focus(i)
-    local s = awful.util.cycle(screen.count(), mouse.screen + i)
-    local c = awful.client.focus.history.get(s, 0)
-    mouse.screen = s
-    if c then client.focus = c end
+  local s = awful.util.cycle(screen.count(), mouse.screen + i)
+  local c = awful.client.focus.history.get(s, 0)
+  mouse.screen = s
+  if c then client.focus = c end
 end
 
 local music = loadrc("spotify", "vbe/spotify")
 
-local display_nmaster_ncol =
-   (function()
-       local nid = nil
-       return function()
-          local nmaster = awful.tag.getnmaster()
-          local ncol = awful.tag.getncol()
-          nid = naughty.notify(
-				{ title = "Tag configuration",
-				  timeout = 5,
-				  text = "Number of masters: " .. nmaster ..
-                                     "\nNumber of columns: " .. ncol,
-				  replaces_id = nid }).id
-              end
-    end)()
+local display_nmaster_ncol = (
+  function()
+    local nid = nil
+    return (
+      function()
+        local nmaster = awful.tag.getnmaster()
+        local ncol = awful.tag.getncol()
+        nid = naughty.notify(
+        {
+          title = "Tag configuration",
+          timeout = 5,
+          text = "Number of masters: " .. nmaster ..
+          "\nNumber of columns: " .. ncol,
+          replaces_id = nid
+        }
+        ).id
+      end
+      )
+  end
+  )()
 
 config.keys.global = awful.util.table.join(
   keydoc.group("Focus"),
   awful.key({ modkey,           }, "j",
     function ()
-		  awful.client.focus.byidx( 1)
-		  if client.focus then
-		    client.focus:raise()
-		  end
+      awful.client.focus.byidx( 1)
+      if client.focus then
+        client.focus:raise()
+      end
     end,
     "Focus next window"),
   awful.key({ modkey,           }, "k",
     function ()
       awful.client.focus.byidx(-1)
-		  if client.focus then
+      if client.focus then
         client.focus:raise()
       end
     end,
     "Focus previous window"),
   awful.key({ modkey,           }, "Tab",
     function ()
-		  awful.client.focus.history.previous()
+      awful.client.focus.history.previous()
       if client.focus then
         client.focus:raise()
       end
@@ -142,7 +150,7 @@ config.keys.global = awful.util.table.join(
     "Jump to next screen"),
   awful.key({ modkey, "Control" }, "k",
     function ()
-		  screen_focus(-1)
+      screen_focus(-1)
     end,
     "Jump to previous screen"),
 
@@ -180,7 +188,7 @@ config.keys.global = awful.util.table.join(
       awful.tag.incncol(-1)
       display_nmaster_ncol()
     end,
-	  "Decrease number of columns"),
+    "Decrease number of columns"),
   awful.key({ modkey,           }, "Up",
     function ()
       awful.layout.inc(config.layouts,  1)
@@ -201,7 +209,7 @@ config.keys.global = awful.util.table.join(
       awful.client.swap.byidx( -1)
     end,
     "Swap with previous window"),
-  
+
   keydoc.group("Misc"),
   awful.key({ modkey,           }, "Return",
     function ()
@@ -219,7 +227,7 @@ config.keys.global = awful.util.table.join(
     end,
     "Spawn a filebrowser"),
 
-   -- Screenshot
+  -- Screenshot
   awful.key({}, "Print",
     function()
       screenshot("root")
@@ -259,9 +267,9 @@ config.keys.client = awful.util.table.join(
       if screen.count() == 1 then return nil end
       local s = awful.util.cycle(screen.count(), c.screen + 1)
       if awful.tag.selected(s) then
-         c.screen = s
-         client.focus = c
-         c:raise()
+        c.screen = s
+        client.focus = c
+        c:raise()
       end
     end,
     "Move to the other screen"),
@@ -283,12 +291,12 @@ config.keys.client = awful.util.table.join(
     "Get client-related information"),
   awful.key({ modkey,           }, "m",
     function (c)
-		  c.maximized_horizontal = not c.maximized_horizontal
-		  c.maximized_vertical   = not c.maximized_vertical
+      c.maximized_horizontal = not c.maximized_horizontal
+      c.maximized_vertical   = not c.maximized_vertical
       c:raise()
     end,
     "Maximize")
-)
+  )
 
 keydoc.group("Misc")
 
@@ -300,4 +308,4 @@ config.mouse.client = awful.util.table.join(
     end),
   awful.button({ modkey }, 1, awful.mouse.client.move),
   awful.button({ modkey }, 3, awful.mouse.client.resize)
-)
+  )

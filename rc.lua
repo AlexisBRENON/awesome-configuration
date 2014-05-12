@@ -6,41 +6,41 @@ require("naughty")
 
 -- Simple function to load additional LUA files from rc/.
 function loadrc(name, mod)
-   local success
-   local result
+  local success
+  local result
 
-   -- Which file? In rc/ or in lib/?
-   local path = awful.util.getdir("config") .. "/" ..
-      (mod and "lib" or "rc") ..
-      "/" .. name .. ".lua"
+  -- Which file? In rc/ or in lib/?
+  local path = awful.util.getdir("config") .. "/" ..
+    (mod and "lib" or "rc") ..
+    "/" .. name .. ".lua"
 
-   -- If the module is already loaded, don't load it again
-   if mod and package.loaded[mod] then return package.loaded[mod] end
+  -- If the module is already loaded, don't load it again
+  if mod and package.loaded[mod] then return package.loaded[mod] end
 
-   -- Execute the RC/module file
-   success, result = pcall(function() return dofile(path) end)
-   if not success then
-      naughty.notify({ title = "Error while loading an RC file",
-             text = "When loading `" .. name ..
-           "`, got the following error:\n" .. result,
-             preset = naughty.config.presets.critical
-           })
-      return print("E: error loading RC file '" .. name .. "': " .. result)
-   end
+  -- Execute the RC/module file
+  success, result = pcall(function() return dofile(path) end)
+  if not success then
+    naughty.notify({ title = "Error while loading an RC file",
+      text = "When loading `" .. name ..
+      "`, got the following error:\n" .. result,
+      preset = naughty.config.presets.critical
+      })
+    return print("E: error loading RC file '" .. name .. "': " .. result)
+  end
 
-   -- Is it a module?
-   if mod then
-      return package.loaded[mod]
-   end
+  -- Is it a module?
+  if mod then
+    return package.loaded[mod]
+  end
 
-   return result
+  return result
 end
 
 loadrc("errors")     -- errors and debug stuff
 
 -- Create cache directory
 os.execute("test -d " .. awful.util.getdir("cache") ..
-           " || mkdir -p " .. awful.util.getdir("cache"))
+  " || mkdir -p " .. awful.util.getdir("cache"))
 
 -- Global configuration
 modkey = "Mod4"
@@ -48,10 +48,10 @@ config = {}
 config.terminal = "urxvtc"
 config.termclass = "URxvt"
 config.layouts = {
-   awful.layout.suit.tile,
-   awful.layout.suit.tile.left,
-   awful.layout.suit.tile.bottom,
-   awful.layout.suit.magnifier,
+  awful.layout.suit.tile,
+  awful.layout.suit.tile.left,
+  awful.layout.suit.tile.bottom,
+  awful.layout.suit.magnifier,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 config.browser = "google-chrome"

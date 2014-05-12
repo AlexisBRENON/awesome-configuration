@@ -61,13 +61,13 @@ theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"
 
 -- Layout icons
 for _, l in pairs(config.layouts) do
-   theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
+  theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
 end
 
 -- Naughty
 naughty.config.presets.normal.bg = theme.bg_widget
 for _,preset in pairs({"normal", "low", "critical"}) do
-   naughty.config.presets[preset].font = "DejaVu Sans 10"
+  naughty.config.presets[preset].font = "DejaVu Sans 10"
 end
 
 return theme
