@@ -1,6 +1,6 @@
 -- Tags
 
-local shifty = loadrc("shifty", "vbe/shifty")
+local shifty = require("shifty")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
 
 local tagicon = function(icon)

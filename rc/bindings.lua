@@ -25,7 +25,7 @@ end
 -- function that will effectively toggle things.
 local function toggle_window(filter)
   local undo = {} -- undo stack
-  client.add_signal('unmanage',
+  client.connect_signal('unmanage',
     function(c)
       -- If the client is in the undo stack, remove it
       while true do

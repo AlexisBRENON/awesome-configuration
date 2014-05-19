@@ -1,8 +1,8 @@
-require("awful")
+awful = require("awful")
 require("awful.autofocus")
 require("awful.rules")
-require("beautiful")
-require("naughty")
+beautiful = require("beautiful")
+naughty = require("naughty")
 
 -- Simple function to load additional LUA files from rc/.
 function loadrc(name, mod)

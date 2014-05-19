@@ -135,13 +135,13 @@ function QuakeConsole:new(config)
    config.visible  = config.visible or false -- Initially, not visible
 
    local console = setmetatable(config, { __index = QuakeConsole })
-   capi.client.add_signal("manage",
+   capi.client.connect_signal("manage",
 			  function(c)
 			     if c.instance == console.name and c.screen == console.screen then
 				console:display()
 			     end
 			  end)
-   capi.client.add_signal("unmanage",
+   capi.client.connect_signal("unmanage",
 			  function(c)
 			     if c.instance == console.name and c.screen == console.screen then
 				console.visible = false
@@ -150,7 +150,7 @@ function QuakeConsole:new(config)
 
    -- "Reattach" currently running QuakeConsole. This is in case awesome is restarted.
    local reattach = capi.timer { timeout = 0 }
-   reattach:add_signal("timeout",
+   reattach:connect_signal("timeout",
 		       function()
 			  reattach:stop()
 			  console:display()

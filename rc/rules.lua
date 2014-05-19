@@ -1,4 +1,5 @@
 local icons = loadrc("icons", "vbe/icons")
+awful.rules = require("awful.rules")
 
 awful.rules.rules = {
   -- All clients will match this rule.
