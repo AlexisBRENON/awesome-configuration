@@ -5,7 +5,8 @@ local icons = awful.util.getdir("config") .. "/icons"
 
 theme = {}
 theme.icons = icons
-theme.wallpaper_cmd = { "feh --bg-scale " .. awful.util.getdir("cache") .. "/current-wallpaper.png" }
+-- theme.wallpaper_cmd = { "feh --bg-scale " .. awful.util.getdir("cache") .. "/current-wallpaper.png" }
+theme.wallpaper = awful.util.getdir("cache") .. "/current-wallpaper.png"
 theme.font = "DejaVu Sans Mono 8"
 theme.tasklist_font = "DejaVu Sans 8"
 

@@ -10,10 +10,6 @@ local sep = "\n"
 local wallpapers_list = {wallpapers:match((wallpapers:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))}
 math.randomseed(os.time())
 local wallpaper_idx = math.random(1, #wallpapers_list)
-print(wallpaper_idx)
-for i,line in ipairs(wallpapers_list) do
-  print(i, line)
-end
 local wallpaper = wallpapers_list[wallpaper_idx]
 
 -- Create a new symbolic link to the selected wallpaper
