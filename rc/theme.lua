@@ -25,7 +25,7 @@ theme.border_focus  = "#002589"
 theme.border_marked = "#FFFFFF"
 
 -- Widget stuff
-theme.bg_widget        = "#000000"
+theme.bg_widget        = "#2c3e50"
 theme.fg_widget_label  = "#737d8c"
 theme.fg_widget_value  = na(theme.fg_normal)
 theme.fg_widget_value_important  = "#E80F28"
@@ -58,6 +58,7 @@ theme.fg_widget_clock  = na(theme.fg_normal)
 -- Taglist
 theme.taglist_squares_sel   = icons .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"
+theme.taglist_bg_focus = "#ffffff"
 
 -- Layout icons
 for _, l in pairs(config.layouts) do
