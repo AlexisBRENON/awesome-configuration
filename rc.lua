@@ -1,10 +1,8 @@
 -- Make sure that there's always a client with focus
 -- (on tag changement and client unmanagement)
 require("awful.autofocus")
+local awful = require("awful")
 
-awful = require("awful")
-beautiful = require("beautiful")
-naughty = require("naughty")
 
 -- Create cache directory
 os.execute("[ -d " .. awful.util.getdir("cache") .." ] || mkdir -p " .. awful.util.getdir("cache"))

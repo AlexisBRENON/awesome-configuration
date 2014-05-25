@@ -1,3 +1,4 @@
+local awful = require("awful")
 
 -- Run a command only if it doesn't already running
 local function run_once(cmd)

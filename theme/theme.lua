@@ -1,4 +1,4 @@
--- Small modifications to anrxc's zenburn theme
+local awful = require("awful")
 
 local na = awful.util.color_strip_alpha
 local icons = awful.util.getdir("config") .. "theme/icons"
@@ -44,6 +44,7 @@ end
 
 
 -- Naughty
+local naughty = require("naughty")
 naughty.config.presets.normal.bg = theme.bg_widget
 for _,preset in pairs({"normal", "low", "critical"}) do
   naughty.config.presets[preset].font = "DejaVu Sans 10"

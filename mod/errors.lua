@@ -1,3 +1,5 @@
+local naughty = require("naughty")
+
 -- Handle runtime errors after startup
 do
     local in_error = false
