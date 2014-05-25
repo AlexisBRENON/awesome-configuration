@@ -1,52 +1,32 @@
-awful = require("awful")
+-- Make sure that there's always a client with focus
+-- (on tag changement and client unmanagement)
 require("awful.autofocus")
-require("awful.rules")
+
+awful = require("awful")
 beautiful = require("beautiful")
 naughty = require("naughty")
 
--- Simple function to load additional LUA files from rc/.
-function loadrc(name, mod)
-  local success
-  local result
-
-  -- Which file? In rc/ or in lib/?
-  local path = awful.util.getdir("config") .. "/" ..
-    (mod and "lib" or "rc") ..
-    "/" .. name .. ".lua"
-
-  -- If the module is already loaded, don't load it again
-  if mod and package.loaded[mod] then return package.loaded[mod] end
-
-  -- Execute the RC/module file
-  success, result = pcall(function() return dofile(path) end)
-  if not success then
-    naughty.notify({ title = "Error while loading an RC file",
-      text = "When loading `" .. name ..
-      "`, got the following error:\n" .. result,
-      preset = naughty.config.presets.critical
-      })
-    return print("E: error loading RC file '" .. name .. "': " .. result)
-  end
-
-  -- Is it a module?
-  if mod then
-    return package.loaded[mod]
-  end
-
-  return result
-end
-
-loadrc("errors")     -- errors and debug stuff
-
 -- Create cache directory
-os.execute("test -d " .. awful.util.getdir("cache") ..
-  " || mkdir -p " .. awful.util.getdir("cache"))
+os.execute("[ -d " .. awful.util.getdir("cache") .." ] || mkdir -p " .. awful.util.getdir("cache"))
 
--- Global configuration
+
+-- Define main configuration variables
 modkey = "Mod4"
 config = {}
-config.terminal = "urxvtc"
-config.termclass = "URxvt"
+config.application = {
+    ["terminal"] = {
+        ["bin"] = "urxvtc",
+        ["class"] = "URxvt",
+    },
+    ["file_browser"] = {
+        ["bin"] = "gnome-commander",
+        ["class"] = "Gnome-commander",
+    },
+    ["web_browser"] = {
+        ["bin"] = "google-chrome",
+        ["class"] = "Google-chrome",
+    },
+}
 config.layouts = {
   awful.layout.suit.tile,
   awful.layout.suit.tile.left,
@@ -54,12 +34,13 @@ config.layouts = {
   awful.layout.suit.magnifier,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
-config.browser = "google-chrome"
-config.filebrowser = "gnome-commander"
+
 
 -- Remaining modules
-loadrc("xrun")       -- xrun function
-loadrc("appearance")    -- theme and appearance settings
+require("mod/errors")     -- errors and debug stuff
+require("mod/appearance")    -- theme and appearance settings
+
+
 loadrc("debug")         -- debugging primitive `dbg()`
 
 loadrc("start")         -- programs to run on start
