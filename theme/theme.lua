@@ -8,7 +8,7 @@ theme = {}
 
 -- Define common stuff
 theme.icons 	= icons
-theme.wallpaper = awful.util.getdir("cache") .. "/current-wallpaper.png"
+theme.wallpaper = config.wallpaper
 theme.font 		= "DejaVu Sans 8"
 
 
