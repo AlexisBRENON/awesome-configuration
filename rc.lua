@@ -37,13 +37,11 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 
 -- Remaining modules
-require("mod/errors")     -- errors and debug stuff
-require("mod/appearance")    -- theme and appearance settings
+require("mod/errors")       -- errors and debug stuff
+require("mod/appearance")   -- theme and appearance settings
+require("mod/autostart")    -- programs to run at login
 
 
-loadrc("debug")         -- debugging primitive `dbg()`
-
-loadrc("start")         -- programs to run on start
 loadrc("bindings")      -- keybindings
 loadrc("wallpaper")     -- wallpaper settings
 loadrc("widgets")    -- widgets configuration
