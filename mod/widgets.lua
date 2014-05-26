@@ -136,7 +136,7 @@ vicious.register(
     "Master"
 )
 config.widget.vol_widget = volwidget
--- TODO : Add buttons and bindings
+-- TODO : Add buttons
 
 
 -- Systray (nothing fanzy)
