@@ -39,10 +39,10 @@ require("mod/wallpaper")    -- Automatic wallpaper randomizer
 require("mod/errors")       -- errors and debug stuff
 require("mod/appearance")   -- theme and appearance settings
 require("mod/autostart")    -- programs to run at login
+require("mod/widgets")      -- widgets & wibox configuration
 
 
 loadrc("bindings")      -- keybindings
-loadrc("widgets")    -- widgets configuration
 loadrc("tags")       -- tags handling
 -- loadrc("xlock")         -- lock screen
 loadrc("signals")    -- window manager behaviour

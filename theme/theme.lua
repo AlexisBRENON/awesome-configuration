@@ -1,7 +1,7 @@
 local awful = require("awful")
 
 local na = awful.util.color_strip_alpha
-local icons = awful.util.getdir("config") .. "theme/icons"
+local icons = awful.util.getdir("config") .. "theme/icons/"
 
 theme = {}
 
