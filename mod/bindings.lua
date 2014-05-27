@@ -1,5 +1,6 @@
-local brightness = require("brightness")
-local volume = require("volume")
+local awful = require("awful")
+local brightness = require("mod/brightness")
+local volume = require("mod/volume")
 
 config.keys = {}
 config.mouse = {}

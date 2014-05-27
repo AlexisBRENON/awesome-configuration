@@ -1,6 +1,8 @@
 local awful        = require("awful")
 local naughty      = require("naughty")
 
+local volume = {}
+
 local notification_id = nil
 local function change(what)
     os.execute("amixer -q sset Master " .. what, false)
@@ -25,19 +27,27 @@ local function change(what)
 	    replaces_id = volid }).id
 end
 
-function increase()
+local function increase()
     change("5%+")
 end
 
-function decrease()
+local function decrease()
     change("5%-")
 end
 
-function toggle()
+local function toggle()
     change("toggle")
 end
 
 -- run pavucontrol
-function mixer()
+local function mixer()
     awful.util.spawn("pavucontrol", false)
 end
+
+
+-- Define public interface
+volume.increase = increase
+volume.decrease = decrease
+volume.mixer = mixer
+
+return volume

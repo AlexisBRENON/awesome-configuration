@@ -1,10 +1,12 @@
 -- Handle brightness (with xbacklight)
 
-local awful        = require("awful")
-local naughty      = require("naughty")
+local brightness = {}
+
+local awful = require("awful")
+local naughty = require("naughty")
 
 local nid = nil
-local function change(what)
+function brightness.change(what)
     -- We don't really change the brightness, just report the change...
     local out = awful.util.pread("xbacklight -get")
     if not out then return end
@@ -13,3 +15,5 @@ local function change(what)
         text = out .. " %",
         replaces_id = nid }).id
 end
+
+return brightness
