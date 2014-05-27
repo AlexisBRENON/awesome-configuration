@@ -215,3 +215,8 @@ for s = 1, screen.count() do
 
     wibox_top[s]:set_widget(main_group)
 end
+
+-- Activate shifty now !
+local shifty = require("shifty")
+shifty.taglist = taglist
+shifty.init()
