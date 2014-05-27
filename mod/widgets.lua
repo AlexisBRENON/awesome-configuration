@@ -1,7 +1,8 @@
-local wibox     = require("wibox")
+local wibox = require("wibox")
 local beautiful = require("beautiful")
-local vicious   = require("vicious")
-local awful     = require("awful")
+local vicious = require("vicious")
+local awful = require("awful")
+local naughty = require("naughty")
 
 config.widget = {}
 
@@ -201,5 +202,5 @@ for s = 1, screen.count() do
     main_group:set_left(left_group)
     main_group:set_right(right_group)
 
-    wiboxbar[s]:set_widget(main_group)
+    wibox_top[s]:set_widget(main_group)
 end
