@@ -26,10 +26,12 @@ shifty.config.tags = {
         icon = beautiful.taglist_file
     },
     gimp = {
+        exclusive = true,
         icon_only = true,
         icon = beautiful.taglist_image
     },
     vlc = {
+        exclusive = true,
         icon_only = true,
         icon = beautiful.taglist_video
     }

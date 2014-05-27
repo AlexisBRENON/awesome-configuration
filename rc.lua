@@ -42,10 +42,10 @@ require("mod/autostart")  -- programs to run at login
 require("mod/tags") -- tags handling
 require("mod/widgets")  -- widgets & wibox configuration
 require("mod/bindings") -- keybindings and mouse bindings
+require("mod/rules")         -- window rules
 
 -- loadrc("xlock")         -- lock screen
 --loadrc("signals")    -- window manager behaviour
--- loadrc("rules")         -- window rules
 -- loadrc("quake")         -- quake console
 -- loadrc("xrandr")     -- xrandr menu
 
