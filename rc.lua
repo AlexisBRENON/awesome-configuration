@@ -35,15 +35,14 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 
 -- Remaining modules
-require("mod/wallpaper")    -- Automatic wallpaper randomizer
-require("mod/errors")       -- errors and debug stuff
-require("mod/appearance")   -- theme and appearance settings
-require("mod/autostart")    -- programs to run at login
-require("mod/widgets")      -- widgets & wibox configuration
-require("mod/bindings")     -- keybindings and mouse bindings
+require("mod/wallpaper")  -- Automatic wallpaper randomizer
+require("mod/errors") -- errors and debug stuff
+require("mod/appearance") -- theme and appearance settings
+require("mod/autostart")  -- programs to run at login
+require("mod/tags") -- tags handling
+require("mod/widgets")  -- widgets & wibox configuration
+require("mod/bindings") -- keybindings and mouse bindings
 
-
-loadrc("tags")       -- tags handling
 -- loadrc("xlock")         -- lock screen
 loadrc("signals")    -- window manager behaviour
 loadrc("rules")         -- window rules

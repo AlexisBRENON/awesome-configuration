@@ -35,7 +35,9 @@ theme.widget_alternative_fg = theme.fg_focus
 -- Taglist
 theme.taglist_squares_sel   = icons .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"
-
+for _, tag_name in pairs({"home", "web", "file", "gimp", "vlc"}) do
+	theme["taglist_" .. tag_name] = icons .. "/taglist/" .. tag_name .. ".png"
+end
 
 -- Layout icons
 for _, l in pairs(config.layouts) do
