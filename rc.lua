@@ -49,4 +49,4 @@ require("mod/bindings") -- keybindings and mouse bindings
 -- loadrc("quake")         -- quake console
 -- loadrc("xrandr")     -- xrandr menu
 
-root.keys(config.keys.global)
+

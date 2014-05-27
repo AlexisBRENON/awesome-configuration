@@ -1,6 +1,7 @@
 local awful = require("awful")
 local brightness = require("mod/brightness")
 local volume = require("mod/volume")
+local shifty = require("shifty")
 
 config.keys = {}
 config.mouse = {}
@@ -92,6 +93,15 @@ config.keys.global = awful.util.table.join(
         end,
         "Spawn a file browser"),
 
+    -- Tag manipulation
+    awful.key({modkey}, "Left", awful.tag.viewprev),
+    awful.key({modkey}, "Right", awful.tag.viewnext),
+    awful.key({modkey}, "w", shifty.del), -- delete a tag
+    awful.key({modkey, "Shift"}, "Left", shifty.send_prev), -- client to prev tag
+    awful.key({modkey, "Shift"}, "Right", shifty.send_next), -- client to next tag
+    awful.key({modkey}, "t", shifty.add), -- creat a new tag
+    awful.key({modkey}, "r", shifty.rename), -- rename a tag
+    
     -- Screenshot
     awful.key({}, "Print",
         function()
@@ -111,6 +121,36 @@ config.keys.global = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
     awful.key({ }, "XF86AudioMute",        volume.toggle)
 )
+
+for i = 0, 9 do
+    config.keys.global = awful.util.table.join(
+        config.keys.global,
+        -- View tag only.
+        awful.key({ modkey }, "KP_" .. i,
+            function ()
+                awful.tag.viewonly(shifty.getpos(i+1))
+            end),
+        -- Toggle tag.
+        awful.key({ modkey, "Control" }, "KP_" .. i,
+            function ()
+                local t = shifty.getpos(i+1)
+                t.selected = not t.selected    
+            end),
+        -- Move client to tag.
+        awful.key({ modkey, "Shift" }, "KP_" .. i,
+            function ()
+                if client.focus then
+                    -- remember the focused client because getpos() switch
+                    -- to new tag (if it doesn't exist) and the client lost focus
+                    local c = client.focus
+                    t = shifty.getpos(i+1)
+                    awful.client.movetotag(t, c)
+                    awful.tag.viewonly(t)
+                end
+            end)
+    )
+end
+
 
 config.keys.client = awful.util.table.join(
     awful.key({ modkey,           }, "f",
@@ -140,7 +180,9 @@ config.keys.client = awful.util.table.join(
             c:raise()
         end,
         "Maximize")
-  )
+)
+
+config.mouse.global = {}
 
 config.mouse.client = awful.util.table.join(
     awful.button({ }, 1,
@@ -151,3 +193,11 @@ config.mouse.client = awful.util.table.join(
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize)
 )
+
+-- Actually apply bindings
+root.keys(config.keys.global)
+shifty.config.clientkeys = config.keys.client
+shifty.config.modkey = modkey
+
+root.buttons(config.mouse.global)
+-- The clients buttons will be added in rules
