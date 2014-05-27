@@ -13,8 +13,8 @@ end
 -- List commands to run at login
 local execute = {
     -- Start PulseAudio
-    "(pulseaudio --check || pulseaudio -D)",
-    "(urxvtd &)",
+    "pulseaudio -D",
+    "urxvtd",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
     "nm-applet"
 
