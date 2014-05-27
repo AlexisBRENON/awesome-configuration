@@ -5,7 +5,7 @@ local gears = require("gears")
 -- Load theme
 beautiful.init(awful.util.getdir("config") .. "/theme/theme.lua")
 -- Link it to awful
-awful.beautiful.register(beautiful)
+-- awful.beautiful.register(beautiful)
 -- Set background (on all screen, keep ratio)
 gears.wallpaper.maximized(beautiful.wallpaper, nil, false)
 

@@ -1,7 +1,7 @@
 local awful = require("awful")
 
 -- Change wallpaper
-local wallpaper_directory = awful.util.getdir("config") .. "/wallpapers/"
+local wallpaper_directory = awful.util.getdir("config") .. "/theme/wallpapers/"
 config.wallpaper = awful.util.getdir("cache") .. "/current-wallpaper.png"
 
 -- Find all avalaible wallpapers
