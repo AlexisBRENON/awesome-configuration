@@ -10,6 +10,7 @@ theme = {}
 theme.icons 	= icons
 theme.wallpaper = config.wallpaper
 theme.font 		= "DejaVu Sans 8"
+theme.font_mono = "DejaVu Sans Mono 8"
 
 
 -- Define color scheme

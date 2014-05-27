@@ -53,14 +53,25 @@ local calendar = (
 
             -- Get month calendar with week number and week starting on Monday
             local cal = awful.util.pread("ncal -w -M -m " .. datespec)
+            
+            -- Highlight the current day
+            cal = cal:gsub(
+                "_.([%d ])",
+                string.format(
+                    '<span bg_color="%s" color="%s">%%1</span>',
+                    beautiful.bg_focus,
+                    beautiful.fg_focus
+                )
+            )
+            
             -- Display calendar with naughty
             notification = naughty.notify({
                 text = cal,
                 timeout = 0, -- No timeout
                 screen = mouse.screen,
+                font = beautiful.font_mono,
             })
         end
-
         return {
             display = add_calendar,
             hide = remove_calendar
