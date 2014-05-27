@@ -101,6 +101,17 @@ config.keys.global = awful.util.table.join(
     awful.key({modkey, "Shift"}, "Right", shifty.send_next), -- client to next tag
     awful.key({modkey}, "t", shifty.add), -- creat a new tag
     awful.key({modkey}, "r", shifty.rename), -- rename a tag
+
+    -- Display prompt box
+    awful.key({modkey}, "F2",
+        function()
+            awful.prompt.run(
+                {prompt = "Run: "},
+                config.promptbox[mouse.screen].widget,
+                awful.util.spawn, awful.completion.shell,
+                awful.util.getdir("cache") .. "/history"
+            )
+        end),
     
     -- Screenshot
     awful.key({}, "Print",
