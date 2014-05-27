@@ -30,19 +30,21 @@ config.widget.date_widget = datewidget
 -- Define funtions to display/hide calendar
 local calendar = (
     function()
-        local notification_id = nil
+        local notification = nil
         local offset = 0
 
         local remove_calendar = function()
-            if notification_id ~= nil then
-                naughty.destroy(notification_id)
-                notification_id = nil
+            if notification ~= nil then
+                naughty.destroy(notification)
+                notification = nil
                 offset = 0
             end
         end
 
         local add_calendar = function(inc_offset)
-            offset = offset + inc_offset
+            local new_offset = offset + inc_offset
+            remove_calendar()
+            offset = new_offset
 
             -- Get the right month to display
             local datespec = os.date("*t") -- Fetch the date of the day
@@ -52,13 +54,11 @@ local calendar = (
             -- Get month calendar with week number and week starting on Monday
             local cal = awful.util.pread("ncal -w -M -m " .. datespec)
             -- Display calendar with naughty
-            notification_id = naughty.notify({
+            notification = naughty.notify({
                 text = cal,
                 timeout = 0, -- No timeout
-                hover_timeout = 0.5, -- Disapear after 0.5s over it
                 screen = mouse.screen,
-                replaces_id = notification_id,
-            }).id
+            })
         end
 
         return {
