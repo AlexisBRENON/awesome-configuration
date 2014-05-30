@@ -26,26 +26,26 @@ config.application = {
     },
 }
 config.layouts = {
-  awful.layout.suit.tile,
-  awful.layout.suit.tile.left,
-  awful.layout.suit.tile.bottom,
-  awful.layout.suit.magnifier,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.magnifier,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 
 -- Remaining modules
-require("mod/wallpaper")  -- Automatic wallpaper randomizer
-require("mod/errors") -- errors and debug stuff
-require("mod/appearance") -- theme and appearance settings
-require("mod/autostart")  -- programs to run at login
+require("mod/wallpaper")    -- Automatic wallpaper randomizer
+require("mod/errors")   -- errors and debug stuff
+require("mod/appearance")   -- theme and appearance settings
+require("mod/autostart")    -- programs to run at login
 require("mod/tags") -- tags handling
 require("mod/widgets")  -- widgets & wibox configuration
 require("mod/bindings") -- keybindings and mouse bindings
-require("mod/rules")         -- window rules
+require("mod/rules")    -- window rules
+require("mod/signals")  -- window manager behaviour
 
 -- loadrc("xlock")         -- lock screen
---loadrc("signals")    -- window manager behaviour
 -- loadrc("quake")         -- quake console
 -- loadrc("xrandr")     -- xrandr menu
 
