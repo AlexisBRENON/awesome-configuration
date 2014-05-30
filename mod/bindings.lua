@@ -69,12 +69,12 @@ config.keys.global = awful.util.table.join(
     -- Next layout
     awful.key({ modkey,           }, "Up",
         function ()
-            awful.layout.inc(awful.layout.layouts, 1)
+            awful.layout.inc(1, mouse.screen, awful.layout.layouts)
         end),
     -- Previous layout
     awful.key({ modkey,          }, "Down",
         function ()
-            awful.layout.inc(awful.layout.layouts, -1)
+            awful.layout.inc(-1, mouse.screen, awful.layout.layouts)
         end),
     
     -- Spawn a terminal
