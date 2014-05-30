@@ -133,15 +133,11 @@ vicious.register(
     function ( widget, args )
         -- TODO : Check that this is the right comparison to do ?
         local result = ""
-        if args[2] == "M" then
+        if args[2] == "♩" then
             result = "Mute"
         else
             result = args[1] .. "%"
         end
-        naughty.notify({
-            title = "Volume",
-            text = "Es-tu sûr de la valeur de comparaison pour la sourdine ?"
-            })
         return result
     end,
     17,
