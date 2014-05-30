@@ -41,8 +41,8 @@ for _, tag_name in pairs({"home", "web", "file", "gimp", "vlc"}) do
 end
 
 -- Layout icons
-for _, l in pairs(config.layouts) do
-  theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
+for _, l in pairs(awful.layout.layouts) do
+  	theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
 end
 
 

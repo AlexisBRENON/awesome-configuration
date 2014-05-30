@@ -1,5 +1,6 @@
 local shifty = require("shifty")
 local beautiful = require("beautiful")
+local awful = require("awful")
 
 
 shifty.config.tags = {
@@ -40,7 +41,7 @@ shifty.config.tags = {
 
 
 shifty.config.defaults = {
-    layout = config.layouts[1],
+    layout = awful.layout.layouts[1],
     persist = false,
     floatBars = true,
     guess_name = true,

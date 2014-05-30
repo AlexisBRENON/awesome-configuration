@@ -25,7 +25,7 @@ config.application = {
         ["class"] = "Google-chrome",
     },
 }
-config.layouts = {
+awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
