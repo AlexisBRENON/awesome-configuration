@@ -1,6 +1,5 @@
-
--- Did we get the focus because of sloppy focus?
-local focus_from_mouse = false
+local beautiful = require("beautiful")
+local awful = require("awful")
 
 -- Signal function to execute when a new client appears.
 client.connect_signal(
