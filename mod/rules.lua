@@ -40,9 +40,13 @@ shifty.config.apps = {
     {
         match = {
             "_NET_WM_WINDOW_TYPE_DIALOG",
-            "_NET_WM_WINDOW_TYPE_SPLASH"
+            "_NET_WM_WINDOW_TYPE_SPLASH",
         },
         float = true,
         intrusive = true,
+    },
+    {
+        match = {""},
+        buttons = config.mouse.client,
     }
 }

@@ -131,7 +131,6 @@ vicious.register(
     volwidget,
     vicious.widgets.volume,
     function ( widget, args )
-        -- TODO : Check that this is the right comparison to do ?
         local result = ""
         if args[2] == "♩" then
             result = "Mute"

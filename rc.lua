@@ -18,11 +18,11 @@ config.application = {
     },
     ["file_browser"] = {
         ["bin"] = "gnome-commander",
-        ["class"] = "Gnome-commander",
+        ["class"] = "Gnome%-commander",
     },
     ["web_browser"] = {
         ["bin"] = "google-chrome",
-        ["class"] = "Google-chrome",
+        ["class"] = "Google%-chrome",
     },
 }
 awful.layout.layouts = {
