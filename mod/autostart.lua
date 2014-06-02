@@ -15,6 +15,7 @@ local execute = {
     -- Start PulseAudio
     "pulseaudio -D",
     "urxvtd -q -o -f",
+    "xscreensaver -no-splash",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
     "nm-applet"
 
