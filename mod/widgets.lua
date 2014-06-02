@@ -58,7 +58,7 @@ local calendar = (
             cal = cal:gsub(
                 "_.([%d ])",
                 string.format(
-                    '<span bg_color="%s" color="%s">%%1</span>',
+                    '<span background="%s" foreground="%s">%%1</span>',
                     beautiful.bg_focus,
                     beautiful.fg_focus
                 )
@@ -137,6 +137,9 @@ vicious.register(
         else
             result = args[1] .. "%"
         end
+        result = '<span foreground="' .. beautiful.widget_alternative_fg .. '" ' .. 
+            'background="' .. beautiful.widget_alternative_bg .. '">' .. 
+            result .. '</span>'
         return result
     end,
     17,
@@ -186,7 +189,8 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox
     -- Widgets that are aligned to the left
     local left_group = wibox.layout.fixed.horizontal()
-    left_group:add(layoutbox[s])
+    left_group:add(wibox.widget.background(layoutbox[s], beautiful.widget_alternative_bg))
+    left_group:add(sep_bottom_top)
     left_group:add(taglist[s])
     left_group:add(sep_blank)
     left_group:add(promptbox[s])
@@ -194,13 +198,13 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_group = wibox.layout.fixed.horizontal()
     right_group:add(sep_top_bottom)
-    right_group:add(systray)
+    right_group:add(wibox.widget.background(systray, beautiful.widget_alternative_bg))
     right_group:add(sep_bottom_top)
 
     right_group:add(batwidget.widget)
 
     right_group:add(sep_top_bottom)
-    right_group:add(volwidget)
+    right_group:add(wibox.widget.background(volwidget, beautiful.widget_alternative_bg))
     right_group:add(sep_bottom_top)
 
     right_group:add(datewidget)
