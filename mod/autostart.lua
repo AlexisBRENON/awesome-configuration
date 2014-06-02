@@ -14,7 +14,7 @@ end
 local execute = {
     -- Start PulseAudio
     "pulseaudio -D",
-    "urxvtd",
+    "urxvtd -q -o -f",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
     "nm-applet"
 
