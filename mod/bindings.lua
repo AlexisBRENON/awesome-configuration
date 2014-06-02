@@ -1,6 +1,7 @@
 local awful = require("awful")
 local brightness = require("mod/brightness")
 local volume = require("mod/volume")
+local xrandr = require("mod/xrandr")
 local shifty = require("shifty")
 
 config.keys = {}
@@ -130,7 +131,9 @@ config.keys.global = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessDown", brightness.change),
     awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
     awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
-    awful.key({ }, "XF86AudioMute",        volume.toggle)
+    awful.key({ }, "XF86AudioMute",        volume.toggle),
+
+    awful.key({}, "XF86Display", xrandr.change_screen) -- Switch between screens configurations
 )
 
 for i = 0, 9 do

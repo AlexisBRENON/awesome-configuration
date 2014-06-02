@@ -47,6 +47,5 @@ require("mod/signals")  -- window manager behaviour
 
 -- loadrc("xlock")         -- lock screen
 -- loadrc("quake")         -- quake console
--- loadrc("xrandr")     -- xrandr menu
 
 
