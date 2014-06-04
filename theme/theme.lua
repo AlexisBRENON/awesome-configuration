@@ -32,6 +32,9 @@ theme.border_marked = "#93B0CD" -- Very light blue
 theme.widget_alternative_bg = theme.bg_focus
 theme.widget_alternative_fg = theme.fg_focus
 
+-- Systray stuff
+theme.bg_systray = theme.widget_alternative_bg
+theme.systray_icon_spacing = 4
 
 -- Taglist
 theme.taglist_squares_sel   = icons .. "/taglist/squarefw.png"
