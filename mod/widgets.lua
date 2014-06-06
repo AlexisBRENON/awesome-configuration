@@ -189,10 +189,10 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox
     -- Widgets that are aligned to the left
     local left_group = wibox.layout.fixed.horizontal()
-    left_group:add(wibox.widget.background(layoutbox[s], beautiful.widget_alternative_bg))
+    left_group:add(layoutbox[s])
+    left_group:add(sep_top_bottom)
+    left_group:add(wibox.widget.background(taglist[s], beautiful.widget_alternative_bg))
     left_group:add(sep_bottom_top)
-    left_group:add(taglist[s])
-    left_group:add(sep_blank)
     left_group:add(promptbox[s])
 
     -- Widgets that are aligned to the right
