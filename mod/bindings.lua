@@ -49,12 +49,12 @@ config.keys.global = awful.util.table.join(
     -- Jump to next screen
     awful.key({ modkey, "Control" }, "j",
         function ()
-            screen_focus( 1)
+            awful.screen.focus_relative(1)
         end),
     -- Jump to previous screen
     awful.key({ modkey, "Control" }, "k",
         function ()
-            screen_focus(-1)
+            awful.screen.focus_relative(-1)
         end),
 
     -- Increase master-width factor
