@@ -38,7 +38,6 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 require("mod/wallpaper")    -- Automatic wallpaper randomizer
 require("mod/errors")   -- errors and debug stuff
 require("mod/appearance")   -- theme and appearance settings
-require("mod/autostart")    -- programs to run at login
 require("mod/tags") -- tags handling
 require("mod/widgets")  -- widgets & wibox configuration
 require("mod/bindings") -- keybindings and mouse bindings
