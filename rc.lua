@@ -43,8 +43,3 @@ require("mod/widgets")  -- widgets & wibox configuration
 require("mod/bindings") -- keybindings and mouse bindings
 require("mod/rules")    -- window rules
 require("mod/signals")  -- window manager behaviour
-
--- loadrc("xlock")         -- lock screen
--- loadrc("quake")         -- quake console
-
-
