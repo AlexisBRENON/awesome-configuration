@@ -9,7 +9,7 @@ theme = {}
 -- Define common stuff
 theme.icons 	= icons
 theme.wallpaper = config.wallpaper
-theme.font 		= "DejaVu Sans 8"
+theme.font 		= "DejaVu Sans 11"
 theme.font_mono = "DejaVu Sans Mono 8"
 
 

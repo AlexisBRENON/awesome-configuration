@@ -5,13 +5,13 @@ shifty.config.apps = {
         match = {
             config.application.web_browser.class
         },
-        tag = "web",
+        tag = "🌐",
     },
     {
         match = {
             config.application.file_browser.class
         },
-        tag = "file",
+        tag = "📁",
     },
     {
         match = {

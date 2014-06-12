@@ -183,7 +183,7 @@ for s = 1, screen.count() do
     wibox_top[s] = awful.wibox({
         screen = s,
         position = "top",
-        height = 16,
+        height = 18,
     })
     
     -- Add widgets to the wibox
