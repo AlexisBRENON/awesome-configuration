@@ -1,3 +1,9 @@
 [submodule "radical"]
 	path = radical
 	url = https://github.com/Elv13/radical.git
+[submodule "shifty"]
+	path = shifty
+	url = git://github.com/cdump/awesome-shifty
+[submodule "vicious"]
+	path = vicious
+	url = http://git.sysphere.org/vicious
