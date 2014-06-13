@@ -5,13 +5,13 @@ local awful = require("awful")
 
 shifty.config.tags = {}
 shifty.config.tags["🌐"] = {
-    position = 1,
+    index = 1,
     exclusive = true,
     spawn = config.application.web_browser.bin,
 }
 
 shifty.config.tags["📁"] = {
-    position = 2,
+    index = 2,
     exclusive = true,
     spawn = config.application.file_browser.bin,
 }
@@ -35,5 +35,4 @@ shifty.config.defaults = {
     persist = false,
     floatBars = true,
     guess_name = true,
-    guess_position = true,
 }

@@ -136,28 +136,39 @@ config.keys.global = awful.util.table.join(
     awful.key({}, "XF86Display", xrandr.change_screen) -- Switch between screens configurations
 )
 
-for i = 0, 9 do
+local numericPad = {
+    "KP_End",
+    "KP_Down",
+    "KP_Next",
+    "KP_Left",
+    "KP_Begin",
+    "KP_Right",
+    "KP_Home",
+    "KP_Up",
+    "KP_Prior"
+}
+for i = 1, 9 do
     config.keys.global = awful.util.table.join(
         config.keys.global,
         -- View tag only.
-        awful.key({ modkey }, "KP_" .. i,
+        awful.key({ modkey }, numericPad[i],
             function ()
-                awful.tag.viewonly(shifty.getpos(i+1))
+                awful.tag.viewonly(shifty.getpos(i))
             end),
         -- Toggle tag.
-        awful.key({ modkey, "Control" }, "KP_" .. i,
+        awful.key({ modkey, "Control" }, numericPad[i],
             function ()
-                local t = shifty.getpos(i+1)
+                local t = shifty.getpos(i)
                 t.selected = not t.selected    
             end),
         -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "KP_" .. i,
+        awful.key({ modkey, "Shift" }, numericPad[i],
             function ()
                 if client.focus then
                     -- remember the focused client because getpos() switch
                     -- to new tag (if it doesn't exist) and the client lost focus
                     local c = client.focus
-                    t = shifty.getpos(i+1)
+                    t = shifty.getpos(i)
                     awful.client.movetotag(t, c)
                     awful.tag.viewonly(t)
                 end
