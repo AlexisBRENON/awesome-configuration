@@ -204,6 +204,14 @@ config.keys.client = awful.util.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
             c:raise()
+        end),
+    awful.key({ modkey, "Shift", "Control"}, "Left",
+        function(c)
+            awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen-1))
+        end),
+    awful.key({ modkey, "Shift", "Control"}, "Right",
+        function(c)
+            awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen+1))
         end)
 )
 
