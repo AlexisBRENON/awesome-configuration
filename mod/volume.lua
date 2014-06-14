@@ -48,6 +48,7 @@ end
 -- Define public interface
 volume.increase = increase
 volume.decrease = decrease
+volume.toggle = toggle
 volume.mixer = mixer
 
 return volume

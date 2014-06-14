@@ -3,6 +3,7 @@ local beautiful = require("beautiful")
 local vicious = require("vicious")
 local awful = require("awful")
 local naughty = require("naughty")
+local volume = require("mod/volume")
 
 config.widget = {}
 
@@ -146,7 +147,14 @@ vicious.register(
     "Master"
 )
 config.widget.vol_widget = volwidget
--- TODO : Add buttons
+volwidget:buttons(
+    awful.util.table.join(
+        awful.button({ }, 1, volume.mixer), -- Right click
+        awful.button({ }, 3, volume.toggle), -- Right click
+        awful.button({ }, 4, volume.increase), -- Scroll up
+        awful.button({ }, 5, volume.decrease) -- Scroll down
+    )
+)
 
 
 -- Systray (nothing fanzy)
