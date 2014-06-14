@@ -117,7 +117,7 @@ vicious.register(
             end
         end
         -- TODO : hibernate computer if current is critical
-        return args[1] .. current
+        return args[1] .. current .. "%"
     end,
     59,
     "BAT0"
