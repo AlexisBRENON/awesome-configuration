@@ -13,10 +13,15 @@ shifty.config.tags["file"] = {
     position = 2,
 }
 
-shifty.config.tags["3"] = {
-    position = 3,
-    init = true,
-}
+shifty.config.tags = awful.util.table.join(
+    shifty.config.tags,
+    {
+        test3 = {
+            position = 3,
+            init = true,
+        }
+    }
+)
 
 
 shifty.config.defaults = {

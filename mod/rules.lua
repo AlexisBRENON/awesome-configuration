@@ -5,7 +5,7 @@ shifty.config.apps = {
         match = {
             config.application.file_browser.class
         },
-        tag = "files",
+        tag = "file",
     },
     {
         match = {""},
