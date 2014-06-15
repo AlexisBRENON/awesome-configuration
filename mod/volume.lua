@@ -1,5 +1,6 @@
 local awful        = require("awful")
 local naughty      = require("naughty")
+local vicious = require("vicious")
 
 local volume = {}
 
@@ -21,10 +22,7 @@ local function change(what)
         icon = "medium"
     end
 
-    volid = naughty.notify({
-        text = string.format("%3d %%", vol),
-	    icon = awful.util.geticonpath("audio-volume-" .. icon),
-	    replaces_id = volid }).id
+    vicious.force({config.widget.vol_widget}) -- Update the volume widget
 end
 
 local function increase()
