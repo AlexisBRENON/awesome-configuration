@@ -4,30 +4,32 @@ local awful = require("awful")
 
 
 shifty.config.tags = {}
-shifty.config.tags["mine"] = {
+shifty.config.tags["🌐"] = {
     position = 0,
-    init = true,
+    exclusive = true,
 }
 
-shifty.config.tags["1"] = {
+shifty.config.tags["📁"] = {
     position = 1,
-    init = true,
-}
-
-shifty.config.tags["file"] = {
-    position = 2,
+    exclusive = true,
 }
 
 shifty.config.tags = awful.util.table.join(
     shifty.config.tags,
     {
-        test3 = {
-            position = 3,
-            init = true,
+        gimp = {
+            exclusive = true,
+            icon_only = true,
+            icon = beautiful.taglist_image
+        },
+        vlc = {
+            exclusive = true,
+            icon_only = true,
+            icon = beautiful.taglist_video
         }
+    -- TODO : to be continued
     }
 )
-
 
 shifty.config.defaults = {
     layout = awful.layout.layouts[1],

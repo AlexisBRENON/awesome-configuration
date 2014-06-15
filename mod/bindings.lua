@@ -137,6 +137,7 @@ config.keys.global = awful.util.table.join(
 )
 
 local numericPad = {
+    "KP_Insert",
     "KP_End",
     "KP_Down",
     "KP_Next",
@@ -147,22 +148,22 @@ local numericPad = {
     "KP_Up",
     "KP_Prior"
 }
-for i = 1, 9 do
+for i = 0, 9 do
     config.keys.global = awful.util.table.join(
         config.keys.global,
         -- View tag only.
-        awful.key({ modkey }, numericPad[i],
+        awful.key({ modkey }, numericPad[i+1],
             function ()
                 awful.tag.viewonly(shifty.getpos(i))
             end),
         -- Toggle tag.
-        awful.key({ modkey, "Control" }, numericPad[i],
+        awful.key({ modkey, "Control" }, numericPad[i+1],
             function ()
                 local t = shifty.getpos(i)
                 t.selected = not t.selected    
             end),
         -- Move client to tag.
-        awful.key({ modkey, "Shift" }, numericPad[i],
+        awful.key({ modkey, "Shift" }, numericPad[i+1],
             function ()
                 if client.focus then
                     -- remember the focused client because getpos() switch
