@@ -4,6 +4,11 @@ local awful = require("awful")
 
 
 shifty.config.tags = {}
+shifty.config.tags["mine"] = {
+    position = 0,
+    init = true,
+}
+
 shifty.config.tags["1"] = {
     position = 1,
     init = true,
