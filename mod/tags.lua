@@ -20,12 +20,12 @@ shifty.config.tags = awful.util.table.join(
         gimp = {
             exclusive = true,
             icon_only = true,
-            icon = beautiful.taglist_image
+            icon = beautiful.taglist_gimp
         },
         vlc = {
             exclusive = true,
             icon_only = true,
-            icon = beautiful.taglist_video
+            icon = beautiful.taglist_vlc
         }
     -- TODO : to be continued
     }
