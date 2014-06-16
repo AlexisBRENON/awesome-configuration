@@ -15,6 +15,12 @@ shifty.config.apps = {
     },
     {
         match = {
+            config.application.terminal.class
+        },
+        slave = true,
+    },
+    {
+        match = {
             "Gimp.*"
         },
         tag = "gimp",
@@ -30,6 +36,12 @@ shifty.config.apps = {
             "Subl"
         },
         tag = "subl",
+    },
+    {
+        match = {
+            "TeamViewer%.exe"
+        },
+        tag = "teamviewer"
     },
     {
         match = {
