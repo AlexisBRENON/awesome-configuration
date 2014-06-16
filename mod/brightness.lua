@@ -8,11 +8,11 @@ local naughty = require("naughty")
 local nid = nil
 function brightness.change(what)
     -- We don't really change the brightness, just report the change...
-    local out = awful.util.pread("xbacklight -get")
-    if not out then return end
-
+    local current = tonumber(io.lines("/sys/class/backlight/acpi_video0/actual_brightness")())
+    local max = tonumber(io.lines("/sys/class/backlight/acpi_video0/max_brightness")())
+    
     nid = naughty.notify({
-        text = out .. " %",
+        text = (current*100)/max .. " %",
         replaces_id = nid }).id
 end
 
