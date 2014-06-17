@@ -8,15 +8,15 @@ config.keys = {}
 config.mouse = {}
 
 local function screenshot(client)
-    if client == "root" then
+    if client == "root" then -- All screen
         client = "-window root"
-    elseif client then
+    elseif client then -- Only one client
         client = "-window " .. client.window
-    else
+    else -- Select with the mouse the area
         client = ""
     end
-    local path = "${HOME}/" ..
-        "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
+    local path = os.getenv("HOME") ..
+        "/screenshot-" .. os.date("%m-%d_%H-%M-%S") .. ".jpg"
     awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
 end
 
@@ -213,7 +213,9 @@ config.keys.client = awful.util.table.join(
     awful.key({ modkey, "Shift", "Control"}, "Right",
         function(c)
             awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen+1))
-        end)
+        end),
+    awful.key({ "Control" }, "Print",
+        screenshot)
 )
 
 config.mouse.global = {}
