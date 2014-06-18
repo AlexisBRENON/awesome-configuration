@@ -11,7 +11,7 @@ shifty.config.apps = {
         match = {
             config.application.file_browser.class
         },
-        tag = "📁",
+        tag = "🖿",
     },
     {
         match = {
@@ -23,13 +23,13 @@ shifty.config.apps = {
         match = {
             "Gimp.*"
         },
-        tag = "gimp",
+        tag = "🎴",
     },
     {
         match = {
             "Vlc"
         },
-        tag = "vlc",
+        tag = "🎥",
     },
     {
         match = {

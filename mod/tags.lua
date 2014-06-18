@@ -6,35 +6,29 @@ local awful = require("awful")
 shifty.config.tags = {}
 shifty.config.tags["🌐"] = {
     position = 0,
-    exclusive = true,
 }
 
-shifty.config.tags["📁"] = {
+shifty.config.tags["🖿"] = {
     position = 1,
-    exclusive = true,
+}
+
+shifty.config.tags["subl"] = {
+    position = 2,
+}
+
+shifty.config.tags["🎴"] = {
+    position = 3,
+}
+
+shifty.config.tags["🎥"] = {
+    position = 4,
 }
 
 shifty.config.tags = awful.util.table.join(
     shifty.config.tags,
-    {
-        subl = {
-            position = 2,
-        },
-        gimp = {
-            position = 3,
-            exclusive = true,
-            icon_only = true,
-            icon = beautiful.taglist_gimp
-        },
-        vlc = {
-            position = 4,
-            exclusive = true,
-            icon_only = true,
-            icon = beautiful.taglist_vlc
-        },
+    {        
         office = {
             position = 5,
-            max_clients = 1,
         },
         teamviewer = {
             position = 9,
@@ -49,4 +43,5 @@ shifty.config.defaults = {
     floatBars = true,
     guess_name = true,
     guess_position = true,
+    exclusive = true,
 }
