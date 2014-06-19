@@ -9,3 +9,4 @@ alsa-utils
 pavucontrol
 pulseaudio
 rxvt-unicode-256color
+FontAwesome (http://fontawesome.io/)

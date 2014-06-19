@@ -47,6 +47,7 @@ theme.taglist_fg_focus = theme.taglist_bg_empty -- White over...
 theme.taglist_bg_focus = theme.taglist_fg_empty -- Dark blue
 theme.taglist_fg_urgent = theme.fg_urgent -- Dark blue over...
 theme.taglist_bg_urgent = theme.bg_urgent -- ... Light blue
+theme.taglist_font = "FontAwesome 12"
 -- Clients images
 theme.taglist_squares_sel   = icons .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"

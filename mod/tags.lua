@@ -4,38 +4,49 @@ local awful = require("awful")
 
 
 shifty.config.tags = {}
-shifty.config.tags["🌐"] = {
+-- Web browser
+shifty.config.tags[""] = {
     position = 0,
 }
 
-shifty.config.tags["🖿"] = {
+-- File browser
+shifty.config.tags[""] = {
     position = 1,
 }
 
-shifty.config.tags["subl"] = {
+-- Sublime text / code
+shifty.config.tags[""] = {
     position = 2,
 }
 
-shifty.config.tags["🎴"] = {
+-- Gimp / image management
+shifty.config.tags[""] = {
     position = 3,
 }
 
-shifty.config.tags["🎥"] = {
+-- VLC / video
+shifty.config.tags[""] = {
     position = 4,
 }
 
-shifty.config.tags = awful.util.table.join(
-    shifty.config.tags,
-    {        
-        office = {
-            position = 5,
-        },
-        teamviewer = {
-            position = 9,
-        }
-    -- TODO : to be continued
-    }
-)
+-- Office writer
+shifty.config.tags[""] = {
+    position = 5,
+}
+-- Office calc
+shifty.config.tags[""] = {
+    position = 5,
+}
+-- Office impress
+shifty.config.tags[""] = {
+    position = 5,
+}
+
+-- Teamviewer
+shifty.config.tags[""] = {
+    position = 9,
+}
+
 
 shifty.config.defaults = {
     layout = awful.layout.layouts[1],

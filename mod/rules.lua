@@ -5,13 +5,13 @@ shifty.config.apps = {
         match = {
             config.application.web_browser.class
         },
-        tag = "🌐",
+        tag = "",
     },
     {
         match = {
             config.application.file_browser.class
         },
-        tag = "🖿",
+        tag = "",
     },
     {
         match = {
@@ -23,31 +23,43 @@ shifty.config.apps = {
         match = {
             "Gimp.*"
         },
-        tag = "🎴",
+        tag = "",
     },
     {
         match = {
             "Vlc"
         },
-        tag = "🎥",
+        tag = "",
     },
     {
         match = {
             "Subl"
         },
-        tag = "subl",
+        tag = "",
     },
     {
         match = {
             "TeamViewer%.exe"
         },
-        tag = "teamviewer"
+        tag = ""
     },
     {
         match = {
-            "libreoffice.*"
+            "libreoffice%-writer"
         },
-        tag = "office",
+        tag = "",
+    },
+    {
+        match = {
+            "libreoffice%-impress"
+        },
+        tag = "",
+    },
+    {
+        match = {
+            "libreoffice%-calc"
+        },
+        tag = "",
     },
     {
         match = {
