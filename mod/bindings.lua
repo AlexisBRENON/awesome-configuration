@@ -3,6 +3,7 @@ local brightness = require("mod/brightness")
 local volume = require("mod/volume")
 local xrandr = require("mod/xrandr")
 local shifty = require("shifty")
+local naughty = require("naughty")
 
 config.keys = {}
 config.mouse = {}
@@ -104,6 +105,7 @@ config.keys.global = awful.util.table.join(
     awful.key({modkey}, "r", shifty.rename), -- rename a tag
 
     -- Display prompt box
+    -- Default prompt
     awful.key({modkey}, "F2",
         function()
             awful.prompt.run(
@@ -111,6 +113,22 @@ config.keys.global = awful.util.table.join(
                 config.promptbox[mouse.screen].widget,
                 awful.util.spawn, awful.completion.shell,
                 awful.util.getdir("cache") .. "/history"
+            )
+        end),
+    -- Calculator prompt
+    awful.key({}, "XF86Calculator",
+        function()
+            awful.prompt.run(
+                { prompt = " = " },
+                config.promptbox[mouse.screen].widget,
+                function (expr)
+                    print(expr)
+                    local result = awful.util.eval("return (" .. expr .. ")")
+                    naughty.notify({
+                        text = expr .. " = " .. result,
+                        timeout = 0
+                    })
+                end
             )
         end),
     
