@@ -3,37 +3,37 @@ local shifty = require("shifty")
 shifty.config.apps = {
     {
         match = {
-            config.application.web_browser.class
+            config.application.web_browser.matching
         },
         tag = "",
     },
     {
         match = {
-            config.application.file_browser.class
+            config.application.file_browser.matching
         },
         tag = "",
     },
     {
         match = {
-            config.application.terminal.class
+            config.application.terminal.matching
         },
         slave = true,
     },
     {
         match = {
-            "Gimp.*"
+            config.application.image_editor.matching
         },
         tag = "",
     },
     {
         match = {
-            "Vlc"
+            config.application.video_player.matching
         },
         tag = "",
     },
     {
         match = {
-            "Subl"
+            config.application.text_editor.matching
         },
         tag = "",
     },
@@ -45,9 +45,10 @@ shifty.config.apps = {
     },
     {
         match = {
+            config.application.office.matching,
             "libreoffice%-writer"
         },
-        tag = "",
+        tag = "",
     },
     {
         match = {

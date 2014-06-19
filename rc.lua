@@ -13,17 +13,33 @@ modkey = "Mod4"
 config = {}
 config.application = {
     ["terminal"] = {
-        ["bin"] = "urxvtc",
-        ["class"] = "URxvt",
+        bin = "urxvtc",
+        matching = "URxvt",
+    },
+    ["text_editor"] = {
+        bin = "subl",
+        matching = "Subl"
     },
     ["file_browser"] = {
-        ["bin"] = "gnome-commander",
-        ["class"] = "Gnome%-commander",
+        bin = "gnome-commander",
+        matching = "Gnome%-commander",
     },
     ["web_browser"] = {
-        ["bin"] = "google-chrome",
-        ["class"] = "Google%-chrome",
+        bin = "google-chrome",
+        matching = "Google%-chrome",
     },
+    ["image_editor"] = {
+        bin = "gimp",
+        matching = "Gimp.*"
+    },
+    ["video_player"] = {
+        bin = "vlc",
+        matching = "Vlc"
+    },
+    ["office"] = {
+        bin = "libreoffice",
+        matching = "libreoffice.*"
+    }
 }
 awful.layout.layouts = {
     awful.layout.suit.tile,
