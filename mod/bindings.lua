@@ -122,7 +122,6 @@ config.keys.global = awful.util.table.join(
                 { prompt = " = " },
                 config.promptbox[mouse.screen].widget,
                 function (expr)
-                    print(expr)
                     local result = awful.util.eval("return (" .. expr .. ")")
                     naughty.notify({
                         text = expr .. " = " .. result,
@@ -130,6 +129,19 @@ config.keys.global = awful.util.table.join(
                     })
                 end
             )
+        end),
+    -- Web search prompt (http://awesome.naquadah.org/wiki/Anrxcs_WebSearch_Prompt)
+    awful.key({modkey}, "F12",
+        function ()
+            awful.prompt.run(
+                {prompt = "Web search: "},
+                config.promptbox[mouse.screen].widget,
+                function (command)
+                    awful.util.spawn(
+                        config.application.web_browser.bin .. " 'http://yubnub.org/parser/parse?command=" .. command .. "'")
+                    -- Switch to the web tag (in my case it's tag 0)
+                    awful.tag.viewonly(shifty.getpos(0))
+                end)
         end),
     
     -- Screenshot

@@ -32,7 +32,7 @@ These softs can be configured in the main rc.lua file
 
 
 ## TODO : ##
-- [ ] Add a custom prompt for [web search](http://awesome.naquadah.org/wiki/Anrxcs_WebSearch_Prompt)
+- [x] Add a custom prompt for [web search](http://awesome.naquadah.org/wiki/Anrxcs_WebSearch_Prompt)
 - [ ] Add a keyboard layout change widget
 - [ ] Update screenshot with new tags icons
 - [x] Move requirements to the README
