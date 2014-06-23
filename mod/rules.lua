@@ -1,4 +1,6 @@
 local shifty = require("shifty")
+local awful = {}
+awful.util = require("awful.util")
 
 shifty.config.apps = {
     {
@@ -45,7 +47,6 @@ shifty.config.apps = {
     },
     {
         match = {
-            config.application.office.matching,
             "libreoffice%-writer"
         },
         tag = "",

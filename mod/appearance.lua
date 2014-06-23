@@ -6,8 +6,10 @@ local gears = require("gears")
 beautiful.init(awful.util.getdir("config") .. "/theme/theme.lua")
 -- Link it to awful
 -- awful.beautiful.register(beautiful)
--- Set background (on all screen, keep ratio)
-gears.wallpaper.fit(beautiful.wallpaper, nil, false)
+-- Set background
+for s = 1, screen.count() do
+	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+end
 
 -- Set cursor theme
 os.execute("xsetroot -cursor_name left_ptr")
