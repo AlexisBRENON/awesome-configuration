@@ -65,6 +65,17 @@ shifty.config.apps = {
     },
     {
         match = {
+            class = {"LibreOffice.*"},
+            name = {}
+        },
+        tag = "",
+        run = function ()
+            print("screen : " .. mouse.screen+1 .. " mod(" .. screen.count() .. ") = " .. awful.util.cycle(screen.count(), mouse.screen+1))
+        end,
+        screen = awful.util.cycle(screen.count(), mouse.screen+1)
+    },
+    {
+        match = {
             "_NET_WM_WINDOW_TYPE_DIALOG",
             "_NET_WM_WINDOW_TYPE_SPLASH",
         },
