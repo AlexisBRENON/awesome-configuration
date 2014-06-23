@@ -176,9 +176,17 @@ config.promptbox = promptbox
 -- Wibox initialisation (one per screen)
 local wibox_top = {}
 
-
 -- Add widgets to wiboxes
 for s = 1, screen.count() do
+
+    -- This function return the widget if it must be displayed on this screen
+    -- nil otherwise
+    local add_widget = function(what, layout, where)
+        if where == nil or where == s then
+            layout:add(what)
+        end
+    end
+
     promptbox[s] = awful.widget.prompt()
     layoutbox[s] = awful.widget.layoutbox(s)
     taglist[s] = awful.widget.taglist.new(
@@ -205,15 +213,15 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_group = wibox.layout.fixed.horizontal()
-    right_group:add(sep_top_bottom)
-    right_group:add(wibox.widget.background(systray, beautiful.widget_alternative_bg))
-    right_group:add(sep_bottom_top)
+    add_widget(sep_top_bottom, right_group, 1)
+    add_widget(wibox.widget.background(systray, beautiful.widget_alternative_bg), right_group, 1)
+    add_widget(sep_bottom_top, right_group, 1)
 
-    right_group:add(batwidget.widget)
+    add_widget(batwidget.widget, right_group, 1)
 
-    right_group:add(sep_top_bottom)
-    right_group:add(wibox.widget.background(volwidget, beautiful.widget_alternative_bg))
-    right_group:add(sep_bottom_top)
+    add_widget(sep_top_bottom, right_group, 1)
+    add_widget(wibox.widget.background(volwidget, beautiful.widget_alternative_bg), right_group, 1)
+    add_widget(sep_bottom_top, right_group, 1)
 
     right_group:add(datewidget)
 
