@@ -1,6 +1,5 @@
 local shifty = require("shifty")
-local awful = {}
-awful.util = require("awful.util")
+local awful = require("awful")
 
 shifty.config.apps = {
     {
@@ -66,13 +65,18 @@ shifty.config.apps = {
     {
         match = {
             class = {"LibreOffice.*"},
-            name = {}
+            name = {nil}
         },
         tag = "",
-        run = function ()
-            print("screen : " .. mouse.screen+1 .. " mod(" .. screen.count() .. ") = " .. awful.util.cycle(screen.count(), mouse.screen+1))
+        run = function (args)
+            local clients = client.get(mouse.screen)
+            local client = nil
+            print(os.date("%m-%d_%H-%M-%S"))
+            print(args)
+            for j, p in ipairs({"name", "class", "instance"}) do
+                print("    " .. p .. " : " .. (args[p] or "nil"))
+            end
         end,
-        screen = awful.util.cycle(screen.count(), mouse.screen+1)
     },
     {
         match = {
