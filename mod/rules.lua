@@ -67,14 +67,18 @@ shifty.config.apps = {
             class = {"LibreOffice.*"},
             name = {nil}
         },
-        tag = "",
-        run = function (args)
-            local clients = client.get(mouse.screen)
-            local client = nil
-            print(os.date("%m-%d_%H-%M-%S"))
-            print(args)
-            for j, p in ipairs({"name", "class", "instance"}) do
-                print("    " .. p .. " : " .. (args[p] or "nil"))
+        run = function (client)
+            if client.name == nil then
+                print(os.date("%m-%d_%H-%M-%S") .. " match")
+                awful.client.movetotag(shifty.add({
+                    name = "",
+                    screen = awful.util.cycle(screen.count(), mouse.screen+1)
+                    }), client)
+            else
+                print(os.date("%m-%d_%H-%M-%S") .. " " .. client.name .. " match")
+                awful.client.movetotag(shifty.add({
+                    name = "slideshow",
+                    }), client)
             end
         end,
     },

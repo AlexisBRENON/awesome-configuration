@@ -56,7 +56,6 @@ shifty.config.tags[""] = {
     spawn = "teamviewer"
 }
 
-
 shifty.config.defaults = {
     layout = awful.layout.layouts[1],
     persist = false,
