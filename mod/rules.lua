@@ -72,12 +72,13 @@ shifty.config.apps = {
                 print(os.date("%m-%d_%H-%M-%S") .. " match")
                 awful.client.movetotag(shifty.add({
                     name = "",
-                    screen = awful.util.cycle(screen.count(), mouse.screen+1)
+                    screen = 2
                     }), client)
             else
                 print(os.date("%m-%d_%H-%M-%S") .. " " .. client.name .. " match")
                 awful.client.movetotag(shifty.add({
                     name = "slideshow",
+                    screen = 1,
                     }), client)
             end
         end,
