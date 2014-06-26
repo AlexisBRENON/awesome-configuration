@@ -24,7 +24,7 @@ Here is a list of known requirements. As my Awesome install comes over a Debian 
 
 ### Default softwares ###
 These softs can be configured in the main rc.lua file
-* **Terminal** : rxvt-unicode-256color + bash
+* **Terminal** : rxvt-unicode-256color + [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)
 * **Text editor** : Sublime Text 2
 * **Web browser** : Google Chrome (for it's embedded flash player)
 * **File browser** : Gnome Commander
@@ -36,4 +36,4 @@ These softs can be configured in the main rc.lua file
 - [ ] Add a keyboard layout change widget
 - [x] Update screenshot with new tags icons [21/06/2014]
 - [x] Move requirements to the README
-- [ ] Add link to my versionned bashrc
+- [x] Add link to my versionned bashrc
