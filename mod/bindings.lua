@@ -163,7 +163,12 @@ config.keys.global = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
     awful.key({ }, "XF86AudioMute",        volume.toggle),
 
-    awful.key({}, "XF86Display", xrandr.change_screen) -- Switch between screens configurations
+    awful.key({}, "XF86Display", xrandr.change_screen), -- Switch between screens configurations
+    awful.key({}, "XF86ScreenSaver",
+        function ()
+            awful.util.spawn("xscreensaver-command -lock")
+            awful.util.spawn("sudo pm-suspend")
+        end)
 )
 
 local numericPad = {
