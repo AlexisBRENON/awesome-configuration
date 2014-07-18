@@ -167,7 +167,6 @@ config.keys.global = awful.util.table.join(
     awful.key({}, "XF86ScreenSaver",
         function ()
             awful.util.spawn("xscreensaver-command -lock")
-            awful.util.spawn("sudo pm-suspend")
         end)
 )
 
