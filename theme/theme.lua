@@ -25,10 +25,17 @@ theme.border_normal = "#3F3F3F" -- Dark grey
 theme.border_focus  = "#6F6F6F" -- Light grey
 theme.border_marked = "#93B0CD" -- Very light blue
 
+-- Systray
+theme.bg_systray = "#00000000"
+theme.systray_icon_spacing = 2
+
 -- Taglist
--- Tag colors
+theme.taglist_bg_focus = "#00000000"
+theme.taglist_bg_occupied = "#00000000"
+theme.taglist_bg_empty = "#00000000"
+theme.taglist_fg_occupied = theme.fg_normal
+theme.taglist_fg_empty = theme.fg_normal
 theme.taglist_font = "FontAwesome 12"
--- Clients images
 theme.taglist_squares_sel   = icons .. "/taglist/squarefw.png"
 theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"
 
