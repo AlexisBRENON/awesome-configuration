@@ -13,16 +13,16 @@ modkey = "Mod4"
 config = {}
 config.application = {
     ["terminal"] = {
-        bin = "urxvtc",
-        matching = "URxvt",
+        bin = "gnome-terminal",
+        matching = "Gnome%-terminal",
     },
     ["text_editor"] = {
-        bin = "subl",
-        matching = "Subl"
+        bin = "sublime",
+        matching = "Sublime"
     },
     ["file_browser"] = {
-        bin = "gnome-commander",
-        matching = "Gnome%-commander",
+        bin = "nautilus",
+        matching = "Nautilus",
     },
     ["web_browser"] = {
         bin = "google-chrome",
