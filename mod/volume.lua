@@ -4,41 +4,25 @@ local vicious = require("vicious")
 
 local volume = {}
 
-local notification_id = nil
-local function change(what)
-    os.execute("amixer -q sset Master " .. what, false)
-    -- Read the current value
-    local out = awful.util.pread("amixer sget Master")
-    local vol, mute = out:match("([%d]+)%%.*%[([%l]*)")
-    if not mute or not vol then return end
-
-    vol = tonumber(vol)
-    local icon = "high"
-    if mute ~= "on" or vol == 0 then
-        icon = "muted"
-    elseif vol < 30 then
-        icon = "low"
-    elseif vol < 60 then
-        icon = "medium"
-    end
-
-    vicious.force({config.widget.vol_widget}) -- Update the volume widget
+local function change(device, what)
+    os.execute("amixer -q sset " .. device .. " " .. what, false)
+    vicious.force({config.widgets.volume.widget}) -- Update the volume widget
 end
 
-local function increase()
-    change("5%+")
+local function increase(device)
+    change(device, "5%+")
 end
 
-local function decrease()
-    change("5%-")
+local function decrease(device)
+    change(device, "5%-")
 end
 
-local function toggle()
-    change("toggle")
+local function toggle(device)
+    change(device, "toggle")
 end
 
 -- run pavucontrol
-local function mixer()
+local function mixer(device)
     awful.util.spawn("pavucontrol", false)
 end
 

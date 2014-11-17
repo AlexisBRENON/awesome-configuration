@@ -188,10 +188,10 @@ vicious.register(
 )
 config.widgets.volume.widget:buttons(
     awful.util.table.join(
-        awful.button({ }, 1, volume.mixer), -- Normal click
-        awful.button({ }, 3, volume.toggle), -- Right click
-        awful.button({ }, 4, volume.increase), -- Scroll up
-        awful.button({ }, 5, volume.decrease) -- Scroll down
+        awful.button({ }, 1, function() volume.mixer(config.widgets.volume.device) end), -- Normal click
+        awful.button({ }, 3, function() volume.toggle(config.widgets.volume.device) end), -- Right click
+        awful.button({ }, 4, function() volume.increase(config.widgets.volume.device) end), -- Scroll up
+        awful.button({ }, 5, function() volume.decrease(config.widgets.volume.device) end) -- Scroll down
     )
 )
 
