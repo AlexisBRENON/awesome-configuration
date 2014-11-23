@@ -1,6 +1,9 @@
 local awful        = require("awful")
 local naughty      = require("naughty")
 local vicious = require("vicious")
+vicious.contrib = {
+    pulse = require("vicious/contrib/pulse")
+}
 
 local volume = {}
 
@@ -9,16 +12,23 @@ local function change(device, what)
     vicious.force({config.widgets.volume.widget}) -- Update the volume widget
 end
 
+local function update()
+    vicious.force({config.widgets.volume.widget}) -- Update the volume widget
+end
+
 local function increase(device)
-    change(device, "5%+")
+    vicious.contrib.pulse.add(5, device)
+    update()
 end
 
 local function decrease(device)
-    change(device, "5%-")
+    vicious.contrib.pulse.add(-5, device)
+    update()
 end
 
 local function toggle(device)
-    change(device, "toggle")
+    vicious.contrib.pulse.toggle(device)
+    update()
 end
 
 -- run pavucontrol

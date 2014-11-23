@@ -1,6 +1,9 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local vicious = require("vicious")
+vicious.contrib = {
+    pulse = require("vicious/contrib/pulse")
+}
 local awful = require("awful")
 local naughty = require("naughty")
 local volume = require("mod/volume")
@@ -20,7 +23,7 @@ config.widgets = {
     volume = {
         widget = nil,
         update_time = 3631,
-        device = "IEC958",
+        device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
     },
     separator = {
         widget = nil,
@@ -173,7 +176,7 @@ vicious.register(
 config.widgets.volume.widget = wibox.widget.textbox()
 vicious.register(
     config.widgets.volume.widget,
-    vicious.widgets.volume,
+    vicious.contrib.pulse,
     function ( widget, args )
         local result = ""
         if args[2] == "♩" then
@@ -190,8 +193,8 @@ config.widgets.volume.widget:buttons(
     awful.util.table.join(
         awful.button({ }, 1, function() volume.mixer(config.widgets.volume.device) end), -- Normal click
         awful.button({ }, 3, function() volume.toggle(config.widgets.volume.device) end), -- Right click
-        awful.button({ }, 4, function() volume.increase(config.widgets.volume.device) end), -- Scroll up
-        awful.button({ }, 5, function() volume.decrease(config.widgets.volume.device) end) -- Scroll down
+        awful.button({ }, 5, function() volume.increase(config.widgets.volume.device) end), -- Scroll down
+        awful.button({ }, 4, function() volume.decrease(config.widgets.volume.device) end) -- Scroll up
     )
 )
 
@@ -222,7 +225,8 @@ for s = 1, screen.count() do
     })
 
     -- Create widgets 
-    config.widgets.promptbox.widget[s] = awful.widget.prompt()
+--    config.widgets.promptbox.widget[s] = awful.widget.prompt()
+    config.widgets.promptbox.widget[s] = wibox.widget.textbox()
     config.widgets.layoutbox.widget[s] = awful.widget.layoutbox(s)
     config.widgets.taglist.widget[s] = awful.widget.taglist.new(
         s,
