@@ -41,8 +41,8 @@ config.widgets = {
                 from={0,0},
                 to={0,22},
                 stops={
-                    {1, beautiful.bg_normal .. "11"},
-                    {0, beautiful.bg_normal .. "CC"},
+                    {1, beautiful.bg_normal .. "00"},
+                    {0, beautiful.bg_normal .. "99"},
                 }
             }),
         }
