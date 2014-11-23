@@ -173,6 +173,7 @@ vicious.register(
 )
 
 -- Volume level
+-- TODO : add icon
 config.widgets.volume.widget = wibox.widget.textbox()
 vicious.register(
     config.widgets.volume.widget,
@@ -238,14 +239,19 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the left
     local left_group = wibox.layout.fixed.horizontal()
     add_widget(config.widgets.layoutbox.widget[s], left_group)
+    add_widget(config.widgets.separator.widget, left_group)
     add_widget(config.widgets.taglist.widget[s], left_group)
+    add_widget(config.widgets.separator.widget, left_group)
     add_widget(config.widgets.promptbox.widget[s], left_group)
 
     -- Widgets that are aligned to the right
     local right_group = wibox.layout.fixed.horizontal()
     add_widget(config.widgets.systray.widget, right_group, 1) -- Only on first screen
+    add_widget(config.widgets.separator.widget, right_group, 1)
     add_widget(config.widgets.battery.widget, right_group, 1) -- Only on first screen
+    add_widget(config.widgets.separator.widget, right_group, 1)
     add_widget(config.widgets.volume.widget, right_group, 1) -- Only on first screen
+    add_widget(config.widgets.separator.widget, right_group, 1)
     add_widget(config.widgets.date_time.widget, right_group) -- On all screens
 
     -- Now bring it all together
