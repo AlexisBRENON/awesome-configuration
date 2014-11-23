@@ -13,8 +13,8 @@ modkey = "Mod4"
 config = {}
 config.application = {
     ["terminal"] = {
-        bin = "gnome-terminal",
-        matching = "Gnome%-terminal",
+        bin = "urxvt",
+        matching = "Urxvt",
     },
     ["text_editor"] = {
         bin = "sublime",
@@ -25,8 +25,8 @@ config.application = {
         matching = "Nautilus",
     },
     ["web_browser"] = {
-        bin = "google-chrome",
-        matching = "Google%-chrome",
+        bin = "google-chrome-stable",
+        matching = "Google%-chrome%-stable",
     },
     ["image_editor"] = {
         bin = "gimp",
