@@ -27,7 +27,7 @@ config.widgets = {
     },
     separator = {
         widget = nil,
-        text = " ",
+        text = "  ",
     },
     systray = {
         widget = nil,
@@ -65,7 +65,7 @@ config.widgets = {
 
 -- Separators
 config.widgets.separator.widget = wibox.widget.textbox()
-config.widgets.separator.widget:set_text(config.widgets.separator.text)
+config.widgets.separator.widget:set_markup(config.widgets.separator.text)
 
 
 -- Date
@@ -239,7 +239,6 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the left
     local left_group = wibox.layout.fixed.horizontal()
     add_widget(config.widgets.layoutbox.widget[s], left_group)
-    add_widget(config.widgets.separator.widget, left_group)
     add_widget(config.widgets.taglist.widget[s], left_group)
     add_widget(config.widgets.separator.widget, left_group)
     add_widget(config.widgets.promptbox.widget[s], left_group)
