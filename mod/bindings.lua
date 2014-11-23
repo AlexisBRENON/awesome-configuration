@@ -110,7 +110,7 @@ config.keys.global = awful.util.table.join(
         function()
             awful.prompt.run(
                 {prompt = "Run: "},
-                config.promptbox[mouse.screen].widget,
+                config.widgets.promptbox.widget[mouse.screen],
                 awful.util.spawn, awful.completion.shell,
                 awful.util.getdir("cache") .. "/history"
             )
@@ -120,7 +120,7 @@ config.keys.global = awful.util.table.join(
         function()
             awful.prompt.run(
                 { prompt = " = " },
-                config.promptbox[mouse.screen].widget,
+                config.widgets.promptbox.widget[mouse.screen],
                 function (expr)
                     local result = awful.util.eval("return (" .. expr .. ")")
                     naughty.notify({
@@ -135,7 +135,7 @@ config.keys.global = awful.util.table.join(
         function ()
             awful.prompt.run(
                 {prompt = "Web search: "},
-                config.promptbox[mouse.screen].widget,
+                config.widgets.promptbox.widget[mouse.screen],
                 function (command)
                     awful.util.spawn(
                         config.application.web_browser.bin .. " 'http://yubnub.org/parser/parse?command=" .. command .. "'")
