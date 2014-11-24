@@ -25,9 +25,11 @@ theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_normal
 theme.border_marked = theme.fg_focus
 
+
 -- Systray
 theme.bg_systray = "#00000000"
 theme.systray_icon_spacing = 2
+
 
 -- Taglist
 theme.taglist_bg_empty = "#00000000" -- No background
@@ -48,6 +50,7 @@ theme.taglist_squares_sel_empty = icons .. "/taglist/none.png"
 theme.taglist_squares_unsel_empty = icons .. "/taglist/none.png"
 theme.taglist_squares_resize = "false"
 
+
 -- Layout icons
 for _, l in pairs(awful.layout.layouts) do
   	theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
@@ -57,9 +60,14 @@ end
 local naughty = require("naughty")
 naughty.config.presets.normal.bg = theme.bg_normal
 naughty.config.presets.normal.fg = theme.fg_normal
-for _,preset in pairs({"normal", "low", "critical"}) do
-  naughty.config.presets[preset].font = "DejaVu Sans 10"
-end
+naughty.config.presets.normal.border_color = theme.fg_normal
 
+naughty.config.presets.low.bg = theme.bg_normal
+naughty.config.presets.low.fg = theme.fg_normal
+naughty.config.presets.low.border_color = theme.bg_normal
+
+naughty.config.presets.critical.bg = theme.bg_urgent
+naughty.config.presets.critical.fg = theme.fg_urgent
+naughty.config.presets.critical.border_color = theme.fg_urgent
 
 return theme
