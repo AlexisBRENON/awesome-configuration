@@ -97,22 +97,24 @@ local calendar = (
             offset = new_offset
 
             -- Get the right month to display
-            local datespec = os.date("*t") -- Fetch the date of the day
-            datespec = datespec.year * 12 + datespec.month - 1 + offset -- Compute date in months to add/remove offset
-            datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12) -- Get back date+offset as 'month year'
+            local today_datespec = os.date("*t") -- Fetch the date of the day
+            display_datespec = today_datespec.year * 12 + today_datespec.month - 1 + offset -- Compute date in months to add/remove offset
+            display_datespec = (display_datespec % 12 + 1) .. " " .. math.floor(display_datespec / 12) -- Get back date+offset as 'month year'
 
             -- Get month calendar with week number and week starting on Monday
-            local cal = awful.util.pread("ncal -w -M -m " .. datespec)
+            local cal = awful.util.pread("cal " .. display_datespec)
             
             -- Highlight the current day
-            cal = cal:gsub(
-                "_.([%d ])",
-                string.format(
-                    '<span background="%s" foreground="%s">%%1</span>',
-                    beautiful.bg_focus,
-                    beautiful.fg_focus
+            if (offset == 0) then
+                cal = cal:gsub(
+                    "( ?" .. today_datespec.day .. " ?)",
+                    string.format(
+                        '<span background="%s" foreground="%s">%%1</span>',
+                        beautiful.bg_focus,
+                        beautiful.fg_urgent
+                    )
                 )
-            )
+            end
             
             -- Display calendar with naughty
             notification = naughty.notify({

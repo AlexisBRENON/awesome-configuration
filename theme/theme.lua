@@ -13,7 +13,7 @@ theme.font_mono = "DejaVu Sans Mono 8"
 
 -- Define color scheme
 theme.bg_normal     = "#272822" -- Monokai black bg
-theme.bg_focus      = theme.bg_normal
+theme.bg_focus      = "#3E3D32" -- Monokai grey highlight
 theme.bg_urgent     = theme.bg_normal
 
 theme.fg_normal     = "#F8F8F2" -- Monokai white fg
