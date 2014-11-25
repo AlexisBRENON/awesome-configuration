@@ -5,7 +5,7 @@ local wallpaper_directory = awful.util.getdir("config") .. "/theme/wallpapers/"
 config.wallpaper = awful.util.getdir("cache") .. "/current-wallpaper.png"
 
 -- Find all avalaible wallpapers
-wallpapers = awful.util.pread("ls -1 " .. wallpaper_directory)
+wallpapers = awful.util.pread("ls -1 " .. wallpaper_directory .. " | grep -v README")
 local sep = "\n"
 local wallpapers_list = {wallpapers:match((wallpapers:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))}
 
