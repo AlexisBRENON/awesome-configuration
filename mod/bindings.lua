@@ -157,8 +157,8 @@ config.keys.global = awful.util.table.join(
     awful.key({ modkey, "Control" }, "q", awesome.quit),
 
     -- Multimedia keys
-    awful.key({ }, "XF86MonBrightnessUp",   brightness.change), -- Changement is done by PC, we only report changement
-    awful.key({ }, "XF86MonBrightnessDown", brightness.change),
+    awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
+    awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
     awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
     awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
     awful.key({ }, "XF86AudioMute",        volume.toggle),
