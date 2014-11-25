@@ -103,7 +103,7 @@ local calendar = (
 
             -- Get month calendar with week number and week starting on Monday
             local cal = awful.util.pread("cal " .. display_datespec)
-            
+
             -- Highlight the current day
             if (offset == 0) then
                 cal = cal:gsub(
@@ -115,7 +115,7 @@ local calendar = (
                     )
                 )
             end
-            
+
             -- Display calendar with naughty
             notification = naughty.notify({
                 text = cal,
@@ -153,9 +153,9 @@ vicious.register(
         local current = args[2]
 
         -- Battery low and discharging
-        if current < 10 and state == "-" then
+        if current < 10 and state == "−" then
             -- Maybe we want to display a small warning?
-            if current ~= batwidget.lastwarn then
+            if current ~= config.widgets.battery.lastwarn then
                 config.widgets.battery.notification_id = naughty.notify({
                     title = "Batterie : niveau bas!",
                     preset = naughty.config.presets.critical,
@@ -227,7 +227,7 @@ for s = 1, screen.count() do
         bg = config.widgets.wiboxes.top.bg
     })
 
-    -- Create widgets 
+    -- Create widgets
 --    config.widgets.promptbox.widget[s] = awful.widget.prompt()
     config.widgets.promptbox.widget[s] = wibox.widget.textbox()
     config.widgets.layoutbox.widget[s] = awful.widget.layoutbox(s)
@@ -236,7 +236,7 @@ for s = 1, screen.count() do
         awful.widget.taglist.filter.all,
         config.widgets.taglist.buttons
     )
-    
+
     -- Add widgets to the wibox
     -- Widgets that are aligned to the left
     local left_group = wibox.layout.fixed.horizontal()
