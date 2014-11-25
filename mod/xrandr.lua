@@ -137,6 +137,20 @@ local function change_screen()
     state.timer:start()
 end
 
+local function turn_on()
+    for _,output in pairs(outputs()) do
+        os.execute("xrandr --output " .. output .. " --auto --dryrun >> /home/alexis/xrand.txt")
+    end
+end
+
+local function turn_off()
+    for _,output in pairs(outputs()) do
+        os.execute("xrandr --output " .. output .. " --off --dryrun >> /home/alexis/xrand.txt")
+    end
+end
+
 xrandr.change_screen = change_screen
+xrandr.turn_on = turn_on
+xrandr.turn_off = turn_off
 
 return xrandr
