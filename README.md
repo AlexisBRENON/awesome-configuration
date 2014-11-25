@@ -2,13 +2,12 @@
 This is my [Awesome](http://awesome.naquadah.org) configuration. It is greatly inspired from [Vincent Bernat](https://github.com/vincentbernat/awesome-configuration)'s one.
 Here some of the things you may be interested in:
 * It is modular
-* It displays notifications when changing volume, brightness and Xrandr outputs
+* It displays notifications when changing ~~volume~~, brightness and Xrandr outputs
 * One tag for one app (except terminal)
 * Iconic tag name
 
-
 ## Requirements ##
-Here is a list of known requirements. As my Awesome install comes over a Debian Testing (Jessie) some requirements are already installed by it.
+Here is a list of known requirements on Arch Linux
 
 ### Awesome third library ###
 * [Shifty](https://github.com/bioe007/awesome-shifty) for tag management
@@ -19,15 +18,17 @@ Here is a list of known requirements. As my Awesome install comes over a Debian 
 * [FontAwesome](http://fontawesome.io/) for icons
 
 ### Utils ###
-* alsa-utils
+* pulseaudio
 * pavucontrol
+* xbacklight
+* wicd and wicd-gtk
 
 ### Default softwares ###
 These softs can be configured in the main rc.lua file
-* **Terminal** : rxvt-unicode-256color + [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)
+* **Terminal** : rxvt-unicode-256color ~~+ [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)~~ [zsh + oh my zsh](https://github.com/AlexisBRENON/dotfiles/blob/master/bash/zshrc)
 * **Text editor** : Sublime Text 2
 * **Web browser** : Google Chrome (for it's embedded flash player)
-* **File browser** : Gnome Commander
+* ~~**File browser** : Gnome Commander~~
 * **Office suite** : Libre Office
 
 
@@ -37,3 +38,4 @@ These softs can be configured in the main rc.lua file
 - [x] Update screenshot with new tags icons [21/06/2014]
 - [x] Move requirements to the README
 - [x] Add link to my versionned bashrc
+- [ ] Restore notifications
