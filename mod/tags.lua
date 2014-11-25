@@ -4,6 +4,13 @@ local awful = require("awful")
 
 
 shifty.config.tags = {}
+
+-- Init (without any name)
+shifty.config.tags["\n"] = {
+    position = 0,
+    init = true,
+}
+
 -- Web browser
 shifty.config.tags[""] = {
     position = 0,
