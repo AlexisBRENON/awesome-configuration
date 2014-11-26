@@ -1,12 +1,14 @@
 local awful = require("awful")
 
-local na = awful.util.color_strip_alpha
-local icons = awful.util.getdir("config") .. "/theme/icons/"
-
 theme = {}
 
 -- Define common stuff
-theme.icons 	= icons
+theme.icons 	= {
+	main = awful.util.getdir("config") .. "/theme/icons/",
+	layouts = awful.util.getdir("config") .. "/theme/icons/layouts/",
+	taglist = awful.util.getdir("config") .. "/theme/icons/taglist/",
+	common = awful.util.getdir("config") .. "/theme/icons/material-design-icons/",
+}
 theme.wallpaper = config.wallpaper
 theme.font 		= "DejaVu Sans 11"
 theme.font_mono = "DejaVu Sans Mono 8"
@@ -44,16 +46,16 @@ theme.taglist_fg_urgent = theme.fg_urgent
 
 theme.taglist_font = "FontAwesome 12"
 
-theme.taglist_squares_sel = icons .. "/taglist/none.png"
-theme.taglist_squares_unsel = icons .. "/taglist/none.png"
-theme.taglist_squares_sel_empty = icons .. "/taglist/none.png"
-theme.taglist_squares_unsel_empty = icons .. "/taglist/none.png"
+theme.taglist_squares_sel = awful.util.geticonpath("none", {"png"}, {theme.icons.taglist})
+theme.taglist_squares_unsel = awful.util.geticonpath("none", {"png"}, {theme.icons.taglist})
+theme.taglist_squares_sel_empty = awful.util.geticonpath("none", {"png"}, {theme.icons.taglist})
+theme.taglist_squares_unsel_empty = awful.util.geticonpath("none", {"png"}, {theme.icons.taglist})
 theme.taglist_squares_resize = "false"
 
 
 -- Layout icons
 for _, l in pairs(awful.layout.layouts) do
-  	theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
+  	theme["layout_" .. l.name] = awful.util.geticonpath(l.name, {"png"}, {theme.icons.layouts})
 end
 
 -- Naughty
