@@ -7,3 +7,6 @@
 [submodule "vicious"]
 	path = vicious
 	url = http://git.sysphere.org/vicious
+[submodule "theme/icons/material-design-icons"]
+	path = theme/icons/material-design-icons
+	url = https://github.com/google/material-design-icons.git
