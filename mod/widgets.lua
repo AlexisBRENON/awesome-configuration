@@ -10,28 +10,6 @@ local volume = require("mod/volume")
 local gears = require("gears")
 
 config.widgets = {
-    date_time = {
-        widget = nil,
-        update_time = 61,
-        format = "%a %d/%m, %H:%M",
-    },
-    battery = {
-        widget = nil,
-        update_time = 59,
-        device = "BAT0",
-    },
-    volume = {
-        widget = nil,
-        update_time = 3631,
-        device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
-    },
-    separator = {
-        widget = nil,
-        text = "  ",
-    },
-    systray = {
-        widget = nil,
-    },
     wiboxes = {
         top = {
             widget = {}, -- One widget per screen
@@ -46,6 +24,34 @@ config.widgets = {
                 }
             }),
         }
+    },
+    date_time = {
+        widget = nil,
+        update_time = 61,
+        format = "%a %d/%m, %H:%M",
+    },
+    battery = {
+        widget = nil,
+        text = {
+            widget = nil,
+        },
+        icon = {
+            widget = nil,
+        },
+        update_time = 59,
+        device = "BAT0",
+    },
+    volume = {
+        widget = nil,
+        update_time = 3631,
+        device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
+    },
+    separator = {
+        widget = nil,
+        text = "  ",
+    },
+    systray = {
+        widget = nil,
     },
     promptbox = {
         widget = {}, -- One widget per screen
@@ -143,32 +149,56 @@ config.widgets.date_time.widget:buttons(
 
 
 -- Battery
--- TODO : Add a progress bar as battery charge
-config.widgets.battery.widget = wibox.widget.textbox()
+-- Create widgets and append them to a layout
+config.widgets.battery.widget = wibox.layout.fixed.horizontal()
+config.widgets.battery.text.widget = wibox.widget.textbox()
+config.widgets.battery.icon.widget = wibox.widget.imagebox()
+config.widgets.battery.widget:add(config.widgets.battery.icon.widget)
+config.widgets.battery.widget:add(config.widgets.battery.text.widget)
+-- Register battery widget
 vicious.register(
-    config.widgets.battery.widget,
+    config.widgets.battery.text.widget,
     vicious.widgets.bat,
     function (widget, args)
         local state = args[1]
         local current = args[2]
+        local time = args[3]
+        local result = current .. "%"
 
-        -- Battery low and discharging
+        -- Choose the icon to display
+        local icon_dir = "widgets/battery/"
+        -- battery discharging
+        if state == "−" then
+            icon_dir = icon_dir .. "discharging/"
+        -- Battery charging or full
+        elseif state == "+" or state == "↯" then
+            icon_dir = icon_dir .. "charging/"
+        -- Battery state unknown
+        elseif state == "⌁" then
+            icon_dir = icon_dir .. "unknown/"
+        end
+        -- Set the right icon
+        local icon_level = math.floor(tonumber(current)/10)
+        config.widgets.battery.icon.widget:set_image(
+            beautiful.icons .. icon_dir .. icon_level .. ".png")
+
+        -- Notify user if battery low
         if current < 10 and state == "−" then
-            -- Maybe we want to display a small warning?
-            if current ~= config.widgets.battery.lastwarn then
+            -- Display a new notification only when percentage decreases
+            if current < config.widgets.battery.lastwarn then
                 config.widgets.battery.notification_id = naughty.notify({
                     title = "Batterie : niveau bas!",
                     preset = naughty.config.presets.critical,
                     timeout = 20,
-                    text = args[3] .. " restante(s).",
-                    icon = awful.util.geticonpath("battery-caution"),
-                    replaces_id = config.widgets.battery.notification_id
+                    text = time .. " restante(s)",
+                    icon = beautiful.icons .. icon_dir .. icon_level .. ".png",
+                    replaces_id = config.widgets.battery.notification_id,
                 }).id
                 config.widgets.battery.lastwarn = current
             end
         end
         -- TODO : hibernate computer if current is critical
-        return args[1] .. current .. "%"
+        return result
     end,
     config.widgets.battery.update_time,
     config.widgets.battery.device
