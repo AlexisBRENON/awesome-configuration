@@ -38,6 +38,8 @@ config.widgets = {
         icon = {
             widget = nil,
         },
+        tooltip = nil,
+        time = "0",
         update_time = 59,
         device = "BAT0",
     },
@@ -159,8 +161,10 @@ config.widgets.date_time.widget:buttons(
 config.widgets.battery.widget = wibox.layout.fixed.horizontal()
 config.widgets.battery.text.widget = wibox.widget.textbox()
 config.widgets.battery.icon.widget = wibox.widget.imagebox()
+config.widgets.battery.tooltip = awful.tooltip({})
 config.widgets.battery.widget:add(config.widgets.battery.icon.widget)
 config.widgets.battery.widget:add(config.widgets.battery.text.widget)
+config.widgets.battery.tooltip:add_to_object(config.widgets.battery.widget)
 -- Register battery widget
 vicious.register(
     config.widgets.battery.text.widget,
@@ -170,6 +174,7 @@ vicious.register(
         local current = args[2]
         local time = args[3]
         local result = current .. "%"
+        config.widgets.battery.tooltip:set_text("Temps restant : " .. time)
 
         -- Choose the icon to display
         local icon_dir = "widgets/battery/"
@@ -209,6 +214,38 @@ vicious.register(
     config.widgets.battery.update_time,
     config.widgets.battery.device
 )
+-- config.widgets.battery.tooltip = (
+--     function()
+--         local notification = nil
+
+--         local hide_tooltip = function()
+--             if notification ~= nil then
+--                 naughty.destroy(notification)
+--                 notification = nil
+--             end
+--         end
+
+--         local show_tooltip = function()
+--             -- Display calendar with naughty
+--             notification = naughty.notify({
+--                 text = "Temps restant : " .. config.widgets.battery.time,
+--                 timeout = 0, -- No timeout
+--                 icon = beautiful.icons .. "widgets/battery/discharging/5.png",
+--                 icon_size = config.widgets.wiboxes.top.size,
+--                 screen = mouse.screen,
+--             })
+--         end
+--         return {
+--             show = show_tooltip,
+--             hide = hide_tooltip
+--         }
+--     end
+-- )()
+-- config.widgets.battery.widget:connect_signal("mouse::enter", config.widgets.battery.tooltip.show)
+-- config.widgets.battery.widget:connect_signal("mouse::leave", config.widgets.battery.tooltip.hide)
+
+
+
 
 -- Volume level
 config.widgets.volume.text.widget = wibox.widget.textbox()

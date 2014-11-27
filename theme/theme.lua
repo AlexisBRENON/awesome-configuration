@@ -67,4 +67,11 @@ naughty.config.presets.critical.bg = theme.bg_urgent
 naughty.config.presets.critical.fg = theme.fg_urgent
 naughty.config.presets.critical.border_color = theme.fg_urgent
 
+
+-- Tooltips
+theme.tooltip_border_width = theme.border_width
+theme.tooltip_border_color = theme.fg_normal
+theme.tooltip_opacity = 0.9
+theme.tooltip_fg_color = theme.fg_normal
+
 return theme
