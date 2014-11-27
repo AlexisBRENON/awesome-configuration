@@ -4,12 +4,10 @@
 local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
-local xrandr = require("mod/xrandr")
 
 local brightness = {
     current_backlight = 0,
     notification_id = nil,
-    is_off = false,
     last_call = os.time(),
     pass_call = false, -- This boolean is a workaround for my laptop which always send 2 keystrokes for brightness modifications
 }
@@ -42,12 +40,7 @@ end
 local function increase()
     if (brightness.pass_call == false) then
         brightness.pass_call = true
-        brightness.last_call = os.time()
-        if (brightness.is_off == true) then
-            brightness.is_off = false
-        else
-           os.execute('xbacklight -time 1 +10')
-        end
+        os.execute('xbacklight -time 1 +10')
         update()
     else
         brightness.pass_call = false
@@ -60,7 +53,6 @@ local function decrease()
         if (brightness.current_backlight == 0 and os.time() > brightness.last_call) then
             -- Let a delay before turning off the screen
             os.execute("xset dpms force off")
-            brightness.is_off = true
         else
             os.execute('xbacklight -time 1 -10')
             update()
