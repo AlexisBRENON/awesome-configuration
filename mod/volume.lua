@@ -13,7 +13,7 @@ local function change(device, what)
 end
 
 local function update()
-    vicious.force({config.widgets.volume.text.widget}) -- Update the volume widget
+    vicious.force({config.widgets.volume.text}) -- Update the volume widget
 end
 
 local function increase(device)

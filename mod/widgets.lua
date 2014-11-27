@@ -26,31 +26,26 @@ config.widgets = {
         }
     },
     date_time = {
-        widget = nil,
+        widget = wibox.layout.fixed.horizontal(),
+        text = wibox.widget.textbox(),
+        icon = wibox.widget.imagebox(),
+        tooltip = awful.tooltip({}),
         update_time = 61,
         format = "%a %d/%m, %H:%M",
     },
     battery = {
-        widget = nil,
-        text = {
-            widget = nil,
-        },
-        icon = {
-            widget = nil,
-        },
-        tooltip = nil,
-        time = "0",
+        widget = wibox.layout.fixed.horizontal(),
+        text = wibox.widget.textbox(),
+        icon = wibox.widget.imagebox(),
+        tooltip = awful.tooltip({}),
         update_time = 59,
         device = "BAT0",
     },
     volume = {
-        widget = nil,
-        text = {
-            widget = nil,
-        },
-        icon = {
-            widget = nil,
-        },
+        widget = wibox.layout.fixed.horizontal(),
+        text = wibox.widget.textbox(),
+        icon = wibox.widget.imagebox(),
+        tooltip = awful.tooltip({}),
         update_time = 3631,
         device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
     },
@@ -83,21 +78,23 @@ config.widgets.separator.widget:set_markup(config.widgets.separator.text)
 
 
 -- Date
-config.widgets.date_time.widget = wibox.widget.textbox()
+config.widgets.date_time.widget:add(config.widgets.date_time.icon)
+config.widgets.date_time.widget:add(config.widgets.date_time.text)
+-- config.widgets.date_time.tooltip:add_to_object(config.widgets.battery.widget)
 vicious.register(
-    config.widgets.date_time.widget,
+    config.widgets.date_time.text,
     vicious.widgets.date,
     config.widgets.date_time.format,
     config.widgets.date_time.update_time
 )
 -- Add an icon ??
 -- Define funtions to display/hide calendar
-local calendar = (
+config.widgets.date_time.calendar = (
     function()
         local notification = nil
         local offset = 0
 
-        local remove_calendar = function()
+        local hide_calendar = function()
             if notification ~= nil then
                 naughty.destroy(notification)
                 notification = nil
@@ -105,9 +102,9 @@ local calendar = (
             end
         end
 
-        local add_calendar = function(inc_offset)
+        local show_calendar = function(inc_offset)
             local new_offset = offset + inc_offset
-            remove_calendar()
+            hide_calendar() -- Usefull if you click on the widget
             offset = new_offset
 
             -- Get the right month to display
@@ -115,7 +112,7 @@ local calendar = (
             display_datespec = today_datespec.year * 12 + today_datespec.month - 1 + offset -- Compute date in months to add/remove offset
             display_datespec = (display_datespec % 12 + 1) .. " " .. math.floor(display_datespec / 12) -- Get back date+offset as 'month year'
 
-            -- Get month calendar with week number and week starting on Monday
+            -- Get month calendar
             local cal = awful.util.pread("cal " .. display_datespec)
 
             -- Highlight the current day
@@ -138,36 +135,27 @@ local calendar = (
                 font = beautiful.font_mono,
             })
         end
-        return {
-            display = add_calendar,
-            hide = remove_calendar
-        }
+
+        -- Display calendar when entering in date widget
+        config.widgets.date_time.widget:connect_signal("mouse::enter", function() show_calendar(0) end)
+        config.widgets.date_time.widget:connect_signal("mouse::leave", hide_calendar)
+        config.widgets.date_time.widget:buttons(awful.util.table.join(
+            awful.button({ }, 3, function() show_calendar(-1) end),
+            awful.button({ }, 1, function() show_calendar(1) end)
+        ))
     end
 )()
 
--- Display calendar when entering in date widget
-config.widgets.date_time.widget:connect_signal("mouse::enter", function() calendar.display(0) end)
-config.widgets.date_time.widget:connect_signal("mouse::leave", calendar.hide)
-config.widgets.date_time.widget:buttons(
-    awful.util.table.join(
-        awful.button({ }, 3, function() calendar.display(-1) end),
-        awful.button({ }, 1, function() calendar.display(1) end)
-    )
-)
 
 
 -- Battery
--- Create widgets and append them to a layout
-config.widgets.battery.widget = wibox.layout.fixed.horizontal()
-config.widgets.battery.text.widget = wibox.widget.textbox()
-config.widgets.battery.icon.widget = wibox.widget.imagebox()
-config.widgets.battery.tooltip = awful.tooltip({})
-config.widgets.battery.widget:add(config.widgets.battery.icon.widget)
-config.widgets.battery.widget:add(config.widgets.battery.text.widget)
+-- Link parts of the widget
+config.widgets.battery.widget:add(config.widgets.battery.icon)
+config.widgets.battery.widget:add(config.widgets.battery.text)
 config.widgets.battery.tooltip:add_to_object(config.widgets.battery.widget)
 -- Register battery widget
 vicious.register(
-    config.widgets.battery.text.widget,
+    config.widgets.battery.text,
     vicious.widgets.bat,
     function (widget, args)
         local state = args[1]
@@ -190,7 +178,7 @@ vicious.register(
         end
         -- Set the right icon
         local icon_level = math.floor(tonumber(current)/10)
-        config.widgets.battery.icon.widget:set_image(
+        config.widgets.battery.icon:set_image(
             beautiful.icons .. icon_dir .. icon_level .. ".png")
 
         -- Notify user if battery low
@@ -214,47 +202,14 @@ vicious.register(
     config.widgets.battery.update_time,
     config.widgets.battery.device
 )
--- config.widgets.battery.tooltip = (
---     function()
---         local notification = nil
-
---         local hide_tooltip = function()
---             if notification ~= nil then
---                 naughty.destroy(notification)
---                 notification = nil
---             end
---         end
-
---         local show_tooltip = function()
---             -- Display calendar with naughty
---             notification = naughty.notify({
---                 text = "Temps restant : " .. config.widgets.battery.time,
---                 timeout = 0, -- No timeout
---                 icon = beautiful.icons .. "widgets/battery/discharging/5.png",
---                 icon_size = config.widgets.wiboxes.top.size,
---                 screen = mouse.screen,
---             })
---         end
---         return {
---             show = show_tooltip,
---             hide = hide_tooltip
---         }
---     end
--- )()
--- config.widgets.battery.widget:connect_signal("mouse::enter", config.widgets.battery.tooltip.show)
--- config.widgets.battery.widget:connect_signal("mouse::leave", config.widgets.battery.tooltip.hide)
-
-
-
 
 -- Volume level
-config.widgets.volume.text.widget = wibox.widget.textbox()
-config.widgets.volume.icon.widget = wibox.widget.imagebox()
-config.widgets.volume.widget = wibox.layout.fixed.horizontal()
-config.widgets.volume.widget:add(config.widgets.volume.icon.widget)
-config.widgets.volume.widget:add(config.widgets.volume.text.widget)
+-- Link parts of the widget
+config.widgets.volume.widget:add(config.widgets.volume.icon)
+config.widgets.volume.widget:add(config.widgets.volume.text)
+-- config.widgets.volume.tooltip:add_to_object(config.widgets.volume.widget)
 vicious.register(
-    config.widgets.volume.text.widget,
+    config.widgets.volume.text,
     vicious.contrib.pulse,
     function ( widget, args )
         local state = args[2]
@@ -269,7 +224,7 @@ vicious.register(
             icon_path = icon_path .. math.floor(tonumber(level)/10) .. ".png"
             result = level .. "%"
         end
-        config.widgets.volume.icon.widget:set_image(
+        config.widgets.volume.icon:set_image(
             beautiful.icons .. icon_path)
 
         return result
@@ -277,6 +232,7 @@ vicious.register(
     config.widgets.volume.update_time,
     config.widgets.volume.device
 )
+-- Make the widget respond to mouse interactions
 config.widgets.volume.widget:buttons(
     awful.util.table.join(
         awful.button({ }, 1, function() volume.mixer(config.widgets.volume.device) end), -- Normal click
