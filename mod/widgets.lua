@@ -87,7 +87,6 @@ vicious.register(
     config.widgets.date_time.format,
     config.widgets.date_time.update_time
 )
--- Add an icon ??
 -- Define funtions to display/hide calendar
 config.widgets.date_time.calendar = (
     function()
@@ -132,6 +131,8 @@ config.widgets.date_time.calendar = (
                 text = cal,
                 timeout = 0, -- No timeout
                 screen = mouse.screen,
+                icon = beautiful.icons .. "widgets/date_time/date.png",
+                icon_size = config.widgets.wiboxes.top.size,
                 font = beautiful.font_mono,
             })
         end
