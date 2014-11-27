@@ -38,4 +38,4 @@ These softs can be configured in the main rc.lua file
 - [x] Update screenshot with new tags icons [21/06/2014]
 - [x] Move requirements to the README
 - [x] Add link to my versionned bashrc
-- [ ] Restore notifications
+- [x] Restore notifications
