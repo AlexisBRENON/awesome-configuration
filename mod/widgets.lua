@@ -43,6 +43,12 @@ config.widgets = {
     },
     volume = {
         widget = nil,
+        text = {
+            widget = nil,
+        },
+        icon = {
+            widget = nil,
+        },
         update_time = 3631,
         device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
     },
@@ -205,18 +211,30 @@ vicious.register(
 )
 
 -- Volume level
--- TODO : add icon
-config.widgets.volume.widget = wibox.widget.textbox()
+config.widgets.volume.text.widget = wibox.widget.textbox()
+config.widgets.volume.icon.widget = wibox.widget.imagebox()
+config.widgets.volume.widget = wibox.layout.fixed.horizontal()
+config.widgets.volume.widget:add(config.widgets.volume.icon.widget)
+config.widgets.volume.widget:add(config.widgets.volume.text.widget)
 vicious.register(
-    config.widgets.volume.widget,
+    config.widgets.volume.text.widget,
     vicious.contrib.pulse,
     function ( widget, args )
+        local state = args[2]
+        local level = args[1]
         local result = ""
-        if args[2] == "♩" then
-            result = "Mute"
+
+        local icon_path = "widgets/volume/"        
+        if state == "off" then
+            icon_path = icon_path .. "mute.png"
+            result = "Muted"
         else
-            result = args[1] .. "%"
+            icon_path = icon_path .. math.floor(tonumber(level)/10) .. ".png"
+            result = level .. "%"
         end
+        config.widgets.volume.icon.widget:set_image(
+            beautiful.icons .. icon_path)
+
         return result
     end,
     config.widgets.volume.update_time,
