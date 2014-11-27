@@ -44,7 +44,6 @@ local function increase()
         brightness.pass_call = true
         brightness.last_call = os.time()
         if (brightness.is_off == true) then
-            xrandr.turn_on()
             brightness.is_off = false
         else
            os.execute('xbacklight -time 1 +10')
@@ -60,7 +59,7 @@ local function decrease()
         brightness.pass_call = true
         if (brightness.current_backlight == 0 and os.time() > brightness.last_call) then
             -- Let a delay before turning off the screen
-            xrandr.turn_off()
+            os.execute("xset dpms force off")
             brightness.is_off = true
         else
             os.execute('xbacklight -time 1 -10')
