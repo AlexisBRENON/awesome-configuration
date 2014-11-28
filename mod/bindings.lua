@@ -69,15 +69,16 @@ config.keys.global = awful.util.table.join(
             awful.tag.incmwfact(-0.05)
         end),
     -- Next layout
-    awful.key({ modkey,           }, "Up",
-        function ()
-            awful.layout.inc(1, mouse.screen, awful.layout.layouts)
-        end),
-    -- Previous layout
-    awful.key({ modkey,          }, "Down",
-        function ()
-            awful.layout.inc(-1, mouse.screen, awful.layout.layouts)
-        end),
+    -- TODO : Same issue as volume keys (not recognized as soon as defined)
+    -- awful.key({ modkey,           }, "Up",
+    --     function ()
+    --         awful.layout.inc(1, mouse.screen, awful.layout.layouts)
+    --     end),
+    -- -- Previous layout
+    -- awful.key({ modkey,          }, "Down",
+    --     function ()
+    --         awful.layout.inc(-1, mouse.screen, awful.layout.layouts)
+    --     end),
     
     -- Spawn a terminal
     awful.key({ modkey,           }, "Return",
@@ -116,7 +117,8 @@ config.keys.global = awful.util.table.join(
             )
         end),
     -- Calculator prompt
-    awful.key({}, "XF86Calculator",
+    -- awful.key({}, "XF86Calculator",
+    awful.key({modkey}, "F1",
         function()
             awful.prompt.run(
                 { prompt = " = " },
@@ -145,26 +147,34 @@ config.keys.global = awful.util.table.join(
         end),
     
     -- Screenshot
-    awful.key({}, "Print",
-        function()
-            screenshot("root")
-        end),
-    awful.key({ "Shift" }, "Print",
-        screenshot),
+    -- TODO : same issue as volume keys... Not recognized as soon as defined
+    -- awful.key({}, "Print",
+    --     function()
+    --         screenshot("root")
+    --     end),
+    -- awful.key({ "Shift" }, "Print",
+    --     screenshot),
 
     -- Resart awesome
     awful.key({ modkey, "Control" }, "r", awful.util.restart),
     awful.key({ modkey, "Control" }, "q", awesome.quit),
 
     -- Multimedia keys
-    awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
-    awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
-    awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
-    awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
-    awful.key({ }, "XF86AudioMute",        volume.toggle),
+    -- awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
+    -- awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
+    -- awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
+    -- awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
+    -- awful.key({ }, "XF86AudioMute",        volume.toggle),
+    awful.key({modkey, "Shift"}, "F12", brightness.increase),
+    awful.key({modkey, "Shift"}, "F11", brightness.decrease),
+    -- TODO : fix the volume keys.
+    --        As soon as I define the awful key for this events, they are not recognized by X...
+    -- awful.key({}, "F3", function() print("Increase"); volume.increase(); end),
+    -- awful.key({}, "F2", volume.decrease),
+    -- awful.key({}, "F1", volume.toggle),
 
     awful.key({ modkey }, "F7", xrandr.change_screen), -- Switch between screens configurations
-    awful.key({}, "XF86ScreenSaver",
+    awful.key({modkey, "Control"}, "space",
         function ()
             awful.util.spawn("xscreensaver-command -lock")
         end)

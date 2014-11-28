@@ -9,7 +9,6 @@ local brightness = {
     current_backlight = 0,
     notification_id = nil,
     last_call = os.time(),
-    pass_call = false, -- This boolean is a workaround for my laptop which always send 2 keystrokes for brightness modifications
 }
 
 -- Initialise startup backlight
@@ -30,29 +29,19 @@ local function update()
 end
 
 local function increase()
-    if (brightness.pass_call == false) then
-        brightness.pass_call = true
-        os.execute('xbacklight -time 1 -set ' .. brightness.current_backlight+1 .. "1")
-        update()
-    else
-        brightness.pass_call = false
-    end
+    os.execute('xbacklight -set ' .. brightness.current_backlight+1 .. "1")
+    update()
 end
 
 local function decrease()
-    if (brightness.pass_call == false) then
-        brightness.pass_call = true
-        if (brightness.current_backlight == 0 and os.time() > brightness.last_call) then
-            -- Let a delay before turning off the screen
-            os.execute("xset dpms force off")
-        else
-            os.execute('xbacklight -time 1 -set ' .. brightness.current_backlight-1 .. "1")
-            update()
-        end
-        brightness.last_call = os.time()
+    if (brightness.current_backlight == 0 and os.time() > brightness.last_call) then
+        -- Let a delay before turning off the screen
+        os.execute("sleep 1 ; xset dpms force off")
     else
-        brightness.pass_call = false
+        os.execute('xbacklight -set ' .. brightness.current_backlight-1 .. "1")
+        update()
     end
+    brightness.last_call = os.time()
 end
 
 brightness.increase = increase
