@@ -203,6 +203,9 @@ vicious.register(
     config.widgets.battery.update_time,
     config.widgets.battery.device
 )
+config.widgets.battery.widget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function() vicious.force({config.widgets.battery.text}) end)
+))
 
 -- Volume level
 -- Link parts of the widget
