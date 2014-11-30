@@ -119,7 +119,7 @@ config.widgets.date_time.calendar = (
             display_datespec = (display_datespec % 12 + 1) .. " " .. math.floor(display_datespec / 12) -- Get back date+offset as 'month year'
 
             -- Get month calendar
-            local cal = awful.util.pread("cal " .. display_datespec)
+            local cal = awful.util.pread("cal " .. display_datespec .. " | sed '/^ *$/d'")
 
             -- Highlight the current day
             if (offset == 0) then
