@@ -38,5 +38,6 @@ These softs can be configured in the main rc.lua file
 - [x] Move requirements to the README
 - [x] Add link to my versionned bashrc
 - [x] Restore notifications
-- [ ] Add a keyboard layout change widget
+- [x] Add a keyboard layout change widget
 - [ ] Fix the volume keys, layout change and sreenshot key issues (the three of them are linked)
+- [ ] Create a network widget instead of using a third party applet

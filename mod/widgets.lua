@@ -7,6 +7,7 @@ vicious.contrib = {
 local awful = require("awful")
 local naughty = require("naughty")
 local volume = require("mod/volume")
+local keyboard = require("mod/keyboard")
 local gears = require("gears")
 
 config.widgets = {
@@ -48,6 +49,12 @@ config.widgets = {
         tooltip = awful.tooltip({}),
         update_time = 3631,
         device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
+    },
+    keyboard = {
+        widget = wibox.layout.fixed.horizontal(),
+        -- text = wibox.widget.textbox(),
+        icon = wibox.widget.imagebox(),
+        tooltip = awful.tooltip({}),
     },
     separator = {
         widget = nil,
@@ -246,6 +253,17 @@ config.widgets.volume.widget:buttons(
     )
 )
 
+-- Keyboard layout changer
+config.widgets.keyboard.widget:add(config.widgets.keyboard.icon)
+config.widgets.keyboard.tooltip:add_to_object(config.widgets.keyboard.widget)
+config.widgets.keyboard.icon:set_image(beautiful.icons .. "/widgets/keyboard/keyboard.png")
+keyboard.init()
+config.widgets.keyboard.widget:buttons(
+    awful.util.table.join(
+        awful.button({ }, 1, keyboard.change_layout) -- Normal click
+    )
+)
+
 -- Systray (nothing fanzy)
 config.widgets.systray.widget = wibox.widget.systray()
 
@@ -293,6 +311,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_group = wibox.layout.fixed.horizontal()
     add_widget(config.widgets.systray.widget, right_group, 1) -- Only on first screen
+    add_widget(config.widgets.separator.widget, right_group, 1)
+    add_widget(config.widgets.keyboard.widget, right_group, 1) -- Only on first screen
     add_widget(config.widgets.separator.widget, right_group, 1)
     add_widget(config.widgets.battery.widget, right_group, 1) -- Only on first screen
     add_widget(config.widgets.separator.widget, right_group, 1)
