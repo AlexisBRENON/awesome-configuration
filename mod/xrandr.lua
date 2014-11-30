@@ -1,14 +1,23 @@
 local awful = require("awful")
 local naughty = require("naughty")
+local beautiful = require("beautiful")
 
 local xrandr = {}
+
+-- Enumerate different outputs and the icon name corresponding 
+local icons = {
+    eDP1 = "laptop",
+    HDMI1 = "monitor",
+}
 
 -- Get active outputs
 local function outputs()
     local outputs = {}
+    -- Fetch all possible outputs
     local xrandr = io.popen("xrandr -q")
     if xrandr then
         for line in xrandr:lines() do
+            -- Return only connected outputs
             output = line:match("^([%w-]+) connected ")
             if output then
                 outputs[#outputs + 1] = output
@@ -66,18 +75,22 @@ local function menu()
         end
 
         local label = ""
+        local icon = ""
         if #choice == 1 then
             label = 'Only <span weight="bold">' .. choice[1] .. '</span>'
+            icon = icons[choice[1]]
         else
             for i, o in pairs(choice) do
                 if i > 1 then label = label .. " + " end
                 label = label .. '<span weight="bold">' .. o .. '</span>'
             end
+            icon = "multi"
         end
 
         menu[#menu + 1] = {
             label,
-            cmd
+            cmd,
+            icon,
         }
     end
     return menu
@@ -109,14 +122,15 @@ local function change_screen()
     local next  = state.iterator()
     local label, action, icon
     if not next then
-        label, icon = "Keep the current configuration", nil
+        label, icon = "Keep the current configuration", ""
         state.iterator = nil
     else
         label, action, icon = unpack(next)
     end
     state.cid = naughty.notify({
         text = label,
-        icon = icon,
+        icon = beautiful.icons .. "/screen/" .. icon .. ".png",
+        icon_size = config.widgets.wiboxes.top.size,
         timeout = 4,
         screen = mouse.screen, -- Important, not all screens may be visible
         replaces_id = state.cid }).id
@@ -137,20 +151,6 @@ local function change_screen()
     state.timer:start()
 end
 
-local function turn_on()
-    for _,output in pairs(outputs()) do
-        os.execute("xrandr --output " .. output .. " --auto --dryrun >> /home/alexis/xrand.txt")
-    end
-end
-
-local function turn_off()
-    for _,output in pairs(outputs()) do
-        os.execute("xrandr --output " .. output .. " --off --dryrun >> /home/alexis/xrand.txt")
-    end
-end
-
 xrandr.change_screen = change_screen
-xrandr.turn_on = turn_on
-xrandr.turn_off = turn_off
 
 return xrandr
