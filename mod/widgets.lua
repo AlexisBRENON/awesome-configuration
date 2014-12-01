@@ -124,7 +124,7 @@ config.widgets.date_time.calendar = (
             -- Highlight the current day
             if (offset == 0) then
                 cal = cal:gsub(
-                    "( ?" .. today_datespec.day .. " ?)",
+                    "([^a-zA-Z0-9]" .. today_datespec.day .. " )",
                     string.format(
                         '<span background="%s" foreground="%s">%%1</span>',
                         beautiful.bg_focus,
