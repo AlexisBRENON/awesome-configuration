@@ -5,6 +5,7 @@ local xrandr = require("mod/xrandr")
 local shifty = require("shifty")
 local naughty = require("naughty")
 local keyboard = require("mod/keyboard")
+local wlan = require("mod/wlan")
 
 config.keys = {}
 config.mouse = {}
@@ -179,7 +180,8 @@ config.keys.global = awful.util.table.join(
         function ()
             awful.util.spawn("xscreensaver-command -lock")
         end),
-    awful.key({"Mod1", "Shift"}, "space", keyboard.change_layout)
+    awful.key({"Mod1", "Shift"}, "space", keyboard.change_layout),
+    awful.key({}, "XF86WLAN", wlan.toggle)
 )
 
 local numericPad = {

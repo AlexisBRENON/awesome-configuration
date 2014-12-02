@@ -22,6 +22,8 @@ Here is a list of known requirements on Arch Linux
 * pavucontrol
 * xbacklight
 * wicd and wicd-gtk
+* rfkill
+* ImageMagick
 
 ### Default softwares ###
 These softs can be configured in the main rc.lua file
