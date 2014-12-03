@@ -154,11 +154,11 @@ config.keys.global = awful.util.table.join(
             awful.util.spawn("xscreensaver-command -activate")
         end),
     -- Toggle volume
-    awful.key({ modkey, "Shift"   }, "F1", volume.toggle),
+    awful.key({ modkey, "Shift"   }, "F1", function () volume.toggle(config.widgets.volume.device) end),
     -- Decrease volume
-    awful.key({ modkey, "Shift"   }, "F2", volume.decrease),
+    awful.key({ modkey, "Shift"   }, "F2", function () volume.decrease(config.widgets.volume.device) end),
     -- Increase volume
-    awful.key({ modkey, "Shift"   }, "F3", volume.increase),
+    awful.key({ modkey, "Shift"   }, "F3", function () volume.increase(config.widgets.volume.device) end),
     -- Switch between screens configurations
     awful.key({ modkey, "Shift"   }, "F7", xrandr.change_screen),
     -- Increase screen backlight
