@@ -6,32 +6,16 @@ local volume = require("mod/volume")
 local xrandr = require("mod/xrandr")
 local keyboard = require("mod/keyboard")
 local wlan = require("mod/wlan")
+local screenshot = require("mod/screenshot")
 
 config.keys = {}
 config.mouse = {}
-
-local function screenshot(client)
-    if client == "root" then -- All screen
-        client = "-window root"
-    elseif client then -- Only one client
-        client = "-window " .. client.window
-    else -- Select with the mouse the area
-        client = ""
-    end
-    local path = os.getenv("HOME") ..
-        "/screenshot-" .. os.date("%m-%d_%H-%M-%S") .. ".jpg"
-    awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
-end
-
 
 config.keys.global = awful.util.table.join(
     -- Disable/Enable WLAN networks
     awful.key({                   }, "XF86WLAN", wlan.toggle),
     -- Full screen shot
-    awful.key({                   }, "Print",
-        function()
-            screenshot("root")
-        end),
+    awful.key({                   }, "Print", screenshot.full),
     -- Calculator prompt
     awful.key({ modkey            }, "F1",
         function()
@@ -172,7 +156,7 @@ config.keys.global = awful.util.table.join(
     -- Send client to next tag
     awful.key({ modkey, "Shift"   }, "Right", shifty.send_next),
     -- Selection screenshot
-    awful.key({         "Shift"   }, "Print", screenshot)
+    awful.key({         "Shift"   }, "Print", screenshot.selection)
 )
 
 config.keys.client = awful.util.table.join(
@@ -214,8 +198,7 @@ config.keys.client = awful.util.table.join(
             awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen+1))
         end),
     -- Window
-    awful.key({ "Control" }, "Print",
-        screenshot)
+    awful.key({ "Control" }, "Print", screenshot.window)
 )
 
 config.mouse.global = {}
