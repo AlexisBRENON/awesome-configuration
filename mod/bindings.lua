@@ -178,7 +178,7 @@ config.keys.global = awful.util.table.join(
     awful.key({ modkey }, "F7", xrandr.change_screen), -- Switch between screens configurations
     awful.key({modkey, "Control"}, "space",
         function ()
-            awful.util.spawn("xscreensaver-command -lock")
+            awful.util.spawn("xscreensaver-command -activate")
         end),
     awful.key({"Mod1", "Shift"}, "space", keyboard.change_layout),
     awful.key({}, "XF86WLAN", wlan.toggle)

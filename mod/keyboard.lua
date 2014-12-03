@@ -10,10 +10,15 @@ local keyboard_layouts = {
 local current_layout = 1
 local notification_id = nil
 
+local function fix_layout()
+	os.execute("xmodmap -e 'keycode 248 = XF86WLAN NoSymbol XF86WLAN'")
+end
+
 local function change_layout()
 	current_layout = (current_layout % #keyboard_layouts) + 1
 	new_layout = keyboard_layouts[current_layout]
 	os.execute("setxkbmap -layout " .. new_layout[1] .. " -variant " .. new_layout[2])
+	fix_layout()
 	config.widgets.keyboard.tooltip:set_text(new_layout[3])
 	notification_id = naughty.notify({
 		text = new_layout[3],
@@ -40,7 +45,7 @@ local function init()
 		end
 		setxkbmap:close()
 	end
-
+	fix_layout()
 	config.widgets.keyboard.tooltip:set_text(keyboard_layouts[current_layout][3])
 end
 
