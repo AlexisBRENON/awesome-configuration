@@ -1,9 +1,9 @@
 local awful = require("awful")
+local shifty = require("shifty")
+local naughty = require("naughty")
 local brightness = require("mod/brightness")
 local volume = require("mod/volume")
 local xrandr = require("mod/xrandr")
-local shifty = require("shifty")
-local naughty = require("naughty")
 local keyboard = require("mod/keyboard")
 local wlan = require("mod/wlan")
 
@@ -25,6 +25,73 @@ end
 
 
 config.keys.global = awful.util.table.join(
+    -- Disable/Enable WLAN networks
+    awful.key({                   }, "XF86WLAN", wlan.toggle),
+    -- Full screen shot
+    awful.key({                   }, "Print",
+        function()
+            screenshot("root")
+        end),
+    -- Calculator prompt
+    awful.key({ modkey            }, "F1",
+        function()
+            awful.prompt.run(
+                { prompt = " = " },
+                config.widgets.promptbox.widget[mouse.screen],
+                function (expr)
+                    local result = awful.util.eval("return (" .. expr .. ")")
+                    naughty.notify({
+                        text = expr .. " = " .. result,
+                        timeout = 0
+                    })
+                end
+            )
+        end),
+    -- Default prompt
+    awful.key({ modkey            }, "F2",
+        function()
+            awful.prompt.run(
+                {prompt = "Run: "},
+                config.widgets.promptbox.widget[mouse.screen],
+                awful.util.spawn, awful.completion.shell,
+                awful.util.getdir("cache") .. "/history"
+            )
+        end),
+    -- Web search prompt
+    awful.key({ modkey            }, "F12",
+        function ()
+            awful.prompt.run(
+                {prompt = "Web search: "},
+                config.widgets.promptbox.widget[mouse.screen],
+                function (command)
+                    awful.util.spawn(
+                        config.application.web_browser.bin .. " 'http://yubnub.org/parser/parse?command=" .. command .. "'")
+                    -- Switch to the web tag (in my case it's tag 0)
+                    awful.tag.viewonly(shifty.getpos(0))
+                end)
+        end),
+    -- Focus previously focused window
+    awful.key({ modkey,           }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
+            end
+        end),
+    -- Rename the current tag
+    awful.key({ modkey            }, "r", shifty.rename),
+    -- Create a new tag
+    awful.key({ modkey            }, "t", shifty.add),
+    -- Spawn a web browser
+    awful.key({ modkey,           }, "o",
+        function ()
+            awful.util.spawn(config.application.web_browser.bin)
+        end),
+    -- Decrease master-width factor
+    awful.key({ modkey,           }, "h",
+        function ()
+            awful.tag.incmwfact(-0.05)
+        end),
     -- Focus next window
     awful.key({ modkey,           }, "j",
         function ()
@@ -41,14 +108,36 @@ config.keys.global = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    -- Focus previously focused window
-    awful.key({ modkey,           }, "Tab",
+    -- Increase master-width factor
+    awful.key({ modkey,           }, "l",
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+            awful.tag.incmwfact(0.05)
         end),
+    -- Spawn a terminal
+    awful.key({ modkey,           }, "Return",
+        function ()
+            awful.util.spawn(config.application.terminal.bin)
+        end),
+    -- Delete the current tag
+    awful.key({ modkey            }, "w", shifty.del), -- delete a tag
+    -- Next layout
+    awful.key({ modkey,           }, "Up",
+        function ()
+            awful.layout.inc(awful.layout.layouts, 1, mouse.screen)
+        end),
+    -- Show previous tag
+    awful.key({ modkey            }, "Left", awful.tag.viewprev),
+    -- Previous layout
+    awful.key({ modkey,           }, "Down",
+        function ()
+            awful.layout.inc(awful.layout.layouts, -1, mouse.screen)
+        end),
+    -- Show next tag
+    awful.key({ modkey            }, "Right", awful.tag.viewnext),
+    -- Restart awesome
+    awful.key({ modkey, "Control" }, "r", awful.util.restart),
+    -- Quit awesome
+    awful.key({ modkey, "Control" }, "q", awesome.quit),
     -- Jump to next screen
     awful.key({ modkey, "Control" }, "j",
         function ()
@@ -59,178 +148,50 @@ config.keys.global = awful.util.table.join(
         function ()
             awful.screen.focus_relative(-1)
         end),
-
-    -- Increase master-width factor
-    awful.key({ modkey,           }, "l",
-        function ()
-            awful.tag.incmwfact(0.05)
-        end),
-    -- Decrease master-width factor
-    awful.key({ modkey,           }, "h",
-        function ()
-            awful.tag.incmwfact(-0.05)
-        end),
-    -- Next layout
-    -- TODO : Same issue as volume keys (not recognized as soon as defined)
-    -- awful.key({ modkey,           }, "Up",
-    --     function ()
-    --         awful.layout.inc(1, mouse.screen, awful.layout.layouts)
-    --     end),
-    -- -- Previous layout
-    -- awful.key({ modkey,          }, "Down",
-    --     function ()
-    --         awful.layout.inc(-1, mouse.screen, awful.layout.layouts)
-    --     end),
-    
-    -- Spawn a terminal
-    awful.key({ modkey,           }, "Return",
-        function ()
-            awful.util.spawn(config.application.terminal.bin)
-        end),
-    -- Spawn a web browser
-    awful.key({ modkey,           }, "o",
-        function ()
-            awful.util.spawn(config.application.web_browser.bin)
-        end),
-    -- Spawn a file browser
-    awful.key({ modkey,           }, "space",
-        function ()
-            awful.util.spawn(config.application.file_browser.bin)
-        end),
-
-    -- Tag manipulation
-    awful.key({modkey}, "Left", awful.tag.viewprev),
-    awful.key({modkey}, "Right", awful.tag.viewnext),
-    awful.key({modkey}, "w", shifty.del), -- delete a tag
-    awful.key({modkey, "Shift"}, "Left", shifty.send_prev), -- client to prev tag
-    awful.key({modkey, "Shift"}, "Right", shifty.send_next), -- client to next tag
-    awful.key({modkey}, "t", shifty.add), -- creat a new tag
-    awful.key({modkey}, "r", shifty.rename), -- rename a tag
-
-    -- Display prompt box
-    -- Default prompt
-    awful.key({modkey}, "F2",
-        function()
-            awful.prompt.run(
-                {prompt = "Run: "},
-                config.widgets.promptbox.widget[mouse.screen],
-                awful.util.spawn, awful.completion.shell,
-                awful.util.getdir("cache") .. "/history"
-            )
-        end),
-    -- Calculator prompt
-    -- awful.key({}, "XF86Calculator",
-    awful.key({modkey}, "F1",
-        function()
-            awful.prompt.run(
-                { prompt = " = " },
-                config.widgets.promptbox.widget[mouse.screen],
-                function (expr)
-                    local result = awful.util.eval("return (" .. expr .. ")")
-                    naughty.notify({
-                        text = expr .. " = " .. result,
-                        timeout = 0
-                    })
-                end
-            )
-        end),
-    -- Web search prompt (http://awesome.naquadah.org/wiki/Anrxcs_WebSearch_Prompt)
-    awful.key({modkey}, "F12",
-        function ()
-            awful.prompt.run(
-                {prompt = "Web search: "},
-                config.widgets.promptbox.widget[mouse.screen],
-                function (command)
-                    awful.util.spawn(
-                        config.application.web_browser.bin .. " 'http://yubnub.org/parser/parse?command=" .. command .. "'")
-                    -- Switch to the web tag (in my case it's tag 0)
-                    awful.tag.viewonly(shifty.getpos(0))
-                end)
-        end),
-    
-    -- Screenshot
-    -- TODO : same issue as volume keys... Not recognized as soon as defined
-    -- awful.key({}, "Print",
-    --     function()
-    --         screenshot("root")
-    --     end),
-    -- awful.key({ "Shift" }, "Print",
-    --     screenshot),
-
-    -- Resart awesome
-    awful.key({ modkey, "Control" }, "r", awful.util.restart),
-    awful.key({ modkey, "Control" }, "q", awesome.quit),
-
-    -- Multimedia keys
-    -- awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
-    -- awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
-    -- awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
-    -- awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
-    -- awful.key({ }, "XF86AudioMute",        volume.toggle),
-    awful.key({modkey, "Shift"}, "F12", brightness.increase),
-    awful.key({modkey, "Shift"}, "F11", brightness.decrease),
-    -- TODO : fix the volume keys.
-    --        As soon as I define the awful key for this events, they are not recognized by X...
-    -- awful.key({}, "F3", function() print("Increase"); volume.increase(); end),
-    -- awful.key({}, "F2", volume.decrease),
-    -- awful.key({}, "F1", volume.toggle),
-
-    awful.key({ modkey }, "F7", xrandr.change_screen), -- Switch between screens configurations
-    awful.key({modkey, "Control"}, "space",
+    -- Activate screensaver
+    awful.key({ modkey, "Control" }, "space",
         function ()
             awful.util.spawn("xscreensaver-command -activate")
         end),
-    awful.key({"Mod1", "Shift"}, "space", keyboard.change_layout),
-    awful.key({}, "XF86WLAN", wlan.toggle)
+    -- Toggle volume
+    awful.key({ modkey, "Shift"   }, "F1", volume.toggle),
+    -- Decrease volume
+    awful.key({ modkey, "Shift"   }, "F2", volume.decrease),
+    -- Increase volume
+    awful.key({ modkey, "Shift"   }, "F3", volume.increase),
+    -- Switch between screens configurations
+    awful.key({ modkey, "Shift"   }, "F7", xrandr.change_screen),
+    -- Increase screen backlight
+    awful.key({ modkey, "Shift"   }, "F12", brightness.increase),
+    -- Decrease screen backlight
+    awful.key({ modkey, "Shift"   }, "F11", brightness.decrease),
+    -- Change keyboard layout
+    awful.key({ modkey, "Shift"   }, "space", keyboard.change_layout),
+    -- -- Send client to prev tag
+    awful.key({ modkey, "Shift"   }, "Left", shifty.send_prev),
+    -- Send client to next tag
+    awful.key({ modkey, "Shift"   }, "Right", shifty.send_next),
+    -- Selection screenshot
+    awful.key({         "Shift"   }, "Print", screenshot)
 )
 
-local numericPad = {
-    "KP_Insert",
-    "KP_End",
-    "KP_Down",
-    "KP_Next",
-    "KP_Left",
-    "KP_Begin",
-    "KP_Right",
-    "KP_Home",
-    "KP_Up",
-    "KP_Prior"
-}
-for i = 0, 9 do
-    config.keys.global = awful.util.table.join(
-        config.keys.global,
-        -- View tag only.
-        awful.key({ modkey }, numericPad[i+1],
-            function ()
-                awful.tag.viewonly(shifty.getpos(i))
-            end),
-        -- Toggle tag.
-        awful.key({ modkey, "Control" }, numericPad[i+1],
-            function ()
-                local t = shifty.getpos(i)
-                t.selected = not t.selected    
-            end),
-        -- Move client to tag.
-        awful.key({ modkey, "Shift" }, numericPad[i+1],
-            function ()
-                if client.focus then
-                    -- remember the focused client because getpos() switch
-                    -- to new tag (if it doesn't exist) and the client lost focus
-                    local c = client.focus
-                    t = shifty.getpos(i)
-                    awful.client.movetotag(t, c)
-                    awful.tag.viewonly(t)
-                end
-            end)
-    )
-end
-
-
 config.keys.client = awful.util.table.join(
+    -- Stick window
+    awful.key({ modkey,           }, "s",
+        function (c)
+            c.sticky = not c.sticky
+        end),
     -- Fullscreen
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
+        end),
+    -- Maximize
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+            c:raise()
         end),
     -- Close
     awful.key({ modkey,           }, "x",
@@ -242,26 +203,17 @@ config.keys.client = awful.util.table.join(
         function (c)
             c:swap(awful.client.getmaster())
         end),
-    -- Stick window
-    awful.key({ modkey,           }, "s",
-        function (c)
-            c.sticky = not c.sticky
-        end),
-    -- Maximize
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-            c:raise()
-        end),
+    -- Move client to previous screen
     awful.key({ modkey, "Shift", "Control"}, "Left",
         function(c)
             awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen-1))
         end),
+    -- Move client to next screen
     awful.key({ modkey, "Shift", "Control"}, "Right",
         function(c)
             awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen+1))
         end),
+    -- Window
     awful.key({ "Control" }, "Print",
         screenshot)
 )
