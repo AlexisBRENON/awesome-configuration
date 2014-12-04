@@ -50,7 +50,7 @@ theme.taglist_squares_resize = "false"
 
 -- Layout icons
 for _, l in pairs(awful.layout.layouts) do
-  	theme["layout_" .. l.name] = theme.icons .. "layouts/" .. l.name .. ".png"
+	theme["layout_" .. l.name] = theme.icons .. "layouts/" .. l.name .. ".png"
 end
 
 -- Naughty

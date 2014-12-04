@@ -15,31 +15,31 @@ current_backlight = math.floor(tonumber(f:read("*all"))/10)
 f:close()
 
 local function update()
-    local f = io.popen("xbacklight -get")
-    current_backlight = math.floor(tonumber(f:read("*all"))/10)
-    f:close()
+  local f = io.popen("xbacklight -get")
+  current_backlight = math.floor(tonumber(f:read("*all"))/10)
+  f:close()
 
-    notification_id = naughty.notify({
-        text = current_backlight .. "0%",
-        icon = beautiful.icons .. "/brightness/" .. current_backlight .. ".png",
-        icon_size = config.widgets.wiboxes.top.size,
-        replaces_id = notification_id }).id
+  notification_id = naughty.notify({
+    text = current_backlight .. "0%",
+    icon = beautiful.icons .. "/brightness/" .. current_backlight .. ".png",
+    icon_size = config.widgets.wiboxes.top.size,
+    replaces_id = notification_id }).id
 end
 
 local function increase()
-    os.execute('xbacklight -set ' .. current_backlight+1 .. "1")
-    update()
+  os.execute('xbacklight -set ' .. current_backlight+1 .. "1")
+  update()
 end
 
 local function decrease()
-    if (current_backlight == 0 and os.time() > last_call) then
-        -- Let a delay before turning off the screen
-        os.execute("sleep 1 ; xset dpms force off")
-    else
-        os.execute('xbacklight -set ' .. current_backlight-1 .. "1")
-        update()
-    end
-    last_call = os.time()
+  if (current_backlight == 0 and os.time() > last_call) then
+    -- Let a delay before turning off the screen
+    os.execute("sleep 1 ; xset dpms force off")
+  else
+    os.execute('xbacklight -set ' .. current_backlight-1 .. "1")
+    update()
+  end
+  last_call = os.time()
 end
 
 brightness.increase = increase

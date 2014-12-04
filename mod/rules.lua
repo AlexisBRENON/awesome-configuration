@@ -3,76 +3,76 @@ local awful = {}
 awful.util = require("awful.util")
 
 shifty.config.apps = {
-    {
-        match = {
-            config.application.web_browser.matching
-        },
-        tag = "",
+  {
+    match = {
+      config.application.web_browser.matching
     },
-    {
-        match = {
-            config.application.file_browser.matching
-        },
-        tag = "",
+    tag = "",
+  },
+  {
+    match = {
+      config.application.file_browser.matching
     },
-    {
-        match = {
-            config.application.terminal.matching
-        },
-        slave = true,
+    tag = "",
+  },
+  {
+    match = {
+      config.application.terminal.matching
     },
-    {
-        match = {
-            config.application.image_editor.matching
-        },
-        tag = "",
+    slave = true,
+  },
+  {
+    match = {
+      config.application.image_editor.matching
     },
-    {
-        match = {
-            config.application.video_player.matching
-        },
-        tag = "",
+    tag = "",
+  },
+  {
+    match = {
+      config.application.video_player.matching
     },
-    {
-        match = {
-            config.application.text_editor.matching
-        },
-        tag = "",
+    tag = "",
+  },
+  {
+    match = {
+      config.application.text_editor.matching
     },
-    {
-        match = {
-            "TeamViewer%.exe"
-        },
-        tag = ""
+    tag = "",
+  },
+  {
+    match = {
+      "TeamViewer%.exe"
     },
-    {
-        match = {
-            "libreoffice%-writer"
-        },
-        tag = "",
+    tag = ""
+  },
+  {
+    match = {
+      "libreoffice%-writer"
     },
-    {
-        match = {
-            "libreoffice%-impress"
-        },
-        tag = "",
+    tag = "",
+  },
+  {
+    match = {
+      "libreoffice%-impress"
     },
-    {
-        match = {
-            "libreoffice%-calc"
-        },
-        tag = "",
+    tag = "",
+  },
+  {
+    match = {
+      "libreoffice%-calc"
     },
-    {
-        match = {
-            "_NET_WM_WINDOW_TYPE_DIALOG",
-            "_NET_WM_WINDOW_TYPE_SPLASH",
-        },
-        float = true,
-        intrusive = true,
+    tag = "",
+  },
+  {
+    match = {
+      "_NET_WM_WINDOW_TYPE_DIALOG",
+      "_NET_WM_WINDOW_TYPE_SPLASH",
     },
-    {
-        match = {""},
-        buttons = config.mouse.client,
-    }
+    float = true,
+    intrusive = true,
+  },
+  {
+    match = {""},
+    buttons = config.mouse.client,
+  }
 }

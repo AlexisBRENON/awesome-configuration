@@ -8,7 +8,7 @@ beautiful.init(awful.util.getdir("config") .. "/theme/theme.lua")
 -- awful.beautiful.register(beautiful)
 -- Set background
 for s = 1, screen.count() do
-	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+  gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 end
 
 -- Set cursor theme
