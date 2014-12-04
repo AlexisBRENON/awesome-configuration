@@ -1,10 +1,15 @@
 # My AwsomeWM (3.5) configuration #
-This is my [Awesome](http://awesome.naquadah.org) configuration. It is greatly inspired from [Vincent Bernat](https://github.com/vincentbernat/awesome-configuration)'s one.
-Here some of the things you may be interested in:
-* It is modular
-* It displays notifications when changing ~~volume~~, brightness and Xrandr outputs
-* One tag for one app (except terminal)
-* Iconic tag name
+This is my [Awesome](http://awesome.naquadah.org) configuration. It is greatly inspired from [Vincent Bernat](https://github.com/vincentbernat/awesome-configuration)'s one, but since time, I hope that it greatly diverged also !
+
+![My screenshot](https://raw.githubusercontent.com/AlexisBRENON/awesome-configuration/master/screenshot.jpg)
+
+You can find [my wallpapers on my Dropbox](https://www.dropbox.com/sh/sz7xcn7ygpxixoz/AAA_jpIMzlLuUy4fwD5S4A0Ma?dl=0). One is choose randomly at each awesome start. (Sorry for the missing credits, most of them come from [deviantart](http://www.deviantart.com/), [Hubble website](http://hubblesite.org/gallery/wallpaper/), [Ubuntu wallpapers](http://www.omgubuntu.co.uk/category/wallpaper), etc...)
+
+Here are some of the things you may be interested in:
+* It is modular (see the mod/ folder)
+* It display notifications when changing ~~volume~~, brightness and Xrandr outputs
+* Each app has its tag (except for terminal, and some uncommon app)
+* Tag names are iconic thanks to FontAwesome (see below)
 
 ## Requirements ##
 Here is a list of known requirements on Arch Linux
@@ -43,3 +48,4 @@ These softs can be configured in the main rc.lua file
 - [x] Add a keyboard layout change widget
 - [x] Fix the volume keys, layout change and sreenshot key issues ~~(the three of them are linked)~~
 - [ ] Create a network widget instead of using a third party applet
+- [ ] Clean up the mod/ folder and refactor code to avoid too much global data
