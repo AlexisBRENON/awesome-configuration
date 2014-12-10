@@ -65,8 +65,10 @@ shifty.config.apps = {
   },
   {
     match = {
-      "_NET_WM_WINDOW_TYPE_DIALOG",
-      "_NET_WM_WINDOW_TYPE_SPLASH",
+      type = {
+        "dialog",
+        "splash",
+      }
     },
     float = true,
     intrusive = true,
