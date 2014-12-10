@@ -14,7 +14,7 @@ config = {}
 config.application = {
   ["terminal"] = {
     bin = "urxvt",
-    matching = "Urxvt",
+    matching = "URxvt",
   },
   ["text_editor"] = {
     bin = "sublime",

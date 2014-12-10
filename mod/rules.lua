@@ -20,6 +20,7 @@ shifty.config.apps = {
       config.application.terminal.matching
     },
     slave = true,
+    honorsizehints = false,
   },
   {
     match = {
