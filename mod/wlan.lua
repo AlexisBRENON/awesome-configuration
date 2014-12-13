@@ -8,7 +8,7 @@ local hard_blocked = false
 local notification_id = nil
 
 local function init()
-  local rfkill = io.popen("rfkill list")
+  local rfkill = io.popen("rfkill list wifi")
   if rfkill then
     for line in rfkill:lines() do
       s_blocked = line:match("^%s*Soft blocked: (yes|no)%s*$")
