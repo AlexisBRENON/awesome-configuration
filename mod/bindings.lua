@@ -63,6 +63,11 @@ config.keys.global = awful.util.table.join(
         client.focus:raise()
       end
     end),
+  -- Start the text editor
+  awful.key({ modkey,           }, "e",
+    function ()
+      awful.util.spawn(config.application.text_editor.bin)
+    end),
   -- Rename the current tag
   awful.key({ modkey            }, "r", shifty.rename),
   -- Create a new tag

@@ -17,8 +17,8 @@ config.application = {
     matching = "URxvt",
   },
   ["text_editor"] = {
-    bin = "sublime",
-    matching = "Sublime"
+    bin = 'urxvt -e vim',
+    matching = "vim"
   },
   ["file_browser"] = {
     bin = "nautilus",
