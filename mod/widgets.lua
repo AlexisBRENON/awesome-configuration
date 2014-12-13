@@ -41,6 +41,7 @@ config.widgets = {
     tooltip = awful.tooltip({}),
     update_time = 59,
     device = "BAT0",
+    lastwarn = 100,
   },
   volume = {
     widget = wibox.layout.fixed.horizontal(),
