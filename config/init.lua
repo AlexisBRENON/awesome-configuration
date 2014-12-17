@@ -18,12 +18,7 @@ config.mouse = require('config/mouse')
 -------------------------------------------------------------------------------------
 -- Define different keyboard layouts allowed
 
-config.keyboard_layouts = {
-    -- {layout, variant, displayed name}
-    {"fr", "oss", "Français"}, -- Alternative french AZERTY
-    {"us", "dvp", "Dvorak Programmeur"}, -- Dvorak for programmers
-}
-
+config.keyboard = require('config/keyboard')
 -------------------------------------------------------------------------------------
 -- Define tags
 
