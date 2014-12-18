@@ -1,3 +1,4 @@
+local client_wrapper = require('backend/client_wrapper')
 local mouse = {}
 
 mouse.global = {}

@@ -1,6 +1,6 @@
 -- Awesome wrappers
 local awful_wrapper = require('backend/awful_wrapper')
-local shifty_wrapper = require('backend/shifty_wrapper')
+local tag_wrapper = require('backend/tag_wrapper')
 local client_wrapper = require('backend/client_wrapper')
 -- Custom backend
 local brightness = require('backend/brightness')
@@ -9,6 +9,7 @@ local prompt = require('backend/prompt')
 local screenshot = require('backend/screenshot')
 local volume = require('backend/volume')
 local wlan = require('backend/wlan')
+local xrand = require('backend/xrandr')
 
 local modkey = config.main.modkey
 
@@ -26,37 +27,37 @@ keys.global = {
     -- Web search prompt
     {{ modkey            }, "F12", prompt.web_search, nil, "Web search prompt"},
     -- Focus previously focused window
-    {{ modkey,           }, "Tab", function() awful_wrapper.focus(-1) end, nil, "Focus previous window"},
+    {{ modkey,           }, "Tab", function() tag_wrapper.focus_client(-1) end, nil, "Focus previous window"},
     -- Start the text editor
     {{ modkey,           }, "e", function () awful_wrapper.spawn(config.applications.text_editor) end, nil, "Launch text editor"},
     -- Rename the current tag
-    {{ modkey            }, "r", shifty_wrapper.rename, nil, "Rename current tag"},
+    {{ modkey            }, "r", tag_wrapper.rename, nil, "Rename current tag"},
     -- Create a new tag
-    {{ modkey            }, "t", shifty_wrapper.add, nil, "Create new tag"},
+    {{ modkey            }, "t", tag_wrapper.add, nil, "Create new tag"},
     -- Spawn a web browser
     {{ modkey,           }, "o", function () awful_wrapper.spawn(config.applications.web_browser) end, nil, "Launch web browser"},
     -- Decrease master-width factor
-    {{ modkey,           }, "h", function () awful_wrapper.master_size(-1) end, nil, "Reduce master size"},
+    {{ modkey,           }, "h", function () tag_wrapper.change_master_size(-1) end, nil, "Reduce master size"},
     -- Focus next window
-    {{ modkey,           }, "j", function () awful_wrapper.focus(1) end, nil, "Focus next window"},
+    {{ modkey,           }, "j", function () tag_wrapper.focus_client(1) end, nil, "Focus next window"},
     -- Increase master-width factor
-    {{ modkey,           }, "l", function () awful_wrapper.master_size(1) end, nil, "Increase master size"},
+    {{ modkey,           }, "l", function () tag_wrapper.change_master_size(1) end, nil, "Increase master size"},
     -- Spawn a terminal
     {{ modkey,           }, "Return", function () awful_wrapper.spawn(config.applications.terminal) end, nil, "Launch terminal"},
     -- Delete the current tag
-    {{ modkey            }, "w", shifty_wrapper.del, nil, "Delete tag"}, -- delete a tag
+    {{ modkey            }, "w", tag_wrapper.del, nil, "Delete tag"}, -- delete a tag
     -- Next layout
-    {{ modkey,           }, "Up", function () awful_wrapper.change_layout(1) end, nil, "Next layout"},
+    {{ modkey,           }, "Up", function () tag_wrapper.change_layout(1) end, nil, "Next layout"},
     -- Show previous tag
     {{ modkey            }, "Left", function() awful_wrapper.change_tag(1) end, nil, "Go to next tag"},
     -- Previous layout
-    {{ modkey,           }, "Down", function () awful_wrapper.change_layout(-1) end, nil, "Previous layout"},
+    {{ modkey,           }, "Down", function () tag_wrapper.change_layout(-1) end, nil, "Previous layout"},
     -- Show next tag
     {{ modkey            }, "Right", function() awful_wrapper.change_tag(-1) end, nil, "Go to next tag"},
     -- Restart awesome
     {{ modkey, "Control" }, "r", awful_wrapper.restart_awesome, nil, "Restart awesome"},
     -- Quit awesome
-    {{ modkey, "Control" }, "q", awesome.quit, nil, "Quit awesome"},
+    {{ modkey, "Control" }, "q", awful_wrapper.quit_awesome, nil, "Quit awesome"},
     -- Jump to next screen
     {{ modkey, "Control" }, "j", function () awful_wrapper.screen_focus(1) end, nil, "Jump to next screen"},
     -- Jump to previous screen
@@ -78,9 +79,9 @@ keys.global = {
     -- Change keyboard layout
     {{ modkey, "Shift"   }, "space", keyboard.change_layout, nil, "Change keyboard layout"},
     -- -- Send client to prev tag
-    {{ modkey, "Shift"   }, "Left", shifty_wrapper.send_prev, nil, "Send window to previous tag"},
+    {{ modkey, "Shift"   }, "Left", tag_wrapper.send_to_prev, nil, "Send window to previous tag"},
     -- Send client to next tag
-    {{ modkey, "Shift"   }, "Right", shifty_wrapper.send_next, nil, "Send window to next tag"},
+    {{ modkey, "Shift"   }, "Right", tag_wrapper.send_to_next, nil, "Send window to next tag"},
     -- Selection screenshot
     {{         "Shift"   }, "Print", screenshot.selection, nil, "Screenshot selection"},
 }
