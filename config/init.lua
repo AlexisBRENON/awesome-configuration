@@ -7,6 +7,7 @@ config.main = require('config/main')
 -------------------------------------------------------------------------------------
 -- Define common applications, their command for ones launchable via keyboard shortcut
 -- and the match dictionary for the (shifty) rules
+
 config.applications = require('config/applications')
 
 -------------------------------------------------------------------------------------
@@ -19,13 +20,16 @@ config.mouse = require('config/mouse')
 -- Define different keyboard layouts allowed
 
 config.keyboard = require('config/keyboard')
+
 -------------------------------------------------------------------------------------
 -- Define tags
 
-local tags = require('config/tags')
-config.tags = {}
-config.tags.tags = tags.tags
-config.tags.defaults = tags.defaults
+config.tags = require('config/tags')
+
+-------------------------------------------------------------------------------------
+-- Define matching rules
+
+config.tags = require('config/rules')
 
 -------------------------------------------------------------------------------------
 -- Define widgets

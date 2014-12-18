@@ -26,13 +26,13 @@ keys.global = {
     -- Focus previously focused window
     {{ modkey,           }, "Tab", function() awful_wrapper.focus(-1) end, nil, "Focus previous window"},
     -- Start the text editor
-    {{ modkey,           }, "e", function () awful_wrapper.spawn(config.applications.text_editor.cmd) end, nil, "Launch text editor"},
+    {{ modkey,           }, "e", function () awful_wrapper.spawn(config.applications.text_editor) end, nil, "Launch text editor"},
     -- Rename the current tag
     {{ modkey            }, "r", shifty_wrapper.rename, nil, "Rename current tag"},
     -- Create a new tag
     {{ modkey            }, "t", shifty_wrapper.add, nil, "Create new tag"},
     -- Spawn a web browser
-    {{ modkey,           }, "o", function () awful_wrapper.spawn(config.applications.web_browser.cmd) end, nil, "Launch web browser"},
+    {{ modkey,           }, "o", function () awful_wrapper.spawn(config.applications.web_browser) end, nil, "Launch web browser"},
     -- Decrease master-width factor
     {{ modkey,           }, "h", function () awful_wrapper.master_size(-1) end, nil, "Reduce master size"},
     -- Focus next window
@@ -40,7 +40,7 @@ keys.global = {
     -- Increase master-width factor
     {{ modkey,           }, "l", function () awful_wrapper.master_size(1) end, nil, "Increase master size"},
     -- Spawn a terminal
-    {{ modkey,           }, "Return", function () awful_wrapper.spawn(config.applications.terminal.cmd) end, nil, "Launch terminal"},
+    {{ modkey,           }, "Return", function () awful_wrapper.spawn(config.applications.terminal) end, nil, "Launch terminal"},
     -- Delete the current tag
     {{ modkey            }, "w", shifty_wrapper.del, nil, "Delete tag"}, -- delete a tag
     -- Next layout
@@ -60,7 +60,7 @@ keys.global = {
     -- Jump to previous screen
     {{ modkey, "Control" }, "k", function () awful_wrapper.screen_focus(-1) end, nil, "Jump to previous screen"},
     -- Activate screensaver
-    {{ modkey, "Control" }, "space", function () awful_wrapper.spawn(config.applications.screensaver.cmd) end, nil, "Start screensaver"},
+    {{ modkey, "Control" }, "space", function () awful_wrapper.spawn(config.applications.screensaver) end, nil, "Start screensaver"},
     -- Toggle volume
     {{ modkey, "Shift"   }, "F1", volume.toggle, nil, "(Un)Mute volume"},
     -- Decrease volume
