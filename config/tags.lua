@@ -51,5 +51,12 @@ tags.defaults = {
     exclusive = true,
 }
 
+tags.layouts = {
+  'tile',
+  'tile.left',
+  'tile.bottom',
+  'magnifier',
+}
+
 return tags
 
