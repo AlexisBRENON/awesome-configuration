@@ -1,12 +1,14 @@
-local wlan = require('backend/wlan')
-local screenshot = require('backend/screenshot')
-local volume = require('backend/volume')
-local brightness = require('backend/brightness')
-local keyboard = require('backend/keyboard')
-local prompt = require('backend/prompt')
+-- Awesome wrappers
 local awful_wrapper = require('backend/awful_wrapper')
 local shifty_wrapper = require('backend/shifty_wrapper')
 local client_wrapper = require('backend/client_wrapper')
+-- Custom backend
+local brightness = require('backend/brightness')
+local keyboard = require('backend/keyboard')
+local prompt = require('backend/prompt')
+local screenshot = require('backend/screenshot')
+local volume = require('backend/volume')
+local wlan = require('backend/wlan')
 
 local modkey = config.main.modkey
 
