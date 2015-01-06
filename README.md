@@ -33,7 +33,7 @@ Here is a list of known requirements on Arch Linux
 ### Default softwares ###
 These softs can be configured in the main rc.lua file
 * **Terminal** : rxvt-unicode-256color ~~+ [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)~~ [zsh + oh my zsh](https://github.com/AlexisBRENON/dotfiles/blob/master/bash/zshrc)
-* **Text editor** : Sublime Text 2
+* **Text editor** : ~~Sublime Text 2~~ Vim
 * **Web browser** : Google Chrome (for it's embedded flash player)
 * ~~**File browser** : Gnome Commander~~
 * **Office suite** : Libre Office
