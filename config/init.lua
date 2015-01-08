@@ -1,5 +1,3 @@
-local awful = require('awful')
-
 local config = {}
 
 config.main = require('config/main')
@@ -36,5 +34,5 @@ config.tags = require('config/rules')
 
 config.widgets = require('config/widgets')
 
-
+return config
 
