@@ -24,7 +24,7 @@ theme.border_marked = theme.fg_focus
 
 
 -- Systray
-theme.bg_systray = "#00000000"
+theme.bg_systray = theme.wallpaper
 theme.systray_icon_spacing = 2
 
 
