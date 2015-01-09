@@ -6,18 +6,38 @@ local widgets = {
         left = nil,
         right = nil,
     },
-    promptbox = {},
-    taglist = {},
-    layoutbox = {},
+    promptbox = {
+        layout = {
+            wibox = 'top',
+            position = 'left',
+            index = 100, -- right most on the left
+        }
+    },
+    taglist = {
+        layout = {
+            wibox = 'top',
+            position = 'left',
+            index = 50,
+        }
+    },
+    layoutbox = {
+        layout = {
+            wibox = 'top',
+            position = 'left',
+            index = 0, -- Left most widget
+        }
+    },
     systray = {
+        screen = '1', -- Only on screen 1
         layout = {
             wibox = 'top', -- Add it to the top wibox
-            layout = {
-                position = 'right', -- On the right
-                index = 100, -- Left most of the right
-            },
-            screen = '1', -- Only on screen 1
+            position = 'right', -- On the right
+            index = 100, -- Left most of the right
         },
+    },
+    separator = {
+        type = 'text',
+        value = '  ',
     },
     -- Then declare custom ones
     date_time = {
@@ -25,11 +45,8 @@ local widgets = {
         format = "%a %d/%m, %H:%M",
         layout = {
             wibox = 'top', -- Add it to the top wibox
-            layout = {
-                position = 'right', -- On the right
-                index = 00, -- Right most of the right
-            },
-            screen = nil, -- On every screen
+            position = 'right', -- On the right
+            index = 00, -- Right most of the right
         },
     },
     battery = {
@@ -37,23 +54,18 @@ local widgets = {
         device = "BAT0",
         layout = {
             wibox = 'top', -- Add it to the top wibox
-            layout = {
-                position = 'right', -- On the right
-                index = 30, 
-            },
-            screen = nil, -- On every screen
+            position = 'right', -- On the right
+            index = 30, 
         },
     },
     volume = {
         update_time = 3631,
         device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
+        screen = 1,
         layout = {
             wibox = 'top', -- Add it to the top wibox
-            layout = {
-                position = 'right', -- On the right
-                index = 10, 
-            },
-            screen = 1,
+            position = 'right', -- On the right
+            index = 10, 
         },
     },
 }
