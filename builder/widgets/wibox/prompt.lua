@@ -1,6 +1,12 @@
 local wibox = require('wibox')
+local builder = {}
 
-local prompt_args = config.widget.prompt
-for s = prompt_args.screen or 1, prompt_args.screen or screen.count() do
-    prompt_args.widget[s] = wibox.widget.textbox()
+function builder.build (widget_args)
+    widget_args.widgets = {}
+    for s = widget_args.screen or 1, widget_args.screen or screen.count() do
+        widget_args.widgets[s] = wibox.widget.textbox()
+    end
 end
+
+return builder
+

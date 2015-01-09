@@ -1,5 +1,11 @@
 local awful = require('awful')
+local builder = {}
 
-for s = 1, screen.count() do
-    config.widgets.layoutbox.widgets[s] = awful.widget.layoutbox(s)
+function builder.build (widget_args)
+    widget_args.widgets = {}
+    for s = 1, screen.count() do
+        widget_args.widgets[s] = awful.widget.layoutbox(s)
+    end
 end
+
+return builder

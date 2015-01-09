@@ -1,9 +1,15 @@
 local awful = require('awful')
+local builder = {}
 
-for s = 1, screen.count() do
-    config.widgets.taglist.widgets[s] = awful.widget.taglist.new(
-        s,
-        awful.widget.taglist.filter.all,
-        config.widgets.taglist.buttons
-    )
+function builder.build(widget_args)
+    widget_args.widgets = {}
+    for s = 1, screen.count() do
+        widget_args.widgets[s] = awful.widget.taglist.new(
+            s,
+            awful.widget.taglist.filter.all,
+            widget_args.buttons or {}
+        )
+    end
 end
+
+return builder
