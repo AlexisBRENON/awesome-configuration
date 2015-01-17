@@ -1,7 +1,12 @@
 -- TODO : Switch buildings based on shifty usage
 local shifty = require("shifty")
 
-shifty.config.tags = config.tags.tags
+local builder = {}
 
-shifty.config.defaults = config.tags.defaults
+function builder.build(tags)
+    shifty.config.tags = tags.tags
+    shifty.config.defaults = tags.defaults
+end
+
+return builder
 
