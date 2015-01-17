@@ -165,6 +165,18 @@ config.keys.global = awful.util.table.join(
   awful.key({         "Shift"   }, "Print", screenshot.selection)
 )
 
+-- Numbers row a top of keyboard has keycode from 10 to ...
+-- Use keycode instead of keysym to make it work on any keyboard/layout, etc.
+for i = 1, 10 do
+    config.keys.global = awful.util.table.join(
+    config.keys.global,
+    awful.key({ modkey,          }, "#" .. 9 + i,
+    function()
+      awful.tag.viewonly(shifty.getpos(i))
+    end)
+    )
+end
+
 config.keys.client = awful.util.table.join(
   -- Stick window
   awful.key({ modkey,           }, "s",
