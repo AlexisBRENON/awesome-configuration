@@ -1,7 +1,7 @@
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
-wlan = {}
+local wlan = {}
 
 local soft_blocked = false
 local hard_blocked = false

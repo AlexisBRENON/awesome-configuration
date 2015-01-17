@@ -133,24 +133,25 @@ local function change_screen()
         icon_size = config.widgets.wiboxes.top.size,
         timeout = 4,
         screen = mouse.screen, -- Important, not all screens may be visible
-        replaces_id = state.cid }).id
+        replaces_id = state.cid
+    }).id
 
-        -- Setup the timer
-        state.timer = timer { timeout = 4 }
-        state.timer:connect_signal(
-        "timeout",
-        function()
-            state.timer:stop()
-            state.timer = nil
-            state.iterator = nil
-            if action then
-                awful.util.spawn(action, false)
-            end
+    -- Setup the timer
+    state.timer = timer { timeout = 4 }
+    state.timer:connect_signal(
+    "timeout",
+    function()
+        state.timer:stop()
+        state.timer = nil
+        state.iterator = nil
+        if action then
+            awful.util.spawn(action, false)
         end
-        )
-        state.timer:start()
     end
+    )
+    state.timer:start()
+end
 
-    xrandr.change_screen = change_screen
+xrandr.change_screen = change_screen
 
-    return xrandr
+return xrandr

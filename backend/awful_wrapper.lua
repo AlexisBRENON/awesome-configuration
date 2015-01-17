@@ -23,3 +23,4 @@ function awful_wrapper.change_tag(relative_idx)
     awful.tag.viewidx(relative_idx)
 end
 
+return awful_wrapper
