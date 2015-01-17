@@ -49,12 +49,14 @@ local function change_layout()
     notify()
 end
 
-local function init()
+local function init(keyboard_config)
+    keyboard_layouts = keyboard_config.layouts
+    keyboard_custom_keys = keyboard_config.custom_keycodes
     get_current_layout()
     define_custom_keycodes()
+    keyboard.change_layout = change_layout
 end
 
-keyboard.change_layout = change_layout
+keyboard.init = init
 
-init()
 return keyboard

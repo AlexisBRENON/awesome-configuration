@@ -9,14 +9,21 @@ local current_backlight = 0
 local notification_id = nil
 local last_call = os.time()
 
-local function get_current_backlight()
+local function has_backlight_support()
+    local f = io.popen("xbacklight -get")
+    local result = (type(tonumber(f:read("*all"))) == 'number')
+    f:close()
+    return result
+end
+
+local function update_current_backlight()
     local f = io.popen("xbacklight -get")
     current_backlight = math.floor(tonumber(f:read("*all"))/10)
     f:close()
 end
 
 local function notify()
-    get_current_backlight()
+    update_current_backlight()
     notification_id = naughty.notify({
         text = current_backlight .. "0%",
         icon = beautiful.icons .. "/brightness/" .. current_backlight .. ".png",
@@ -41,10 +48,22 @@ local function decrease()
     last_call = os.time()
 end
 
-local init = get_current_backlight
+local function init()
+    if has_backlight_support() then
+        print('backlight support : ON')
+        brightness.increase = increase
+        brightness.decrease = decrease
+        update_current_backlight()
+    else
+        print('backlight support : OFF')
+        local function fallback ()
+            print('xbacklight not supported...')
+        end
+        brightness.increase = fallback
+        brightness.decrease = fallback
+    end
+end
 
-brightness.increase = increase
-brightness.decrease = decrease
+brightness.init = init
 
-init()
 return brightness

@@ -25,6 +25,8 @@ local function init()
     if soft_blocked then
         os.execute("rfkill block all") -- Make sure that ALL devices are blocked
     end
+
+    wlan.toggle = toggle
 end
 
 local function notify()
@@ -62,7 +64,4 @@ local function toggle()
     notify()
 end
 
-wlan.toggle = toggle
-
-init()
 return wlan
