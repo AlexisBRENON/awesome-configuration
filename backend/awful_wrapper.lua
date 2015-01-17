@@ -23,4 +23,10 @@ function awful_wrapper.change_tag(relative_idx)
     awful.tag.viewidx(relative_idx)
 end
 
+awful_wrapper.getdir = awful.util.getdir
+
+function awful_wrapper.get_hostname()
+    return awful.util.pread('uname -n'):gsub('\n', '')
+end
+
 return awful_wrapper
