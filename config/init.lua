@@ -27,11 +27,15 @@ function module.load()
 
     -------------------------------------------------------------------------------------
     -- Define matching rules
-    config.tags = require('config/rules').load(config)
+    config.rules = require('config/rules').load(config)
 
     -------------------------------------------------------------------------------------
     -- Define widgets
     config.widgets = require('config/widgets').load(config)
+
+    -------------------------------------------------------------------------------------
+    -- Define the theme
+    config.theme = require('config.theme').load(config)
 
     return config
 end

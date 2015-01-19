@@ -8,7 +8,7 @@ function module.load(config)
         config = awful_wrapper.getdir('config'),
         cache = awful_wrapper.getdir('cache'),
         hostname = awful_wrapper.get_hostname(),
-        theme = awful_wrapper.getdir('config') .. "/theme/theme.lua",
+--        theme = awful_wrapper.getdir('config') .. "/theme/theme.lua",
     }
     return main
 end
