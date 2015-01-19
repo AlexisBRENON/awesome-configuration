@@ -5,7 +5,7 @@ function module.load(config)
 
     -- Define common stuff
     theme.icons 	= config.main.config ..  "/theme/icons/"
-    theme.wallpaper = config.main.cache .. "current_wallpaper"
+    theme.wallpaper = config.main.cache .. "/current-wallpaper.png"
     theme.font 		= "DejaVu Sans 11"
     theme.font_mono = "DejaVu Sans Mono 8"
 
