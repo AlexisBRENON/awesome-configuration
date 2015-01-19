@@ -6,6 +6,7 @@ local builder = {}
 
 function builder.build(theme)
     -- Load theme
+    -- TODO : to work, this need some hack in beautiful lib
     beautiful.init(theme)
 
     -- Set wallpaper

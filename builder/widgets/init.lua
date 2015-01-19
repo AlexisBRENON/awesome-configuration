@@ -1,15 +1,17 @@
-local builder = {}
+local module = {
+    cwd = ...}
 
 local builders = {} -- Contains all sub-builder available (in decreasing priority order)
 
-function builder.build(config)
+function module.build(config)
     -- List all available sub-builders
-    local available_builders = io.popen('ls -1 ' .. config.main.config .. '/' .. _REQUIREDNAME)
+    local available_builders = io.popen('ls -1 ./' .. module.cwd)
     if available_builders then
         for builder in available_builders:lines() do
+            print(builder)
             if builder ~= 'init.lua' then
                 -- For each of them, ask them the list of widgets they can build
-                builders:insert(require(_REQUIREDNAME .. '/' .. builder))
+                builders:insert(require(module.cwd .. '/' .. builder))
             end
         end
         available_builders:close()
@@ -31,4 +33,4 @@ function builder.build(config)
     end
 end
 
-return builder
+return module
