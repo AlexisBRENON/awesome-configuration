@@ -3,6 +3,7 @@ local module = {}
 function module.load(config)
     local tags = {}
 
+    tags.tags = {}
     -- Init (without any name)
     tags.tags["\n"] = {
         position = 0,
