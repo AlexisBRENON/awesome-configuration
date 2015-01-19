@@ -1,4 +1,7 @@
-local widgets = {
+local module = {}
+
+function module.load(config)
+    local widgets = {
     -- Start with common widgets
     wibox = {
         top = {}, -- I want a wibox on top
@@ -71,4 +74,7 @@ local widgets = {
 }
 
 return widgets
+end
+
+return module
 

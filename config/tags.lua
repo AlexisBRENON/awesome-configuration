@@ -1,62 +1,68 @@
-local tags = {}
+local module = {}
 
--- Init (without any name)
-tags.tags["\n"] = {
-    position = 0,
-    init = true,
-}
--- Web browser
-tags.tags[""] = {
-    position = 1,
-}
--- File browser
-tags.tags[""] = {
-    position = 2,
-}
--- text editor / code
-tags.tags[""] = {
-    position = 3,
-}
--- Gimp / image management
-tags.tags[""] = {
-    position = 4,
-}
--- VLC / video
-tags.tags[""] = {
-    position = 5,
-}
--- Office calc
-tags.tags[""] = {
-    position = 6,
-}
--- Office writer
-tags.tags[""] = {
-    position = 6,
-}
--- Office impress
-tags.tags[""] = {
-    position = 6,
-}
--- Teamviewer
-tags.tags[""] = {
-    position = 9,
-}
+function module.load(config)
+    local tags = {}
 
-tags.defaults = {
-    layout = 1,
-    persist = false,
-    floatBars = true,
-    guess_name = true,
-    guess_position = true,
-    exclusive = true,
-}
+    -- Init (without any name)
+    tags.tags["\n"] = {
+        position = 0,
+        init = true,
+    }
+    -- Web browser
+    tags.tags[""] = {
+        position = 1,
+    }
+    -- File browser
+    tags.tags[""] = {
+        position = 2,
+    }
+    -- text editor / code
+    tags.tags[""] = {
+        position = 3,
+    }
+    -- Gimp / image management
+    tags.tags[""] = {
+        position = 4,
+    }
+    -- VLC / video
+    tags.tags[""] = {
+        position = 5,
+    }
+    -- Office calc
+    tags.tags[""] = {
+        position = 6,
+    }
+    -- Office writer
+    tags.tags[""] = {
+        position = 6,
+    }
+    -- Office impress
+    tags.tags[""] = {
+        position = 6,
+    }
+    -- Teamviewer
+    tags.tags[""] = {
+        position = 9,
+    }
 
-tags.layouts = {
-  'tile',
-  'tile.left',
-  'tile.bottom',
-  'magnifier',
-}
+    tags.defaults = {
+        layout = 1,
+        persist = false,
+        floatBars = true,
+        guess_name = true,
+        guess_position = true,
+        exclusive = true,
+    }
 
-return tags
+    tags.layouts = {
+        'tile',
+        'tile.left',
+        'tile.bottom',
+        'magnifier',
+    }
+
+    return tags
+end
+
+return module
 

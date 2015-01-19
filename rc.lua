@@ -1,4 +1,4 @@
 local config = require('config')
 local builder = require('builder')
 
-builder.build()
+builder.build(config.load())

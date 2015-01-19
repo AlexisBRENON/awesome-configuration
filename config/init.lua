@@ -1,38 +1,40 @@
-local config = {}
+local module = {}
 
-config.main = require('config/main')
+function module.load()
+    local config = {}
 
--------------------------------------------------------------------------------------
--- Define common applications, their command for ones launchable via keyboard shortcut
--- and the match dictionary for the (shifty) rules
+    -------------------------------------------------------------------------------------
+    -- Define some very common things (modket, pathes, etc...)
+    config.main = require('config/main').load(config)
 
-config.applications = require('config/applications')
+    -------------------------------------------------------------------------------------
+    -- Define common applications, their command for ones launchable via keyboard shortcut
+    -- and the match dictionary for the (shifty) rules
+    config.applications = require('config/applications').load(config)
 
--------------------------------------------------------------------------------------
--- Define keys binding and shortcuts
+    -------------------------------------------------------------------------------------
+    -- Define keys binding and shortcuts
+    config.keys = require('config/keys').load(config)
+    config.mouse = require('config/mouse').load(config)
 
-config.keys = require('config/keys')
-config.mouse = require('config/mouse')
+    -------------------------------------------------------------------------------------
+    -- Define different keyboard layouts allowed
+    config.keyboard = require('config/keyboard').load(config)
 
--------------------------------------------------------------------------------------
--- Define different keyboard layouts allowed
+    -------------------------------------------------------------------------------------
+    -- Define tags
+    config.tags = require('config/tags').load(config)
 
-config.keyboard = require('config/keyboard')
+    -------------------------------------------------------------------------------------
+    -- Define matching rules
+    config.tags = require('config/rules').load(config)
 
--------------------------------------------------------------------------------------
--- Define tags
+    -------------------------------------------------------------------------------------
+    -- Define widgets
+    config.widgets = require('config/widgets').load(config)
 
-config.tags = require('config/tags')
+    return config
+end
 
--------------------------------------------------------------------------------------
--- Define matching rules
-
-config.tags = require('config/rules')
-
--------------------------------------------------------------------------------------
--- Define widgets
-
-config.widgets = require('config/widgets')
-
-return config
+return module
 
