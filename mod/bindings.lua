@@ -72,6 +72,11 @@ config.keys.global = awful.util.table.join(
   awful.key({ modkey            }, "r", shifty.rename),
   -- Create a new tag
   awful.key({ modkey            }, "t", shifty.add),
+  -- Spawn an IRC client
+  awful.key({ modkey            }, "i",
+    function ()
+      awful.util.spawn(config.application.irc.bin)
+    end),
   -- Spawn a web browser
   awful.key({ modkey,           }, "o",
     function ()

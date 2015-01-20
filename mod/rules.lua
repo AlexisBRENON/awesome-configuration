@@ -66,6 +66,12 @@ shifty.config.apps = {
   },
   {
     match = {
+      config.application.irc.matching
+    },
+    tag = "\239\130\134",
+  },
+  {
+    match = {
       type = {
         "dialog",
         "splash",

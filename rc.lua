@@ -39,7 +39,11 @@ config.application = {
   ["office"] = {
     bin = "libreoffice",
     matching = "libreoffice.*"
-  }
+  },
+  ["irc"] = {
+    bin = "urxvt -e irssi",
+    matching = "irssi",
+  },
 }
 awful.layout.layouts = {
   awful.layout.suit.tile,

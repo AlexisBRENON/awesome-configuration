@@ -49,6 +49,11 @@ shifty.config.tags[""] = {
   position = 6,
 }
 
+-- IRC
+shifty.config.tags["\239\130\134"] = {
+    position = 9,
+}
+
 -- Teamviewer
 shifty.config.tags[""] = {
   position = 9,
