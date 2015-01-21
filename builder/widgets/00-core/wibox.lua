@@ -10,11 +10,10 @@ function builder.build(widget_type, widget_args)
     end
     print("## DEBUG ## Building wiboxes")
     for position, wibox_args in pairs(widget_args) do
-        print("## DEBUG ## Position : ", position)
-        widget_args.widgets = {}
-        widget_args.layouts = {}
+        wibox_args.widgets = {}
+        wibox_args.layouts = {}
         for s = wibox_args.screen or 1, wibox_args.screen or screen.count() do
-            widget_args.widgets[s] = awful.wibox({
+            wibox_args.widgets[s] = awful.wibox({
                 screen = s,
                 position = position,
                 height = wibox_args.height or 
@@ -23,9 +22,9 @@ function builder.build(widget_type, widget_args)
                 (beautiful.widgets and beautiful.widgets.wibox and ((beautiful.widgets.wibox[position] and beautiful.widgets.wibox[position].bg) or beautiful.widgets.wibox.bg)) or "#000000",
             })
             if position == 'top' or position == 'bottom' then
-                widget_args.layouts[s] = wibox.layout.align.horizontal()
+                wibox_args.layouts[s] = wibox.layout.align.horizontal()
             else
-                widget_args.layouts[s] = wibox.layout.align.vertical()
+                wibox_args.layouts[s] = wibox.layout.align.vertical()
             end
         end
     end
