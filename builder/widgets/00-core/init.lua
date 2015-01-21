@@ -20,7 +20,7 @@ function init()
 end
 
 function module.build(widget_type, widget_args)
-    print("## DEBUG ## 00-core : building '", widget_type , "'")
+    print("## DEBUG ## 00-core : building '" .. widget_type .. "'")
     local built = false
     -- Look after a builder able to build this widget
     for _, widget in ipairs(module.widgets) do
