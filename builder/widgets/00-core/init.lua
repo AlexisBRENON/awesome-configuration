@@ -1,16 +1,36 @@
 -- Return a list of avalaible builder (containing a build() function) of this directory
-local widgets = {}
+local module = {
+    cwd = ...,
+    widgets = {}
+}
 
-local available_widgets = io.popen('ls -1 ' .. config.main.config .. '/' .. _REQUIREDNAME)
-if available_widgets then
-    for widget in available_widgets:lines() do
-        -- For each item in the directory except the current file
-        if widget ~= 'init.lua' then
-            -- Add it to the returned table to allow main builder to call sub-builders
-            widgets[widget] = require(_REQUIREDNAME .. '/' .. widget)
+function init()
+    local available_widgets = io.popen('ls -1 ./' .. module.cwd)
+    if available_widgets then
+        for widget in available_widgets:lines() do
+            -- For each item in the directory except the current file
+            if widget ~= 'init.lua' then
+                widget = widget:gsub('%.lua', '')
+                -- Add it to the returned table to allow main builder to call sub-builders
+                table.insert(module.widgets, require(module.cwd .. '/' .. widget))
+            end
         end
+        available_widgets:close()
     end
-    available_widgets:close()
 end
 
-return widgets
+function module.build(widget_type, widget_args)
+    print("## DEBUG ## 00-core : building '", widget_type , "'")
+    local built = false
+    -- Look after a builder able to build this widget
+    for _, widget in ipairs(module.widgets) do
+        built = widget.build(widget_type, widget_args)
+        if built then
+            break
+        end
+    end
+    return built
+end
+
+init()
+return module
