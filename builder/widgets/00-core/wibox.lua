@@ -26,6 +26,7 @@ function builder.build(widget_type, widget_args)
             else
                 wibox_args.layouts[s] = wibox.layout.align.vertical()
             end
+            wibox_args.widgets[s]:set_widget(wibox_args.layouts[s])
         end
     end
     return true
