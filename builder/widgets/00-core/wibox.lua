@@ -5,7 +5,7 @@ local beautiful = require('beautiful')
 local builder = {}
 
 function builder.build(widget_type, widget_args)
-    if widget_type ~= "wibox" then
+    if not string.find(widget_type, '^wibox') then
         return false
     end
     print("## DEBUG ## Building wiboxes")

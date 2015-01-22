@@ -2,7 +2,7 @@ local awful = require('awful')
 local builder = {}
 
 function builder.build(widget_type, widget_args)
-    if widget_type ~= "layoutbox" then
+    if not string.find(widget_type, '^layoutbox') then
         return false
     end
     print("## DEBUG ## Building layoutbox")
