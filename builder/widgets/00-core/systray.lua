@@ -7,7 +7,7 @@ function builder.build(widget_type, widget_args)
         return false
     end
     print("## DEBUG ## Building systray")
-    widget_args.widget = wibox.widget.systray()
+    widget_args.widgets = wibox.widget.systray()
     return true
 end
 

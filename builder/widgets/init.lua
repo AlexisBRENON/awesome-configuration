@@ -47,57 +47,42 @@ end
 local function add_widget(widget, layout, screen)
     if widget.screen == nil or widget.screen == screen then
         -- Here, it's one widget per screen (taglist, prompt, etc.)
-        if widget.widget[screen] then
-            layout:add(widget.widget[screen])
+        if widget.widgets[screen] then
+            layout:add(widget.widgets[screen])
         else
             -- Here it's one widget for all screen (date/time, etc.)
-            layout:add(widget.widget)
+            layout:add(widget.widgets)
         end
     end
 end
 
 local function assemble_widgets(widgets)
-    local widget_list = {}
+    local widgets_list = {}
     for widget_type, widget_args in pairs(widgets) do
         -- Left outside the wibox (which is the container)
         -- and the widgets that failed to build
         if not (widget_type == 'wibox' or widget_args.widgets == nil) then
+            print('## DEBUG ## Assembling \''..widget_type.."'")
             -- Save where each widget has to be displayed
-            local layout_info = widget_args.layout
-            widget_list[layout_info.wibox] = widget_list[layout_info.wibox] or {}
-            widget_list[layout_info.wibox][layout_info.position] = widget_list[layout_info.wibox][layout_info.position] or {}
-            table.insert(widget_list[layout_info.wibox][layout_info.position], {
-                index = layout_info.index,
-                widget = widget_args.widgets,
-                screen = widget_args.screen
+            local layout = widget_args.layout
+            widgets_list[layout.edge] = widgets_list[layout.edge] or {}
+            widgets_list[layout.edge][layout.alignment] = widgets_list[layout.edge][layout.alignment] or {}
+            table.insert(widgets_list[layout.edge][layout.alignment], {
+                index = layout.index,
+                widget = widget_args,
             })
         end
     end
 
     for s = 1, screen.count() do
-        print("## DEBUG ## Screen s : " .. s)
-        for wibox_pos, wibox_args in pairs(widgets.wibox) do
-            print("## DEBUG ## wibox_pos : " .. wibox_pos)
-            for i, v in pairs(wibox_args) do
-                print("## DEBUG ## ", i, " : ", v)
-            end
-            for position, widgets in pairs(widget_list[wibox_pos]) do
-                print("## DEBUG ## position : " .. position)
-                -- List widgets in the index order
-                table.sort(widgets, function(w1, w2) return w2.index < w1.index end)
-                for i, v in pairs(widgets) do
-                    print("## DEBUG ## ", i, " : ", v)
+        for edge, edge_list in pairs(widgets_list) do
+            for alignment, alignment_list in pairs(edge_list) do
+                local layout = wibox.layout.fixed.horizontal()
+                table.sort(alignment_list, function(w1, w2) return w1.index < w2.index end)
+                for _, w in pairs(alignment_list) do
+                    add_widget(w.widget, layout, s)
                 end
-                local layout
-                if wibox_pos == 'top' or wibox_pos == 'bottom' then
-                    layout = wibox.layout.fixed.horizontal()
-                else
-                    layout = wibox.layout.fixed.vertical()
-                end
-                for _, widget in ipairs(widgets) do
-                    add_widget(widget, layout, s)
-                end
-                wibox_args.layouts[s]['set_'..position](wibox_args.layouts[s], layout)
+                widgets.wibox[edge].layouts[s]['set_'..alignment](widgets.wibox[edge].layouts[s], layout)
             end
         end
     end
