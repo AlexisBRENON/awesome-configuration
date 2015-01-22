@@ -40,7 +40,8 @@ function module.load(config)
             },
         },
         -- Then declare custom ones
-        date_time = {
+        datetime = {
+            has_text = true,
             update_time = 61,
             format = "%a %d/%m, %H:%M",
             layout = {
