@@ -64,8 +64,12 @@ function module.load(config)
             },
         },
         volume = {
+            has_text = true,
+            has_icon = true,
+            has_tooltip = false,
             update_time = 3631,
             device = "alsa_output.pci-0000_00_1b.0.analog-stereo",
+            format = "vicious_format",
             screen = 1,
             layout = {
                 edge = 'top', -- Add it to the top wibox
