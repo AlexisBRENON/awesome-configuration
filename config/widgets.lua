@@ -51,8 +51,12 @@ function module.load(config)
             },
         },
         battery = {
+            has_text = true,
+            has_icon = true,
+            has_tooltip = true,
             update_time = 59,
             device = "BAT0",
+            format = "update_icon_percent",
             layout = {
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
