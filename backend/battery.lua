@@ -11,14 +11,14 @@ end
 local function set_icon(state, current)
     -- Choose the icon to display
     local icon_dir = "widgets/battery/"
-    -- battery discharging
     if state == "−" then
+        -- battery discharging
         icon_dir = icon_dir .. "discharging/"
-    -- Battery charging or full
     elseif state == "+" or state == "↯" then
+        -- Battery charging or full
         icon_dir = icon_dir .. "charging/"
-    -- Battery state unknown
     elseif state == "⌁" then
+        -- Battery state unknown
         icon_dir = icon_dir .. "unknown/"
     end
     -- Set the right icon
