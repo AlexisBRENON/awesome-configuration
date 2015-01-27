@@ -26,9 +26,6 @@ function builder.build(widget_type, widget_args)
     if widget_args.has_text then widget:add(text) end
     if widget_args.has_tooltip then tooltip:add_to_object(widget) end
 
-    for i, v in pairs(volume) do
-        print(i, v)
-    end
     widget_args.widgets = widget
     vicious.register(text, vicious.widgets.volume, volume[widget_args.format], widget_args.update_time, widget_args.device)
     return true
