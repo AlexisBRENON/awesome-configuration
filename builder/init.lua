@@ -5,6 +5,7 @@ function builder.build(config)
     require('builder/tags').build(config.tags)
     require('builder/rules').build(config.rules)
     require('builder/widgets').build(config.widgets)
+    require('builder/keys').build(config.keys)
 end
 
 return builder
