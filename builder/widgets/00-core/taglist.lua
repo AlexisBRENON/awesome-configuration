@@ -14,6 +14,10 @@ function builder.build(widget_type, widget_args)
         widget_args.buttons or {}
         )
     end
+    -- TODO : Support installation without shifty
+    local shifty = require("shifty")
+    shifty.taglist = widget_args.widgets
+    shifty.init()
     return true
 end
 
