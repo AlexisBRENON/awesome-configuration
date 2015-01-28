@@ -51,11 +51,11 @@ function module.load(config)
         -- Next layout
         {{ modkey,           }, "Up", function () tag_wrapper.change_layout(1) end, nil, "Next layout"},
         -- Show previous tag
-        {{ modkey            }, "Left", function() awful_wrapper.change_tag(1) end, nil, "Go to next tag"},
+        {{ modkey            }, "Left", function() awful_wrapper.change_tag(-1) end, nil, "Go to next tag"},
         -- Previous layout
         {{ modkey,           }, "Down", function () tag_wrapper.change_layout(-1) end, nil, "Previous layout"},
         -- Show next tag
-        {{ modkey            }, "Right", function() awful_wrapper.change_tag(-1) end, nil, "Go to next tag"},
+        {{ modkey            }, "Right", function() awful_wrapper.change_tag(1) end, nil, "Go to next tag"},
         -- Restart awesome
         {{ modkey, "Control" }, "r", awful_wrapper.restart_awesome, nil, "Restart awesome"},
         -- Quit awesome
