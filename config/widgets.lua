@@ -50,6 +50,14 @@ function module.load(config)
                 index = 100, -- Right most
             },
         },
+        textbox_sep1 = {
+            value = "  ",
+            layout = {
+                edge = 'top',
+                alignment = 'right',
+                index = 99,
+            },
+        },
         battery = {
             has_text = true,
             has_icon = true,
@@ -61,6 +69,14 @@ function module.load(config)
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
                 index = 30, 
+            },
+        },
+        textbox_sep2 = {
+            value = "  ",
+            layout = {
+                edge = 'top',
+                alignment = 'right',
+                index = 29,
             },
         },
         volume = {
@@ -75,6 +91,14 @@ function module.load(config)
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
                 index = 40, 
+            },
+        },
+        textbox_sep3 = {
+            value = "  ",
+            layout = {
+                edge = 'top',
+                alignment = 'right',
+                index = 39,
             },
         },
         --]]
