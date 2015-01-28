@@ -10,6 +10,8 @@ function builder.build(widget_type, widget_args)
     for s = widget_args.screen or 1, widget_args.screen or screen.count() do
         widget_args.widgets[s] = wibox.widget.textbox()
     end
+    require('backend/prompt').set_prompts(widget_args.widgets)
+
     return true
 end
 
