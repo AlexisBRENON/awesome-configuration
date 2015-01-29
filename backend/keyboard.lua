@@ -31,12 +31,12 @@ local function get_current_layout()
 end
 
 local function notify()
-    local layout_name = config.keyboard.layouts[current_layout][3]
-    config.widgets.keyboard.tooltip:set_text(layout_name)
+    local layout_name = keyboard_layouts[current_layout][3]
+    if tooltip then tooltip:set_text(layout_name) end
     notification_id = naughty.notify({
         text = layout_name,
         icon = beautiful.icons .. "/widgets/keyboard/keyboard.png",
-        icon_size = config.widgets.wiboxes.top.size,
+        icon_size = 16, 
         replaces_id = notification_id,
     }).id
 end
@@ -54,9 +54,9 @@ local function init(keyboard_config)
     keyboard_custom_keys = keyboard_config.custom_keycodes
     get_current_layout()
     define_custom_keycodes()
-    keyboard.change_layout = change_layout
 end
 
+keyboard.change_layout = change_layout
 keyboard.init = init
 
 return keyboard
