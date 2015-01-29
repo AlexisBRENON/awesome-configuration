@@ -5,7 +5,7 @@ function module.load(config)
 
     tags.tags = {}
     -- Init (without any name)
-    tags.tags["\n"] = {
+    tags.tags["Main"] = {
         position = 0,
         init = true,
     }
