@@ -1,6 +1,9 @@
+local log = require("utils/log")
+
 local module = {}
 
 function module.load(config)
+    log.info("Loading widgets configuration")
     local widgets = {
         -- Start with common widgets
         wibox = {

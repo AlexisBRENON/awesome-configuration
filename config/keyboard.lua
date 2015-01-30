@@ -1,6 +1,9 @@
+local log = require("utils/log")
+
 local module = {}
 
 function module.load(config)
+    log.info("Loading keyboard configuration")
     local keyboard = {}
     keyboard.layouts = {
         -- {layout, variant, displayed name}

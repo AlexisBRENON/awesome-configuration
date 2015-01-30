@@ -1,3 +1,4 @@
+local log = require("utils/log")
 -- Awesome wrappers
 local awful_wrapper = require('backend/awful_wrapper')
 local tag_wrapper = require('backend/tag_wrapper')
@@ -14,6 +15,7 @@ local xrandr = require('backend/xrandr')
 local module = {}
 
 function module.load(config)
+    log.info("Loading key bindings configuration")
     local modkey = config.main.modkey
     local keys = {}
     keys.global = {

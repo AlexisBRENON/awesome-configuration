@@ -1,8 +1,10 @@
+local log = require("utils/log")
 local client_wrapper = require('backend/client_wrapper')
 
 local module = {}
 
 function module.load(config)
+    log.info("Loading mouse bindings configuration")
     local mouse = {}
     mouse.global = {}
     mouse.client = {

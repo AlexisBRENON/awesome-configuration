@@ -1,6 +1,9 @@
+local log = require("utils/log")
+
 local module = {}
 
 function module.load()
+    log.info("Loading default applications configuration")
     local applications = {}
     applications.terminal = 'urxvt'
     applications.text_editor =  applications.terminal .. ' -e vim'
