@@ -1,3 +1,4 @@
+local log = require('utils/log')
 local awful = require('awful')
 local wibox = require('wibox')
 local beautiful = require('beautiful')
@@ -8,7 +9,7 @@ function builder.build(widget_type, widget_args)
     if not string.find(widget_type, '^wibox') then
         return false
     end
-    print("## DEBUG ## Building wiboxes")
+    log.debug("Building " .. widget_type)
     for position, wibox_args in pairs(widget_args) do
         wibox_args.widgets = {}
         wibox_args.layouts = {}

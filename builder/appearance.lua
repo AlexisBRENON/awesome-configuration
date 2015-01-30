@@ -1,3 +1,4 @@
+local log = require("utils/log")
 local beautiful = require("beautiful")
 local awful = require("awful")
 local gears = require("gears")
@@ -5,6 +6,7 @@ local gears = require("gears")
 local builder = {}
 
 function builder.build(theme)
+    log.info("Building theme")
     -- Load theme
     -- TODO : to work, this need some hack in beautiful lib
     beautiful.init(theme)

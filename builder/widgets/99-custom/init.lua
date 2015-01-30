@@ -1,3 +1,5 @@
+local log = require("utils/log")
+
 -- Return a list of avalaible builder (containing a build() function) of this directory
 local module = {
     cwd = ...,
@@ -20,7 +22,7 @@ function init()
 end
 
 function module.build(widget_type, widget_args)
-    print("## DEBUG ## 20-vicious : building '" .. widget_type .. "'")
+    log.debug("99-custom : searching '" .. widget_type .. "' builder")
     local built = false
     -- Look after a builder able to build this widget
     for _, widget in ipairs(module.widgets) do

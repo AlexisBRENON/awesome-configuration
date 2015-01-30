@@ -1,9 +1,11 @@
+local log = require("utils/log")
 local awful = require('awful')
 local shifty = require('shifty')
 
 local module = {}
 
 function module.build(keys_config)
+    log.info("Building key bindings")
     local bindings = {}
     for _, binding in ipairs(keys_config.global) do
         bindings = awful.util.table.join(

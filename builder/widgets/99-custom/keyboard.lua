@@ -1,3 +1,5 @@
+local log = require("utils/log")
+
 local keyboard = require('backend/keyboard')
 local module = {}
 
@@ -5,7 +7,7 @@ function module.build (widget_type, widget_args)
     if not string.find(widget_type, '^keyboard') then
         return false
     end
-    print('## DEBUG ## Building keyboard')
+    log.debug("Building " .. widget_type .. " widget")
     local widget
     if widget_args.layout.edge == 'top' or widget_args.layout.edge == 'bottom' then
         widget = wibox.layout.fixed.horizontal()

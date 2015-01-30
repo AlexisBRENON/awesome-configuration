@@ -1,3 +1,4 @@
+local log = require("utils/log")
 local wibox = require('wibox')
 local awful = require('awful')
 
@@ -27,7 +28,7 @@ end
 local function build_widgets(widgets, builders)
     -- Loop over all widgets defined in the config
     for widget_type, widget_args in pairs(widgets) do
-        print("## DEBUG ## widgets : building '" .. widget_type .. "'")
+        log.debug("widgets : building '" .. widget_type .. "'")
         local built = false
 
         -- Ask each builder to build the widget, until there is one which manage
@@ -39,7 +40,7 @@ local function build_widgets(widgets, builders)
             end
         end
         if not built then
-            print('## WARN  ## Widget builder <' .. widget_type .. '> not found.')
+            log.warning("Widget builder <" .. widget_type .. "> not found.")
         end
     end
 end
@@ -62,13 +63,13 @@ local function assemble_widgets(widgets)
         -- Left outside the wibox (which is the container)
         -- and the widgets that failed to build
         if not (widget_type == 'wibox' or widget_args.widgets == nil) then
-            print('## DEBUG ## Assembling \''..widget_type.."'")
             -- Save where each widget has to be displayed
             local layout = widget_args.layout
             widgets_list[layout.edge] = widgets_list[layout.edge] or {}
             widgets_list[layout.edge][layout.alignment] = widgets_list[layout.edge][layout.alignment] or {}
             table.insert(widgets_list[layout.edge][layout.alignment], {
                 index = layout.index,
+                type = widget_type,
                 widget = widget_args,
             })
         end
@@ -80,6 +81,7 @@ local function assemble_widgets(widgets)
                 local layout = wibox.layout.fixed.horizontal()
                 table.sort(alignment_list, function(w1, w2) return w1.index < w2.index end)
                 for _, w in pairs(alignment_list) do
+                    log.debug("Assembling '" .. w.type .. "'")
                     add_widget(w.widget, layout, s)
                 end
                 widgets.wibox[edge].layouts[s]['set_'..alignment](widgets.wibox[edge].layouts[s], layout)
@@ -89,6 +91,7 @@ local function assemble_widgets(widgets)
 end
 
 function module.build(config)
+    log.info("Building widgets")
     local builders = find_builders()
     build_widgets(config, builders)
     assemble_widgets(config)

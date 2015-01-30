@@ -1,7 +1,9 @@
+local log = require("utils/log")
 local awful = require("awful")
 local module = {}
 
 function module.build(mouse_config)
+    log.info("Building mouse bindings")
     buttons = {}
     for _, button in pairs(mouse_config.global) do
         buttons = awful.util.table.join(buttons,
