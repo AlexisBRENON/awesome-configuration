@@ -32,6 +32,11 @@ function builder.build(widget_type, widget_args)
         end
         widget:buttons(buttons)
     end
+    if widget_args.signals then
+        for _, signal in ipairs(widget_args.signals) do
+            widget:connect_signal(signal[1], signal[2])
+        end
+    end
 
     widget_args.widgets = widget
     vicious.register(text, vicious.widgets.date, widget_args.format, widget_args.update_time)

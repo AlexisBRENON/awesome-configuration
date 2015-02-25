@@ -57,6 +57,10 @@ function module.load(config)
                 { {}, 3, function() datetime.calendar.show_calendar(-1) end, nil },
                 { {}, 1, function() datetime.calendar.show_calendar(1) end, nil },
             },
+            signals = {
+                { "mouse::enter", function() datetime.calendar.show_calendar(0) end },
+                { "mouse::leave", datetime.calendar.hide_calendar},
+            },
         },
         textbox_sep1 = {
             value = "  ",

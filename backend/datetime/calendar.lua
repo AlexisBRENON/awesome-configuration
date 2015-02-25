@@ -55,7 +55,7 @@ local function show_calendar(inc_offset)
     })
 end
 
-calendar.hide_calendar = hide_calandar
+calendar.hide_calendar = hide_calendar
 calendar.show_calendar = show_calendar
 
 return calendar
