@@ -23,6 +23,15 @@ function builder.build(widget_type, widget_args)
     if widget_args.has_icon then widget:add(icon) end
     if widget_args.has_text then widget:add(text) end
     if widget_args.has_tooltip then tooltip:add_to_object(widget) end
+    if widget_args.buttons then
+        buttons = widget:buttons()
+        for _, button in ipairs(widget_args.buttons) do
+            buttons = awful.util.table.join(
+                buttons,
+                awful.button(button[1], button[2], button[3], button[4]))
+        end
+        widget:buttons(buttons)
+    end
 
     widget_args.widgets = widget
     vicious.register(text, vicious.widgets.date, widget_args.format, widget_args.update_time)

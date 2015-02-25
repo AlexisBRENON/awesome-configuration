@@ -79,6 +79,11 @@ function module.load(config)
     theme.tooltip_opacity = 0.9
     theme.tooltip_fg_color = theme.fg_normal
 
+    -- Widgets
+    theme.widgets = {
+        wibox = {height = 16},
+    }
+
     return theme
 end
 

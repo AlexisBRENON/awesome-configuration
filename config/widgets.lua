@@ -1,4 +1,5 @@
 local log = require("utils/log")
+local datetime = require("backend/datetime")
 
 local module = {}
 
@@ -51,6 +52,10 @@ function module.load(config)
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
                 index = 100, -- Right most
+            },
+            buttons = {
+                { {}, 3, function() datetime.calendar.show_calendar(-1) end, nil },
+                { {}, 1, function() datetime.calendar.show_calendar(1) end, nil },
             },
         },
         textbox_sep1 = {
