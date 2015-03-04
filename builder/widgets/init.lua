@@ -1,6 +1,7 @@
 local log = require("utils/log")
 local wibox = require('wibox')
 local awful = require('awful')
+local lfs = require('lfs')
 
 local module = {
     cwd = ...
@@ -9,18 +10,21 @@ local module = {
 local function find_builders()
     local builders = {} -- Contains all sub-builder available (in decreasing priority order)
     -- List all available sub-builders (in priority order : 00, 10, 50, .., 99)
-    -- TODO : Use a more lua-way to do this
-    local available_builders = io.popen('ls -1 ./' .. module.cwd)
-    if available_builders then
-        for builder in available_builders:lines() do
-            -- init.lua is the current file and is not an actual builder
-            if builder ~= 'init.lua' then
-                -- For the 'require' call, we have to remove the extension
-                builder = builder:gsub('%.lua', '')
-                table.insert(builders, require(module.cwd .. '/' .. builder))
-            end
+    local available_builders = {} 
+    for entity in lfs.dir(module.cwd) do
+        if entity:match('%d%d%-.*') and 
+            lfs.attributes(module.cwd .. '/' .. entity).mode == "directory" then
+            priority = entity:match('%d%d') + 0 -- Cast the string to an integer
+            table.insert(available_builders,
+            {
+                priority = priority,
+                name = module.cwd .. '/' .. entity
+            })
         end
-        available_builders:close()
+    end
+    table.sort(available_builders, function(e1, e2) return e1.priority < e2.priority end)
+    for _, builder in ipairs(available_builders) do
+        table.insert(builders, require(builder.name))
     end
     return builders
 end

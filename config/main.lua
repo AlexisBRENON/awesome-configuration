@@ -9,6 +9,7 @@ function module.load(config)
         modkey = 'Mod4',
         config = awful_wrapper.getdir('config'),
         cache = awful_wrapper.getdir('cache'),
+        builder = awful_wrapper.getdir('config') .. '/builder/',
         hostname = awful_wrapper.get_hostname(),
     }
     return main
