@@ -3,8 +3,8 @@ local awful = require('awful')
 
 local builder = {}
 
-function builder.build(widget_type, widget_args)
-    if not string.find(widget_type, '^tasklist') then
+function builder.build(widget_args)
+    if widget_args.type ~= 'tasklist' then
         return false
     end
     log.debug("Building " .. widget_args)

@@ -7,35 +7,44 @@ function module.load(config)
     log.info("Loading widgets configuration")
     local widgets = {
         -- Start with common widgets
-        wibox = {
-            top = {}, -- I want a wibox on top
-            bottom = nil, -- No wibox at bottom
-            left = nil,
-            right = nil,
+        {
+            type = "wibox",
+            position = "top", -- I want a wibox on top
         },
+        -- No wibox on bottom or sides
+        --[[
+        {
+            type = "wibox",
+            position = "bottom",
+        },
+        --]]
         ---[[
-        promptbox = {
+        {
+            type = "promptbox",
             layout = {
                 edge = 'top',
                 alignment = 'left',
                 index = 100, -- right most
             }
         },
-        taglist = {
+        {
+            type = "taglist",
             layout = {
                 edge = 'top',
                 alignment = 'left',
                 index = 50,
             }
         },
-        layoutbox = {
+        {
+            type = "layoutbox",
             layout = {
                 edge = 'top',
                 alignment = 'left',
                 index = 0, -- Left most widget
             }
         },
-        systray = {
+        {
+            type = "systray",
             screen = '1', -- Only on screen 1
             layout = {
                 edge = 'top', -- Add it to the top wibox
@@ -44,7 +53,8 @@ function module.load(config)
             },
         },
         -- Then declare custom ones
-        datetime = {
+        {
+            type = "datetime",
             has_text = true,
             update_time = 61,
             format = "%a %d/%m, %H:%M",
@@ -62,7 +72,8 @@ function module.load(config)
                 { "mouse::leave", datetime.calendar.hide_calendar},
             },
         },
-        textbox_sep1 = {
+        {
+            type = "textbox",
             value = "  ",
             layout = {
                 edge = 'top',
@@ -70,7 +81,8 @@ function module.load(config)
                 index = 99,
             },
         },
-        battery = {
+        {
+            type = "battery",
             has_text = true,
             has_icon = true,
             has_tooltip = true,
@@ -83,7 +95,8 @@ function module.load(config)
                 index = 30, 
             },
         },
-        textbox_sep2 = {
+        {
+            type = "textbox",
             value = "  ",
             layout = {
                 edge = 'top',
@@ -91,7 +104,8 @@ function module.load(config)
                 index = 29,
             },
         },
-        volume = {
+        {
+            type = "volume",
             has_text = true,
             has_icon = true,
             has_tooltip = false,
@@ -105,7 +119,8 @@ function module.load(config)
                 index = 40, 
             },
         },
-        textbox_sep3 = {
+        {
+            type = "textbox",
             value = "  ",
             layout = {
                 edge = 'top',

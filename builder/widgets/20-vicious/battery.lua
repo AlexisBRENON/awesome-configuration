@@ -7,11 +7,11 @@ local battery = require('backend/battery')
 
 local builder = {}
 
-function builder.build(widget_type, widget_args)
-    if not string.find(widget_type, '^battery') then
+function builder.build(widget_args)
+    if widget_args.type ~= 'battery' then
         return false
     end
-    log.debug("Building " .. widget_type .. " widget")
+    log.debug("Building " .. widget_args.type .. " widget")
     local widget
     if widget_args.layout.edge == 'top' or widget_args.layout.edge == 'bottom' then
         widget = wibox.layout.fixed.horizontal()

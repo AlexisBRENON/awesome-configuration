@@ -20,12 +20,12 @@ function init()
     end
 end
 
-function module.build(widget_type, widget_args)
-    log.debug("20-vicious : searching '" .. widget_type .. "' builder")
+function module.build(widget_args)
+    log.debug("20-vicious : searching '" .. widget_args.type .. "' builder")
     local built = false
     -- Look after a builder able to build this widget
     for _, widget in ipairs(module.widgets) do
-        built = widget.build(widget_type, widget_args)
+        built = widget.build(widget_args)
         if built then
             break
         end

@@ -31,20 +31,20 @@ end
 
 local function build_widgets(widgets, builders)
     -- Loop over all widgets defined in the config
-    for widget_type, widget_args in pairs(widgets) do
-        log.debug("widgets : building '" .. widget_type .. "'")
+    for _, widget_args in ipairs(widgets) do
+        log.debug("widgets : building '" .. widget_args.type .. "'")
         local built = false
 
         -- Ask each builder to build the widget, until there is one which manage
         for _, builder in pairs(builders) do
-            built = builder.build(widget_type, widget_args)
+            built = builder.build(widget_args)
             -- If the build success, go through the next widget
             if built then
                 break
             end
         end
         if not built then
-            log.warning("Widget builder <" .. widget_type .. "> not found.")
+            log.warning("Widget builder <" .. widget_args.type .. "> not found.")
         end
     end
 end
@@ -63,32 +63,35 @@ end
 
 local function assemble_widgets(widgets)
     local widgets_list = {}
-    for widget_type, widget_args in pairs(widgets) do
-        -- Left outside the wibox (which is the container)
-        -- and the widgets that failed to build
-        if not (widget_type == 'wibox' or widget_args.widgets == nil) then
-            -- Save where each widget has to be displayed
-            local layout = widget_args.layout
-            widgets_list[layout.edge] = widgets_list[layout.edge] or {}
-            widgets_list[layout.edge][layout.alignment] = widgets_list[layout.edge][layout.alignment] or {}
-            table.insert(widgets_list[layout.edge][layout.alignment], {
-                index = layout.index,
-                type = widget_type,
-                widget = widget_args,
-            })
+    local wiboxes_list = {}
+    for _, widget_args in ipairs(widgets) do
+        -- Left outside the widgets that failed to build
+        if widget_args.widgets ~= nil then
+            -- If the widget is not a wibox (which is the container)
+            if widget_args.type ~= 'wibox' then
+                -- Save where each widget has to be displayed
+                local layout = widget_args.layout
+                widgets_list[layout.edge] = widgets_list[layout.edge] or {}
+                widgets_list[layout.edge][layout.alignment] = widgets_list[layout.edge][layout.alignment] or {}
+                table.insert(widgets_list[layout.edge][layout.alignment], {
+                    index = layout.index,
+                    widget = widget_args,
+                })
+            else
+                wiboxes_list[widget_args.position] = widget_args
+            end
         end
     end
-
     for s = 1, screen.count() do
         for edge, edge_list in pairs(widgets_list) do
             for alignment, alignment_list in pairs(edge_list) do
                 local layout = wibox.layout.fixed.horizontal()
                 table.sort(alignment_list, function(w1, w2) return w1.index < w2.index end)
                 for _, w in pairs(alignment_list) do
-                    log.debug("Assembling '" .. w.type .. "'")
+                    log.debug("Assembling '" .. w.widget.type .. "'")
                     add_widget(w.widget, layout, s)
                 end
-                widgets.wibox[edge].layouts[s]['set_'..alignment](widgets.wibox[edge].layouts[s], layout)
+                wiboxes_list[edge].layouts[s]['set_'..alignment](wiboxes_list[edge].layouts[s], layout)
             end
         end
     end

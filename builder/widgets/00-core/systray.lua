@@ -3,11 +3,11 @@ local wibox = require('wibox')
 
 local builder = {}
 
-function builder.build(widget_type, widget_args)
-    if not string.find(widget_type, '^systray') then
+function builder.build(widget_args)
+    if widget_args.type ~= 'systray' then
         return false
     end
-    log.debug("Building " .. widget_type)
+    log.debug("Building " .. widget_args.type)
     widget_args.widgets = wibox.widget.systray()
     return true
 end
