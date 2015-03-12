@@ -6,9 +6,6 @@ local vicious = require('vicious')
 local builder = {}
 
 function builder.build(widget_args)
-    if widget_args.type ~= 'datetime' then
-        return false
-    end
     log.debug("Building " .. widget_args.type .. " widget")
     local widget
     if widget_args.layout.edge == 'top' or widget_args.layout.edge == 'bottom' then

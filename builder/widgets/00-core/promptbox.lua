@@ -4,9 +4,6 @@ local wibox = require('wibox')
 local builder = {}
 
 function builder.build(widget_args)
-    if widget_args.type ~= 'promptbox' then
-        return false
-    end
     log.debug("Building " .. widget_args.type)
     widget_args.widgets = {}
     for s = widget_args.screen or 1, widget_args.screen or screen.count() do

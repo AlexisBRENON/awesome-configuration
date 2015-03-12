@@ -15,7 +15,7 @@ function init()
             entity ~= 'init.lua' then
             entity = entity:gsub('%.lua', '')
             -- Add it to the returned table to allow main builder to call sub-builders
-            table.insert(module.widgets, require(module.cwd .. '/' .. entity))
+            module.widgets[entity] = require(module.cwd .. '/' .. entity)
         end
     end
 end
@@ -24,11 +24,8 @@ function module.build(widget_args)
     log.debug("99-custom : searching '" .. widget_args.type .. "' builder")
     local built = false
     -- Look after a builder able to build this widget
-    for _, widget in ipairs(module.widgets) do
-        built = widget.build(widget_args)
-        if built then
-            break
-        end
+    if module.widgets[widget_args.type] then
+        built = module.widgets[widget_args.type].build(widget_args)
     end
     return built
 end

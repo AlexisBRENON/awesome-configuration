@@ -4,9 +4,6 @@ local keyboard = require('backend/keyboard')
 local module = {}
 
 function module.build(widget_args)
-    if widget_args.type ~= 'keyboard' then
-        return false
-    end
     log.debug("Building " .. widget_args.type .. " widget")
     local widget
     if widget_args.layout.edge == 'top' or widget_args.layout.edge == 'bottom' then

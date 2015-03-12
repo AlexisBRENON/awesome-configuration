@@ -6,9 +6,6 @@ local beautiful = require('beautiful')
 local builder = {}
 
 function builder.build(widget_args)
-    if widget_args.type ~= 'wibox' then
-        return false
-    end
     log.debug("Building " .. widget_args.type)
     widget_args.widgets = {}
     widget_args.layouts = {}

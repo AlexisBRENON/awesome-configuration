@@ -4,9 +4,6 @@ local awful = require('awful')
 local builder = {}
 
 function builder.build(widget_args)
-    if widget_args.type ~= 'tasklist' then
-        return false
-    end
     log.debug("Building " .. widget_args)
     widget_args.widgets = {}
     for s = 1, screen.count() do
