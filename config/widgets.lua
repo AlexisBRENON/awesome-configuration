@@ -18,7 +18,6 @@ function module.load(config)
             position = "bottom",
         },
         --]]
-        ---[[
         {
             type = "promptbox",
             layout = {
@@ -128,7 +127,18 @@ function module.load(config)
                 index = 39,
             },
         },
-        --]]
+        {
+            type = "keyboard",
+            has_text = false,
+            has_icon = true,
+            has_tooltip = true,
+            icon = "widgets/keyboard/keyboard.png",
+            layout = {
+                edge = 'top',
+                alignment = 'right',
+                index = 0,
+            },
+        },
     }
 
     return widgets

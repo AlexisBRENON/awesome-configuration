@@ -5,6 +5,7 @@ local keyboard = {}
 
 local current_layout = 1
 local notification_id = nil
+local widgets = {}
 
 local function define_custom_keycodes()
     os.execute("xmodmap -e 'keycode 248 = XF86WLAN NoSymbol XF86WLAN'")
@@ -32,13 +33,15 @@ end
 
 local function notify()
     local layout_name = keyboard_layouts[current_layout][3]
-    if tooltip then tooltip:set_text(layout_name) end
-    notification_id = naughty.notify({
-        text = layout_name,
-        icon = beautiful.icons .. "/widgets/keyboard/keyboard.png",
-        icon_size = 16, 
-        replaces_id = notification_id,
-    }).id
+    for _, widget in ipairs(widgets) do
+        if widget.tooltip then widget.tooltip:set_text(layout_name) end
+        notification_id = naughty.notify({
+            text = layout_name,
+            icon = beautiful.icons .. "/widgets/keyboard/keyboard.png",
+            icon_size = 16, 
+            replaces_id = notification_id,
+        }).id
+    end
 end
 
 local function change_layout()
@@ -49,13 +52,19 @@ local function change_layout()
     notify()
 end
 
+local function add_widget(widget)
+    table.insert(widgets, widget)
+end
+
 local function init(keyboard_config)
     keyboard_layouts = keyboard_config.layouts
     keyboard_custom_keys = keyboard_config.custom_keycodes
     get_current_layout()
     define_custom_keycodes()
+    notify()
 end
 
+keyboard.add_widget = add_widget
 keyboard.change_layout = change_layout
 keyboard.init = init
 
