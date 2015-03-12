@@ -6,13 +6,12 @@ vicious.contrib = {
 }
 local beautiful = require("beautiful")
 
-local module = {}
+local module = {
+    widgets = {} -- widgets to link to the volume level
+}
 
-local function init(widget)
-    module.tooltip = widget.tooltip or nil
-    module.text = widget.text or nil
-    module.icon = widget.icon or nil
-    return module
+local function add_widget(widget)
+    table.insert(module.widgets, widget)
 end
 
 local function update()
@@ -46,7 +45,9 @@ local function set_icon(state, level)
     else
         icon_path = icon_path .. math.floor(tonumber(level)/10) .. ".png"
     end
-    module.icon:set_image(beautiful.icons .. icon_path)
+    for _, widget in ipairs(module.widgets) do
+        widget.icon:set_image(beautiful.icons .. icon_path)
+    end
 end
 
 local function notify(state, level)
@@ -75,7 +76,7 @@ module.decrease = decrease
 module.toggle = toggle
 module.mixer = mixer
 
-module.init = init
+module.add_widget = add_widget
 module.vicious_format = vicious_format
 
 return module

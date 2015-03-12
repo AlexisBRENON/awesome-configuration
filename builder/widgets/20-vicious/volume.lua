@@ -18,7 +18,7 @@ function builder.build(widget_args)
     local text = wibox.widget.textbox()
     local icon = wibox.widget.imagebox()
     local tooltip = awful.tooltip({})
-    volume = volume.init({text = text, icon = icon, tooltip = tooltip})
+    volume.add_widget({text = text, icon = icon, tooltip = tooltip})
 
     if widget_args.has_icon then widget:add(icon) end
     if widget_args.has_text then widget:add(text) end
