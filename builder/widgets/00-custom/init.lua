@@ -21,7 +21,7 @@ function init()
 end
 
 function module.build(widget_args)
-    log.debug("20-vicious : searching '" .. widget_args.type .. "' builder")
+    log.debug("custom : searching '" .. widget_args.type .. "' builder")
     local built = false
     -- Look after a builder able to build this widget
     if module.widgets[widget_args.type] then

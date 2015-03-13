@@ -1,4 +1,5 @@
-local log = require('utils/log')
+local log = require("utils/log")
+local lfs = require("lfs")
 
 -- Return a list of avalaible builder (containing a build() function) of this directory
 local module = {
@@ -20,7 +21,7 @@ function init()
 end
 
 function module.build(widget_args)
-    log.debug("00-core : searching '" .. widget_args.type .. "' builder")
+    log.debug("vicious : searching '" .. widget_args.type .. "' builder")
     local built = false
     -- Look after a builder able to build this widget
     if module.widgets[widget_args.type] then
