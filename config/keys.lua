@@ -1,8 +1,8 @@
 local log = require("utils/log")
 -- Awesome wrappers
-local awful_wrapper = require('backend/awful_wrapper')
-local tag_wrapper = require('backend/tag_wrapper')
-local client_wrapper = require('backend/client_wrapper')
+local awful_wrapper = require('backend/awesome_wrapper/awful')
+local tag_wrapper = require('backend/awesome_wrapper/tag')
+local client_wrapper = require('backend/awesome_wrapper/client')
 -- Custom backend
 local brightness = require('backend/brightness')
 local keyboard = require('backend/keyboard')

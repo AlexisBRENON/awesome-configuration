@@ -1,5 +1,5 @@
 local log = require("utils/log")
-local awful_wrapper = require('backend/awful_wrapper')
+local awful_wrapper = require('backend/awesome_wrapper/awful')
 
 local module = {}
 
