@@ -81,7 +81,7 @@ function module.load(config)
 
     -- Widgets
     theme.widgets = {
-        wibox = {height = 16},
+        wibox = {height = 22},
     }
 
     return theme
