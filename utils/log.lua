@@ -1,4 +1,6 @@
+local io = require("io")
 local log = {
+    output = io.stderr,
     levels = {
         NONE = 0,
         ERROR = 1,
@@ -24,7 +26,15 @@ end
 
 function log.write(level, ...)
     if level <= log.level then
-        print(header(level) .. ...)
+        log.output:write(header(level) .. ... .. "\n")
+    end
+end
+
+function log.set_output(output)
+    if type(output) == "string" then
+        log.output = io.open(output, "a")
+    elseif io.type(output) == "file" then
+        log.output = output
     end
 end
 
