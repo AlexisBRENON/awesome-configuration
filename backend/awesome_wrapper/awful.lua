@@ -15,7 +15,7 @@ function awful_wrapper.restart_awesome()
     awful.util.restart()
 end
 
-function awful_wrapper.quit_aweesome()
+function awful_wrapper.quit_awesome()
     awesome.quit()
 end
 
