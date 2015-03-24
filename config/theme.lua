@@ -8,7 +8,7 @@ function module.load(config)
     theme = {}
 
     -- Define common stuff
-    theme.icons 	= config.main.config ..  "/theme/icons/"
+    theme.icons 	= "/home/alexis/.icons/AwesomeWM/"
     
     theme.wallpaper = {}
     theme.wallpaper.path = "/home/alexis/Dropbox/Documents/Photos/Backgrounds/"
