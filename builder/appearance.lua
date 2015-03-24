@@ -8,18 +8,17 @@ local builder = {}
 function builder.build(theme)
     log.info("Building theme")
     -- Load theme
-    -- TODO : to work, this need some hack in beautiful lib
     beautiful.init(theme)
 
     -- Set wallpaper
-    -- Allow some randomization or anything
-    if beautiful.wallpaper.init then
-        beautiful.wallpaper.init()
-    end
-    -- Allow multiple wallpaper on multiple screen
-    if beautiful.wallpaper.get then
+    if type(beautiful.wallpaper) == "table" then
+        -- Allow some randomization or anything
+        if beautiful.wallpaper.init then
+            beautiful.wallpaper.init(beautiful.wallpaper.path)
+        end
+        -- Allow multiple wallpaper on multiple screen
         for s = 1, screen.count() do
-            gears.wallpaper[beautiful.wallpaper.format](beautiful.wallpaper.get(s), s, beautiful.wallpaper.ignore_aspect)
+            gears.wallpaper[beautiful.wallpaper.format or "maximized"](beautiful.wallpaper.get(s), s, beautiful.wallpaper.ignore_aspect or true)
         end
     else
         for s = 1, screen.count() do

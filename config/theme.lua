@@ -1,4 +1,5 @@
 local log = require("utils/log")
+local wallpaper = require("backend/wallpaper")
 
 local module = {}
 
@@ -8,7 +9,12 @@ function module.load(config)
 
     -- Define common stuff
     theme.icons 	= config.main.config ..  "/theme/icons/"
-    theme.wallpaper = config.main.cache .. "/current-wallpaper.png"
+    
+    theme.wallpaper = {}
+    theme.wallpaper.path = "/home/alexis/Dropbox/Documents/Photos/Backgrounds/"
+    theme.wallpaper.init = wallpaper.init
+    theme.wallpaper.get = wallpaper.get
+    
     theme.font 		= "DejaVu Sans 11"
     theme.font_mono = "DejaVu Sans Mono 8"
 
