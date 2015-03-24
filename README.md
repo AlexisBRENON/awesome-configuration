@@ -49,6 +49,7 @@ one missing !
 - [x] Clean up the mod/ folder and refactor code to avoid too much global data
 - [ ] Create a network widget instead of using a third party applet
 - [ ] Make Shifty an optional requirement
+- [ ] Implement the "help panel" for key bindings
 - [ ] Use multi-threading to increase configuration loading and execution
 
 # How to use it ?
