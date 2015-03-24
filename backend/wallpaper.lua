@@ -6,7 +6,9 @@ local function init(path)
     wallpaper.images = {}
     -- Fetch all available wallpapers
     for image in lfs.dir(path) do
-        table.insert(wallpaper.images, path .. '/' .. image)
+        if image ~= '.' and image ~= '..' then
+            table.insert(wallpaper.images, path .. '/' .. image)
+        end
     end
 
     --Fetch one randomly
