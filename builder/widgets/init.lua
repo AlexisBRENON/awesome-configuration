@@ -25,6 +25,7 @@ local function find_builders()
     table.sort(available_builders, function(e1, e2) return e1.priority < e2.priority end)
     for _, builder in ipairs(available_builders) do
         table.insert(builders, require(builder.name))
+        builders[#builders].init()
     end
     return builders
 end

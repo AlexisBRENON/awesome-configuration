@@ -6,7 +6,7 @@ local module = {
     widgets = {}
 }
 
-function init()
+function module.init()
     local available_builders = {} 
     for entity in lfs.dir(module.cwd) do
         -- For each item in the directory except the current file
@@ -29,5 +29,4 @@ function module.build(widget_args)
     return built
 end
 
-init()
 return module
