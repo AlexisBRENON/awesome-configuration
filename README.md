@@ -47,10 +47,10 @@ one missing !
 - [x] Add a keyboard layout change widget
 - [x] Fix the volume keys, layout change and sreenshot key issues ~~(the three of them are linked)~~
 - [x] Clean up the mod/ folder and refactor code to avoid too much global data
+- [x] ~~Use multi-threading to increase configuration loading and execution~~ Not very useful as Lua can't easily handle multi-core...
 - [ ] Create a network widget instead of using a third party applet
 - [ ] Make Shifty an optional requirement
 - [ ] Implement the "help panel" for key bindings
-- [ ] Use multi-threading to increase configuration loading and execution
 
 # How to use it ?
 
