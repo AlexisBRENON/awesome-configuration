@@ -10,26 +10,44 @@ local module = {
     widgets = {} -- widgets to link to the volume level
 }
 
+local function init(device)
+    module.device = device
+    if string.match(device, ".+%..+%-[0-9_a-b.]+%..+") then
+        module.device_backend_type = vicious.contrib.pulse
+    else
+        module.device_backend_type = vicious.volume
+    end
+    module.add_widget = add_widget
+    module.increase = increase
+    module.decrease = decrease
+    module.toggle = toggle
+    module.mixer = mixer
+
+    return module
+end
+
 local function add_widget(widget)
     table.insert(module.widgets, widget)
 end
 
 local function update()
-    vicious.force({module.text}) -- Update the volume widget
+    for _, widget in ipairs(module.widgets) do
+        vicious.force({widget.text}) -- Update the volume widget
+    end
 end
 
 local function increase()
-    vicious.contrib.pulse.add(5, module.device)
+    module.device_backend_type.add(5, module.device)
     update()
 end
 
 local function decrease()
-    vicious.contrib.pulse.add(-5, module.device)
+    module.device_backend_type.add(-5, module.device)
     update()
 end
 
 local function toggle()
-    vicious.contrib.pulse.toggle(module.device)
+    module.device_backend_type.toggle(module.device)
     update()
 end
 
@@ -71,12 +89,9 @@ end
 
 
 -- Define public interface
-module.increase = increase
-module.decrease = decrease
-module.toggle = toggle
-module.mixer = mixer
 
 module.add_widget = add_widget
 module.vicious_format = vicious_format
+module.init = init
 
 return module
