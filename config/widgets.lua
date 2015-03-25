@@ -44,7 +44,7 @@ function module.load(config)
         },
         {
             type = "systray",
-            screen = '1', -- Only on screen 1
+            screen = 1, -- Only on screen 1
             layout = {
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
