@@ -51,6 +51,16 @@ function module.load(config)
                 index = 0, -- Left most
             },
         },
+        {
+            type = "textbox",
+            value = "  ",
+            screen = 1,
+            layout = {
+                edge = 'top',
+                alignment = 'right',
+                index = 1,
+            },
+        },
         -- Then declare custom ones
         {
             type = "datetime",
@@ -136,7 +146,7 @@ function module.load(config)
             layout = {
                 edge = 'top',
                 alignment = 'right',
-                index = 0,
+                index = 5,
             },
         },
     }
