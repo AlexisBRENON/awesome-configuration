@@ -51,6 +51,7 @@ one missing !
 - [ ] Create a network widget instead of using a third party applet
 - [ ] Make Shifty an optional requirement
 - [ ] Implement the "help panel" for key bindings
+- [ ] Use a better implementation for backend/widgets linking
 
 # How to use it ?
 
