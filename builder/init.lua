@@ -1,6 +1,7 @@
 local builder = {}
 
 function builder.build(config)
+    require('awful/autofocus')
     require('builder/appearance').build(config.theme)
     require('builder/tags').build(config.tags)
     require('builder/rules').build(config.rules)
