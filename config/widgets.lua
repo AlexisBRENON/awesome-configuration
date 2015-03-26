@@ -1,5 +1,6 @@
 local log = require("utils/log")
 local datetime = require("backend/datetime")
+local volume = require("backend/volume")
 
 local module = {}
 
@@ -126,6 +127,12 @@ function module.load(config)
                 edge = 'top', -- Add it to the top wibox
                 alignment = 'right', -- On the right
                 index = 40, 
+            },
+            buttons = {
+                { {}, 4, volume.decrease, nil}, -- scroll
+                { {}, 5, volume.increase, nil}, -- scroll
+                { {}, 3, volume.toggle, nil }, -- right click
+                { {}, 1, volume.mixer, nil }, -- left click
             },
         },
         {

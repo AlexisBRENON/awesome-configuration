@@ -17,11 +17,6 @@ local function init(device)
     else
         module.device_backend_type = vicious.volume
     end
-    module.add_widget = add_widget
-    module.increase = increase
-    module.decrease = decrease
-    module.toggle = toggle
-    module.mixer = mixer
 
     return module
 end
@@ -93,5 +88,8 @@ end
 module.add_widget = add_widget
 module.vicious_format = vicious_format
 module.init = init
-
+module.increase = increase
+module.decrease = decrease
+module.toggle = toggle
+module.mixer = mixer
 return module
