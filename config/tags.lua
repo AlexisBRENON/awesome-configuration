@@ -8,7 +8,7 @@ function module.load(config)
 
     tags.tags = {}
     -- Init (without any name)
-    tags.tags["Main"] = {
+    tags.tags[" "] = {
         position = 0,
         init = true,
     }
