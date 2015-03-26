@@ -1,11 +1,10 @@
 local beautiful = require('beautiful')
-local module = {}
+local module = {
+    widgets = {}
+}
 
-function module.init(widget)
-    module.tooltip = widget.tooltip or nil
-    module.text = widget.text or nil
-    module.icon = widget.icon or nil
-    return module
+function module.add_widget(widget)
+    table.insert(module.widgets, widget)
 end
 
 local function set_icon(state, current)
@@ -23,7 +22,9 @@ local function set_icon(state, current)
     end
     -- Set the right icon
     local icon_level = math.floor(tonumber(current)/10)
-    module.icon:set_image(beautiful.icons .. icon_dir .. icon_level .. ".png")
+    for _, widget in ipairs(module.widgets) do
+        widget.icon:set_image(beautiful.icons .. icon_dir .. icon_level .. ".png")
+    end
 end
 
 local function notify(state, current, time)
@@ -51,7 +52,9 @@ function module.update_icon_percent (widget, args)
     local time = args[3]
     local result = current .. "%"
 
-    module.tooltip:set_text("Temps restant : " .. time)
+    for _, widget in ipairs(module.widgets) do
+        widget.tooltip:set_text("Temps restant : " .. time)
+    end
     set_icon(state, current)
     notify(state, current, time)
 
