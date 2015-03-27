@@ -1,4 +1,5 @@
 local log = require('utils/log')
+local submodule = require("utils/submodule")
 
 -- Return a list of avalaible builder (containing a build() function) of this directory
 local module = {
@@ -7,15 +8,9 @@ local module = {
 }
 
 function module.init()
-    local available_builders = {} 
-    for entity in lfs.dir(module.cwd) do
-        -- For each item in the directory except the current file
-        if entity:match("^.*%.lua$") and
-            entity ~= 'init.lua' then
-            entity = entity:gsub('%.lua', '')
-            -- Add it to the returned table to allow main builder to call sub-builders
-            module.widgets[entity] = require(module.cwd .. '/' .. entity)
-        end
+    for _, submodule_import_name in ipairs(submodule.fetch_submodules(module.cwd)) do
+        module.widgets[submodule.get_module_name(submodule_import_name)] =
+        require(submodule_import_name)
     end
 end
 

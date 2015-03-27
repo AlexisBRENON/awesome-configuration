@@ -1,4 +1,5 @@
 local log = require("utils/log")
+local submodule = require("utils/submodule")
 local wibox = require('wibox')
 local awful = require('awful')
 local lfs = require('lfs')
@@ -9,22 +10,20 @@ local module = {
 
 local function find_builders()
     local builders = {} -- Contains all sub-builder available (in decreasing priority order)
-    -- List all available sub-builders (in priority order : 00, 10, 50, .., 99)
-    local available_builders = {} 
-    for entity in lfs.dir(module.cwd) do
-        if entity:match('%d%d%-.*') and 
-            lfs.attributes(module.cwd .. '/' .. entity).mode == "directory" then
-            priority = entity:match('%d%d') + 0 -- Cast the string to an integer
-            table.insert(available_builders,
-            {
-                priority = priority,
-                name = module.cwd .. '/' .. entity
-            })
-        end
+    local available_builders = {} -- List all available sub-builders (in priority order : 00, 10, 50, .., 99)
+
+    for _, module in ipairs(submodule.fetch_submodules(module.cwd)) do
+        priority = string.match(submodule.get_module_name(module), '^%d%d') + 0 -- Cast the string to an integer
+        table.insert(available_builders,
+        {
+            priority = priority,
+            import_name = module
+        })
     end
+
     table.sort(available_builders, function(e1, e2) return e1.priority < e2.priority end)
     for _, builder in ipairs(available_builders) do
-        table.insert(builders, require(builder.name))
+        table.insert(builders, require(builder.import_name))
         builders[#builders].init()
     end
     return builders
