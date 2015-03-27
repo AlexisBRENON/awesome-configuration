@@ -95,6 +95,8 @@ function module.load(config)
         {{ modkey,           }, "s", client_wrapper.sticky, nil, "Make window sticky"},
         -- Fullscreen
         {{ modkey,           }, "f", client_wrapper.fullscreen, nil, "Make window fullscreen"},
+        -- Maximize the current window
+        {{ modkey,           }, "m", client_wrapper.maximize, nil, "Maximize window"},
         -- Close
         {{ modkey,           }, "x", client_wrapper.kill, nil, "Close window"},
         -- Switch with master window

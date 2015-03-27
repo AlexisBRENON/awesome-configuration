@@ -10,6 +10,12 @@ function client_wrapper.fullscreen(c)
     c.fullscreen = not c.fullscreen
 end
 
+function client_wrapper.maximize(c)
+    c.maximized_horizontal = not c.maximized_horizontal
+    c.maximized_vertical   = not c.maximized_vertical
+    c:raise()
+end
+
 function client_wrapper.kill(c)
     c:kill()
 end
