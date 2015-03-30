@@ -28,6 +28,8 @@ function client_wrapper.move_to_screen(c, relative_idx)
     awful.client.movetoscreen(c, awful.util.cycle(screen.count(), c.screen-relative_idx))
 end
 
+client_wrapper.move_to_tag = awful.client.movetotag
+
 function client_wrapper.focus(c)
     client.focus = c
     c:raise()

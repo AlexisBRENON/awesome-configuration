@@ -1,4 +1,5 @@
 local log = require('utils/log')
+local converter = require('utils/converter')
 local awful = require('awful')
 
 local builder = {}
@@ -10,7 +11,7 @@ function builder.build(widget_args)
         widget_args.widgets[s] = awful.widget.taglist.new(
         s,
         awful.widget.taglist.filter.all,
-        widget_args.buttons or {}
+        converter.create_buttons(widget_args.buttons)
         )
     end
     -- TODO : Support installation without shifty

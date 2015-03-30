@@ -1,4 +1,6 @@
 local log = require("utils/log")
+local tag_wrapper = require("backend/awesome_wrapper/tag")
+local client_wrapper = require("backend/awesome_wrapper/client")
 local datetime = require("backend/datetime")
 local volume = require("backend/volume")
 
@@ -33,7 +35,12 @@ function module.load(config)
                 edge = 'top',
                 alignment = 'left',
                 index = 50,
-            }
+            },
+            buttons = {
+                {{}, 1, tag_wrapper.viewonly, nil, "Display only one tag"},
+                {{config.main.modkey}, 1, client_wrapper.move_to_tag, nil, "Move client to a tag"},
+                {{}, 3, tag_wrapper.viewtoggle, nil, "Toggle a tag"},
+            },
         },
         {
             type = "layoutbox",
