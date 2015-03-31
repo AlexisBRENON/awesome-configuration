@@ -3,7 +3,7 @@ local beautiful = require("beautiful")
 
 local keyboard = {}
 
-local current_layout = 1
+local current_layout = nil
 local notification_id = nil
 local widgets = {}
 
@@ -12,22 +12,27 @@ local function define_custom_keycodes()
 end
 
 local function get_current_layout()
-    -- TODO : Check also that variant is equal
-    local setxkbmap = io.popen("setxkbmap -query | grep layout")
+    -- Fetch in the configured layout the one matching the actual Xorg keyboard settings
+    local setxkbmap = io.popen("setxkbmap -query | grep -e 'layout' -e 'variant'")
+    local layout, variant
     if setxkbmap then
-        for line in setxkbmap:lines() do
-            layout = line:match("^layout:%s*(%w*)$")
-            if layout then
-                for i,v in ipairs(keyboard_layouts) do
-                    if v[1] == layout then
-                        current_layout = i
-                        break
-                    end
-                end
+        layout = (setxkbmap:read()):match("^layout:%s*(%w*)$")
+        variant = (setxkbmap:read()):match("^variant:%s*(%w*)$")
+        setxkbmap:close()
+    end
+    if layout and variant then
+        for i,v in ipairs(keyboard_layouts) do
+            if v[1] == layout and v[2] == variant then
+                current_layout = i
                 break
             end
         end
-        setxkbmap:close()
+        -- Check that we found a matching configuration
+        if not current_layout then
+            error("Unable to find a layout/variant pair matching : " .. layout .. "/" .. variant)
+        end
+    else
+        error("Unable to get the layout/variant setting")
     end
 end
 
