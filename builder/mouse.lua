@@ -1,21 +1,14 @@
 local log = require("utils/log")
-local awful = require("awful")
+local converter = require("utils/converter")
+
 local module = {}
 
 function module.build(mouse_config)
     log.info("Building mouse bindings")
-    buttons = {}
-    for _, button in pairs(mouse_config.global) do
-        buttons = awful.util.table.join(buttons,
-        awful.button(button[1], button[2], button[3], button[4]))
-    end
+    local buttons = converter.create_buttons(mouse_config.global)
     root.buttons(buttons)
 
-    buttons = {}
-    for _, button in pairs(mouse_config.client) do
-        buttons = awful.util.table.join(buttons,
-        awful.button(button[1], button[2], button[3], button[4]))
-    end
+    buttons = converter.create_buttons(mouse_config.client)
     client.buttons(buttons)
 end
 
