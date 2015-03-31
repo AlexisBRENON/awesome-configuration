@@ -1,4 +1,5 @@
 local log = require("utils/log")
+local converter = require("utils/converter")
 local submodule = require("utils/submodule")
 local wibox = require('wibox')
 local awful = require('awful')
@@ -102,6 +103,70 @@ function module.build(config)
     local builders = find_builders()
     build_widgets(config, builders)
     assemble_widgets(config)
+end
+
+-- ------------------------------------------------------------
+-- Functions commonly used by widgets builder
+--
+
+function module.set_buttons(widget, new_buttons)
+    -- Define the mouse actions
+    if new_buttons then
+        -- Fetch the already define shortcuts
+        local buttons = widget:buttons()
+        -- Add new ones
+        buttons = awful.util.table.join(
+            buttons,
+            converter.create_buttons(new_buttons)
+            )
+        -- Define the whole shortcuts
+        widget:buttons(buttons)
+    end
+end
+
+function module.set_signals(widget, signals)
+    -- Define the signals
+    if signals then
+        for _, signal in ipairs(signals) do
+            -- signal[1] = signal name
+            -- signal[2] = signal function
+            widget:connect_signal(signal[1], signal[2])
+        end
+    end
+end
+
+function module.create_container(widget_args)
+    local container
+    -- Fetch the right orientation, vertical or horizontal
+    if widget_args.layout.edge == 'top' or widget_args.layout.edge == 'bottom' then
+        container = wibox.layout.fixed.horizontal()
+    else
+        container = wibox.layout.fixed.vertical()
+    end
+    return container
+end
+
+function module.build_widget(widget_args)
+    local container = module.create_container(widget_args)
+
+    -- Classic widget has : an icon, a text and a tooltip
+    local icon = wibox.widget.imagebox(
+        widget_args.icon)
+    local text = wibox.widget.textbox(
+        widget_args.text)
+    local tooltip = awful.tooltip({})
+
+    -- Wrap these element in a container
+    if widget_args.has_icon then container:add(icon) end
+    if widget_args.has_text then container:add(text) end
+    if widget_args.has_tooltip then tooltip:add_to_object(container) end
+
+    -- Add the mouse shortcuts
+    module.set_buttons(container, widget_args.buttons)
+    -- Connect the signals
+    module.set_signals(container, widget_args.signals)
+
+    return {widget = container, text = text, icon = icon, tooltip= tooltip}
 end
 
 return module

@@ -30,12 +30,12 @@ function module.load()
     config.rules = require('config/rules').load(config)
 
     -------------------------------------------------------------------------------------
-    -- Define widgets
-    config.widgets = require('config/widgets').load(config)
-
-    -------------------------------------------------------------------------------------
     -- Define the theme
     config.theme = require('config.theme').load(config)
+
+    -------------------------------------------------------------------------------------
+    -- Define widgets
+    config.widgets = require('config/widgets').load(config)
 
     return config
 end

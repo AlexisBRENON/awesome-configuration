@@ -1,19 +1,17 @@
 local log = require("utils/log")
-local wibox = require('wibox')
-local awful = require('awful')
+local widget = require("builder/widgets")
 local vicious = require('vicious')
 
-local super = require('builder/widgets/90-vicious')
 
 local builder = {}
 
 function builder.build(widget_args)
     log.debug("Building " .. widget_args.type .. " widget")
 
-    local widget = super.build_widget(widget_args)
-    widget_args.widgets = widget.widget
+    local date_widget = widget.build_widget(widget_args)
+    widget_args.widgets = date_widget.widget
 
-    vicious.register(widget.text, vicious.widgets.date, widget_args.format, widget_args.update_time)
+    vicious.register(date_widget.text, vicious.widgets.date, widget_args.format, widget_args.update_time)
 
     return true
 end

@@ -156,7 +156,7 @@ function module.load(config)
             has_text = false,
             has_icon = true,
             has_tooltip = true,
-            icon = "widgets/keyboard/keyboard.png",
+            icon = config.theme.icons .. "/widgets/keyboard/keyboard.png",
             layout = {
                 edge = 'top',
                 alignment = 'right',
