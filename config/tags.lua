@@ -32,16 +32,8 @@ function module.load(config)
     tags.tags[""] = {
         position = 5,
     }
-    -- Office calc
-    tags.tags[""] = {
-        position = 6,
-    }
     -- Office writer
-    tags.tags[""] = {
-        position = 6,
-    }
-    -- Office impress
-    tags.tags[""] = {
+    tags.tags[""] = {
         position = 6,
     }
     -- Teamviewer

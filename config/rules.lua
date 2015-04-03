@@ -51,7 +51,7 @@ function module.load(config)
                     "libreoffice%-writer",
                 },
             },
-            tag = "",
+            tag = "",
         },
         {
             match = {
