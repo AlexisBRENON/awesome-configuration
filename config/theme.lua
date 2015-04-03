@@ -15,8 +15,8 @@ function module.load(config)
     theme.wallpaper.init = wallpaper.init
     theme.wallpaper.get = wallpaper.get
     
-    theme.font 		= "DejaVu Sans 11"
-    theme.font_mono = "DejaVu Sans Mono 8"
+    theme.font 		= "sans-serif 11"
+    theme.font_mono = "monospace 8"
 
     -- Define color scheme
     theme.bg_normal     = "#272822" -- Monokai black bg
