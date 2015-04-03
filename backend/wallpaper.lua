@@ -6,7 +6,7 @@ local function init(path)
     wallpaper.images = {}
     -- Fetch all available wallpapers
     for image in lfs.dir(path) do
-        if image ~= '.' and image ~= '..' then
+        if image:match("%.jpg$") then
             table.insert(wallpaper.images, path .. '/' .. image)
         end
     end
