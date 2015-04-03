@@ -15,8 +15,8 @@ function module.load(config)
     theme.wallpaper.init = wallpaper.init
     theme.wallpaper.get = wallpaper.get
     
-    theme.font 		= "sans-serif 11"
-    theme.font_mono = "monospace 8"
+    theme.font 		= "sans-serif 12"
+    theme.font_mono = "monospace 11"
 
     -- Define color scheme
     theme.bg_normal     = "#272822" -- Monokai black bg
@@ -48,8 +48,6 @@ function module.load(config)
     theme.taglist_fg_occupied = theme.fg_normal
     theme.taglist_fg_focus = theme.fg_focus
     theme.taglist_fg_urgent = theme.fg_urgent
-
-    theme.taglist_font = "FontAwesome 12"
 
     theme.taglist_squares_sel = theme.icons .. "taglist/none.png"
     theme.taglist_squares_unsel = theme.icons .. "taglist/none.png"
