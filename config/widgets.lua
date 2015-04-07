@@ -30,6 +30,15 @@ function module.load(config)
             }
         },
         {
+            type = "textbox",
+            value = "  ",
+            layout = {
+                edge = 'top',
+                alignment = 'left',
+                index = 99,
+            },
+        },
+        {
             type = "taglist",
             layout = {
                 edge = 'top',
