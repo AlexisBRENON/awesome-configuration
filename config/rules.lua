@@ -8,6 +8,14 @@ function module.load(config)
         {
             match = {
                 class = {
+                    'Termite'
+                },
+            },
+            tag = "",
+        },
+        {
+            match = {
+                class = {
                     'Google%-chrome%-stable'
                 },
             },
@@ -15,19 +23,11 @@ function module.load(config)
         },
         {
             match = {
-                name = {
-                    'vim',
+                class = {
+                    'Vim',
                 },
             },
             tag = "",
-        },
-        {
-            match = {
-                class = {
-                    'URxvt'
-                },
-            },
-            honorsizehints = false,
         },
         {
             match = {

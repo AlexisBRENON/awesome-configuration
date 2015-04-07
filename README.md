@@ -23,6 +23,7 @@ one missing !
 ### Fonts ###
 * ttf-dejavu for common text
 * [FontAwesome](http://fontawesome.io/) for icons
+* Inconsolata for monospace
 
 ### Utils ###
 * pulseaudio and pavucontrol (audio control)
@@ -31,7 +32,7 @@ one missing !
 * ImageMagick (screenshot ability)
 
 ### Default softwares ###
-* **Terminal** : rxvt-unicode-256color ~~+ [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)~~ [zsh + oh my zsh](https://github.com/AlexisBRENON/dotfiles/blob/master/bash/zshrc)
+* **Terminal** : ~~rxvt-unicode-256color + [bash](https://github.com/AlexisBRENON/dotfiles/blob/master/bash.bashrc)~~ [Termite](https://github.com/thestinger/termite) + [zsh + oh my zsh](https://github.com/AlexisBRENON/dotfiles/blob/master/bash/zshrc)
 * **Text editor** : vim + [Vundle](https://github.com/AlexisBRENON/dotfiles/blob/master/vimrc)
 * **Web browser** : Google Chrome (for it's embedded flash player)
 * ~~**File browser** : Gnome Commander~~
