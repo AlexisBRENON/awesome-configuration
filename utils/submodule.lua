@@ -6,7 +6,6 @@ local module = {}
 
 function module.fetch_submodules(current_module_name)
     submodules = {}
-    log.debug(lfs.currentdir())
     -- Look at all enitities in the current directory
     for entity in lfs.dir(current_module_name) do
         -- Left aside :

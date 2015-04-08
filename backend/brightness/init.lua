@@ -26,7 +26,7 @@ local function init()
     for _, backend_import_name in ipairs(submodule.fetch_submodules(import_name)) do
         local backend = require(backend_import_name)
         if backend.is_supported() then
-            log.debug('backlight support : ON (' .. backend.name ..')')
+            log.info('backlight support : ON (' .. backend.name ..')')
             _increase = backend.increase
             _decrease = backend.decrease
             _get = backend.get
