@@ -1,7 +1,10 @@
 local beautiful = require('beautiful')
+local naughty = require('naughty')
 local module = {
     widgets = {}
 }
+local lastwarn = 100
+local notification_id = nil
 
 function module.add_widget(widget)
     table.insert(module.widgets, widget)
@@ -31,16 +34,29 @@ local function notify(state, current, time)
     -- Notify user if battery low
     if current < 10 and state == "−" then
         -- Display a new notification only when percentage decreases
-        if current < module.lastwarn then
-            config.widgets.battery.notification_id = naughty.notify({
+        if current < lastwarn then
+            local icon_dir = "widgets/battery/"
+            if state == "−" then
+                -- battery discharging
+                icon_dir = icon_dir .. "discharging/"
+            elseif state == "+" or state == "↯" then
+                -- Battery charging or full
+                icon_dir = icon_dir .. "charging/"
+            elseif state == "⌁" then
+                -- Battery state unknown
+                icon_dir = icon_dir .. "unknown/"
+            end
+            -- Set the right icon
+            local icon_level = math.floor(tonumber(current)/10)
+            notification_id = naughty.notify({
                 title = "Batterie : niveau bas!",
                 preset = naughty.config.presets.critical,
                 timeout = 20,
                 text = time .. " restante(s)",
                 icon = beautiful.icons .. icon_dir .. icon_level .. ".png",
-                replaces_id = config.widgets.battery.notification_id,
+                replaces_id = notification_id,
             }).id
-            config.widgets.battery.lastwarn = current
+            lastwarn = current
         end
     end
     -- TODO : hibernate computer if current is critical
