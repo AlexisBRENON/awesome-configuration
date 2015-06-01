@@ -54,6 +54,7 @@ local function notify(state, current, time)
                 timeout = 20,
                 text = time .. " restante(s)",
                 icon = beautiful.icons .. icon_dir .. icon_level .. ".png",
+                icon_size = beautiful.naughty_icon_size,
                 replaces_id = notification_id,
             }).id
             lastwarn = current

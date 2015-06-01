@@ -43,7 +43,7 @@ local function notify()
         notification_id = naughty.notify({
             text = layout_name,
             icon = beautiful.icons .. "/widgets/keyboard/keyboard.png",
-            icon_size = 16, 
+            icon_size = beautiful.naughty_icon_size,
             replaces_id = notification_id,
         }).id
     end

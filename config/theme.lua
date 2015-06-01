@@ -62,6 +62,7 @@ function module.load(config)
     end
 
     -- Naughty
+    theme.naughty_icon_size = 22
     -- TODO : Fix this external call
     local naughty = require("naughty")
     naughty.config.presets.normal.bg = theme.bg_normal

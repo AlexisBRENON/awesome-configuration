@@ -11,7 +11,7 @@ local function take_screenshot(client)
     notification_id = naughty.notify({
         text = image_name .. " enregistrée.",
         icon = beautiful.icons .. "/screenshot/notify.png",
-        icon_size = config.widgets.wiboxes.top.size,
+        icon_size = beautiful.naughty_icon_size,
         replaces_id = notification_id,
     }).id
 end
