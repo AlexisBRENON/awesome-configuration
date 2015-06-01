@@ -47,7 +47,7 @@ local function notify()
         title = title,
         text = text,
         icon = beautiful.icons .. "/wlan/" .. icon,
-        icon_size = config.widgets.wiboxes.top.size,
+        icon_size = beautiful.naughty_icon_size,
         replaces_id = notification_id,
     }).id
 end

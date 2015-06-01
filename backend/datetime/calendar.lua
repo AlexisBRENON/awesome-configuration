@@ -40,17 +40,13 @@ local function show_calendar(inc_offset)
         )
     end
 
-    local icon_size = (
-        (beautiful.widgets and beautiful.widgets.datetime and beautiful.widgets.datetime.calendar and beautiful.widgets.datetime.calendar.icon_size) or
-        16
-    )
     -- Display calendar with naughty
     notification = naughty.notify({
         text = cal,
         timeout = 0, -- No timeout
         screen = mouse.screen,
         icon = beautiful.icons .. "widgets/date_time/date.png",
-        icon_size = icon_size,
+        icon_size = beautiful.naughty_icon_size,
         font = beautiful.font_mono,
     })
 end

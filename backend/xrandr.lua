@@ -130,7 +130,7 @@ local function change_screen()
     state.cid = naughty.notify({
         text = label,
         icon = beautiful.icons .. "/screen/" .. icon .. ".png",
-        -- icon_size = config.widgets.wiboxes.top.size,
+        icon_size = beautiful.naughty_icon_size,
         timeout = 4,
         screen = mouse.screen, -- Important, not all screens may be visible
         replaces_id = state.cid

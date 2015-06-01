@@ -16,7 +16,7 @@ local function notify()
     notification_id = naughty.notify({
         text = backlight_percent .. "%",
         icon = beautiful.icons .. "/brightness/" .. backlight_percent .. ".png",
-        icon_size = 22,
+        icon_size = beautiful.naughty_icon_size,
         replaces_id = notification_id
     }).id
 end
