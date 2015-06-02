@@ -23,7 +23,7 @@ function tag_wrapper.change_master_size(direction)
 end
 
 function tag_wrapper.change_layout(relative_idx)
-    awful.layout.inc(awful.layout.layouts, relative_idx, mouse.screen)
+    awful.layout.inc(relative_idx, mouse.screen, awful.layout.layouts)
 end
 
 return tag_wrapper
