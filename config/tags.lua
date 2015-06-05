@@ -7,11 +7,6 @@ function module.load(config)
     local tags = {}
 
     tags.tags = {}
-    -- Init (without any name)
-    tags.tags[" "] = {
-        position = 0,
-        init = true,
-    }
     -- Web browser
     tags.tags[""] = {
         position = 1,
