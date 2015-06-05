@@ -88,6 +88,10 @@ function module.load(config)
         {{ modkey, "Shift"   }, "Right", tag_wrapper.send_to_next, nil, "Send window to next tag"},
         -- Selection screenshot
         {{         "Shift"   }, "Print", screenshot.selection, nil, "Screenshot selection"},
+        -- Move tag to left
+        {{ modkey, "Shift", "Control"}, "Left", function() tag_wrapper.move_tag(-1) end, nil, "Move tag to left"},
+        -- Move tag to right
+        {{ modkey, "Shift", "Control"}, "Right", function() tag_wrapper.move_tag(1) end, nil, "Move tag to right"},
     }
 
     keys.client = {
@@ -101,10 +105,6 @@ function module.load(config)
         {{ modkey,           }, "x", client_wrapper.kill, nil, "Close window"},
         -- Switch with master window
         {{ modkey, "Control" }, "Return", client_wrapper.switch_master, nil, "Switch window with master"},
-        -- Move client to previous screen
-        {{ modkey, "Shift", "Control"}, "Left", function(c) client_wrapper.move_to_screen(c, -1) end, nil, "Send window to previous screen"},
-        -- Move client to next screen
-        {{ modkey, "Shift", "Control"}, "Right", function(c) client_wrapper.move_to_screen(c, 1) end, nil, "Send window to next screen"},
         -- Window
         {{ "Control" }, "Print", screenshot.window, nil, "Window screen shot"}
     }
