@@ -68,6 +68,12 @@ local function toggle(model)
     end
 end
 
+local function mixer(model)
+    return function()
+        model.backend.mixer()
+    end
+end
+
 
 function volume.vicious_format(widget, args)
     local model = widget.model
@@ -104,6 +110,7 @@ function volume.init(_device_name)
                 volume_model.increase = increase(volume_model)
                 volume_model.decrease = decrease(volume_model)
                 volume_model.toggle = toggle(volume_model)
+                volume_model.mixer= mixer(volume_model)
                 models[_device_name] = volume_model
             end
         end
