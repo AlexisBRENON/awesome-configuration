@@ -53,6 +53,7 @@ one missing !
 - [ ] Make Shifty an optional requirement
 - [ ] Implement the "help panel" for key bindings
 - [ ] Use a better implementation for backend/widgets linking
+- [ ] Drop vicious which cannont handle my definition of widget
 
 # How to use it ?
 

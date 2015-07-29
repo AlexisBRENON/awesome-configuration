@@ -145,10 +145,10 @@ function module.load(config)
                 index = 40, 
             },
             buttons = {
-                { {}, 4, volume.decrease, nil}, -- scroll
-                { {}, 5, volume.increase, nil}, -- scroll
-                { {}, 3, volume.toggle, nil }, -- right click
-                { {}, 1, volume.mixer, nil }, -- left click
+                { {}, 4, "decrease", nil}, -- scroll
+                { {}, 5, "increase", nil}, -- scroll
+                { {}, 3, "toggle", nil }, -- right click
+                { {}, 1, "mixer", nil }, -- left click
             },
         },
         {
