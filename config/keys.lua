@@ -12,12 +12,11 @@ local volume = require('backend/volume')
 local wlan = require('backend/wlan')
 local xrandr = require('backend/xrandr')
 
-local module = {}
+local keys = {}
 
-function module.load(config)
+function keys.load(config)
     log.info("Loading key bindings configuration")
     local modkey = config.main.modkey
-    local keys = {}
     keys.global = {
         -- {{ modkeys        }, key, press, release, description},
         -- Disable/Enable WLAN networks
@@ -109,8 +108,9 @@ function module.load(config)
         {{ "Control" }, "Print", screenshot.window, nil, "Window screen shot"}
     }
 
+    keys.load = nil
     return keys
 end
 
-return module
+return keys
 

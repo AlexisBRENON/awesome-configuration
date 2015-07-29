@@ -1,7 +1,6 @@
-local module = {}
+local config = {}
 
-function module.load()
-    local config = {}
+function config.load()
 
     -------------------------------------------------------------------------------------
     -- Define some very common things (modket, pathes, etc...)
@@ -37,8 +36,8 @@ function module.load()
     -- Define widgets
     config.widgets = require('config/widgets').load(config)
 
+    config.load = nil
     return config
 end
-
-return module
+return config
 

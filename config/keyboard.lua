@@ -1,10 +1,9 @@
 local log = require("utils/log")
 
-local module = {}
+local keyboard = {}
 
-function module.load(config)
+function keyboard.load(config)
     log.info("Loading keyboard configuration")
-    local keyboard = {}
     keyboard.layouts = {
         -- {layout, variant, displayed name}
         {"fr", "oss", "Français"}, -- Alternative french AZERTY
@@ -13,9 +12,10 @@ function module.load(config)
     keyboard.custom_keycodes = {
         {248, 'XF86WLAN NoSymbol XF86WLAN'},
     }
-
+    
+    keyboard.load = nil
     return keyboard
 end
 
-return module
+return keyboard
 

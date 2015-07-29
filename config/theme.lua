@@ -1,9 +1,9 @@
 local log = require("utils/log")
 local wallpaper = require("backend/wallpaper")
 
-local module = {}
+local theme = {}
 
-function module.load(config)
+function theme.load(config)
     log.info("Loading theme configuration")
     theme = {}
 
@@ -89,8 +89,9 @@ function module.load(config)
         wibox = {height = 22},
     }
 
+    theme.load = nil
     return theme
 end
 
-return module
+return theme
 

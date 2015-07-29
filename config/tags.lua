@@ -1,10 +1,9 @@
 local log = require("utils/log")
 
-local module = {}
+local tags = {}
 
-function module.load(config)
+function tags.load(config)
     log.info("Loading tags configuration")
-    local tags = {}
 
     tags.tags = {}
     -- Web browser
@@ -52,8 +51,9 @@ function module.load(config)
         'magnifier',
     }
 
+    tags.load = nil
     return tags
 end
 
-return module
+return tags
 

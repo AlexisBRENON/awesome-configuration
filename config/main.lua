@@ -1,19 +1,19 @@
 local log = require("utils/log")
 local awful_wrapper = require('backend/awesome_wrapper/awful')
 
-local module = {}
+local main = {}
 
-function module.load(config)
+function main.load(config)
     log.info("Loading misc configuration")
-    local main = {
-        modkey = 'Mod4',
-        config = awful_wrapper.getdir('config'),
-        cache = awful_wrapper.getdir('cache'),
-        builder = awful_wrapper.getdir('config') .. '/builder/',
-        hostname = awful_wrapper.get_hostname(),
-    }
+    main.modkey = 'Mod4'
+    main.config = awful_wrapper.getdir('config')
+    main.cache = awful_wrapper.getdir('cache')
+    main.builder = awful_wrapper.getdir('config') .. '/builder/'
+    main.hostname = awful_wrapper.get_hostname()
+
+    main.load = nil
     return main
 end
 
-return module
+return main
 

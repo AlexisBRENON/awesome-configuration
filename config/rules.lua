@@ -1,88 +1,87 @@
 local log = require("utils/log")
 
-local module = {}
+local rules = {}
 
-function module.load(config)
+function rules.load(config)
     log.info("Loading windows rules configuration")
-    local rules = {
-        {
-            match = {
-                class = {
-                    'Termite'
-                },
+    table.insert(rules, {
+        match = {
+            class = {
+                'Termite'
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    'Google%-chrome%-stable'
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                'Google%-chrome%-stable'
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    'Vim',
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                'Vim',
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    'Gimp',
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                'Gimp',
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    'Vlc',
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                'Vlc',
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    "libreoffice%-writer",
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                "libreoffice%-writer",
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    "libreoffice%-impress",
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                "libreoffice%-impress",
             },
-            tag = "",
         },
-        {
-            match = {
-                class = {
-                    "libreoffice%-calc",
-                },
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            class = {
+                "libreoffice%-calc",
             },
-            tag = "",
         },
-        {
-            match = {
-                type = {
-                    "dialog",
-                    "splash",
-                }
-            },
-            float = true,
-            intrusive = true,
+        tag = "",
+    })
+    table.insert(rules, {
+        match = {
+            type = {
+                "dialog",
+                "splash",
+            }
         },
-    }
+        float = true,
+        intrusive = true,
+    })
 
+    rules.load = nil
     return rules
 end
 
-return module
+return rules
 
