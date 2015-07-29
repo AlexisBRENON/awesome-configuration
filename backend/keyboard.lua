@@ -1,3 +1,4 @@
+local log = require("utils/log")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
@@ -16,8 +17,10 @@ local function get_current_layout()
     local setxkbmap = io.popen("setxkbmap -query | grep -e 'layout' -e 'variant'")
     local layout, variant
     if setxkbmap then
-        layout = (setxkbmap:read()):match("^layout:%s*(%w*)$")
-        variant = (setxkbmap:read()):match("^variant:%s*(%w*)$")
+        for line in setxkbmap:lines() do
+            layout = layout or line:match("^layout:%s*(%w*)$")
+            variant = variant or line:match("^variant:%s*(%w*)$")
+        end
         setxkbmap:close()
     end
     if layout and variant then
@@ -29,10 +32,12 @@ local function get_current_layout()
         end
         -- Check that we found a matching configuration
         if not current_layout then
-            error("Unable to find a layout/variant pair matching : " .. layout .. "/" .. variant)
+            log.error("Unable to find a layout/variant pair matching : " .. layout .. "/" .. variant)
+            current_layout = 1
         end
     else
-        error("Unable to get the layout/variant setting")
+        log.error("Unable to get the layout/variant setting")
+        current_layout = 1
     end
 end
 
