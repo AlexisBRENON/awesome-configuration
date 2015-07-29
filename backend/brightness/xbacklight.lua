@@ -4,7 +4,12 @@ local function get()
     local current_backlight
     local f = io.popen("xbacklight -get")
     if f then
-        current_backlight = math.floor(tonumber(f:read("*all")))
+        current_backlight = tonumber(f:read("*all"))
+        if type(current_backlight) == "number" then
+            current_backlight = math.floor(current_backlight)
+        else
+            current_backlight = nil
+        end
         f:close()
     end
     return current_backlight
