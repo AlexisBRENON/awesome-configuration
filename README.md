@@ -53,7 +53,7 @@ one missing !
 - [ ] Make Shifty an optional requirement
 - [ ] Implement the "help panel" for key bindings
 - [ ] Use a better implementation for backend/widgets linking
-- [ ] Drop vicious which cannont handle my definition of widget
+- [x] ~~Drop vicious which cannot handle my definition of widget~~ Use a workaround
 
 # How to use it ?
 

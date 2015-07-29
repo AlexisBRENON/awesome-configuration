@@ -17,10 +17,22 @@ function builder.build(widget_args)
         button[3] = volume_model[button[3]]
     end
     local volume_widget = widget.build_widget(widget_args)
+
+    -- Define the intereference between model and view
+    volume_widget.model = volume_model
+    volume.add_widget(volume_model, volume_widget)
+
     widget_args.widgets = volume_widget.widget
 
-    volume.add_widget(volume_model, volume_widget)
-    vicious.register(volume_widget.text, vicious.contrib.pulse, volume[widget_args.format], widget_args.update_time, widget_args.device)
+    if volume_model.backend.has_vicious_support then
+        vicious.register(
+            volume_widget,
+            require(volume_model.backend.vicious_widget),
+            volume[widget_args.format],
+            widget_args.update_time,
+            widget_args.device
+        )
+    end
     return true
 end
 

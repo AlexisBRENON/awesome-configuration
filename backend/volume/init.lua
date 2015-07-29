@@ -36,9 +36,7 @@ end
 
 local function update_views(model, send_notification)
     for _, widget in ipairs(model.views) do
-        local status = model.backend.get(model.device)
-        vicious.force({widget.text}) -- Update the volume widget
-        widget.icon:set_image(get_icon(status))
+        vicious.force({widget}) -- Update the volume widget
     end
     if send_notification then
         notify(model)
@@ -72,17 +70,21 @@ end
 
 
 function volume.vicious_format(widget, args)
-    local state = args[2]
-    local level = args[1]
-    local result = ""
+    local model = widget.model
+    local status = model.backend.get(model.device)
+    local text = ""
 
-    if state == "off" then
-        result = "Muted"
+    if status.muted then
+        text = "Muted"
     else
-        result = level .. "%"
+        text = status.volume .. "%"
     end
-
-    return result
+    widget.text:set_text(text)
+    widget.icon:set_image(get_icon(status))
+    
+    -- Take that vicious
+    -- I already updated the text and icon
+    return widget.text
 end
 
 function volume.init(_device_name)
