@@ -1,60 +1,51 @@
--- Handle brightness
-local naughty = require("naughty")
-local beautiful = require("beautiful")
+--- Brightness model interface.
+-- Interface for brightness management models
+-- @module brightness
+--
+-- @author Alexis BRENON <brenon.alexis+awesome@gmail.com>
 local log = require("utils/log")
 local submodule = require("utils/submodule")
 
-local brightness = {}
-
 local import_name = ...
-local notification_id = nil
-local _increase = nil
-local _decrease = nil
 
-local function notify()
-    local backlight_percent = _get()
-    notification_id = naughty.notify({
-        text = backlight_percent .. "%",
-        icon = beautiful.icons .. "/brightness/" .. backlight_percent .. ".png",
-        icon_size = beautiful.naughty_icon_size,
-        replaces_id = notification_id
-    }).id
+local function missing_implementation(name)
+    return function()
+        log.error("Brightness: missing implementation for funtion '" .. name .. "'.")
+        return nil
+    end
 end
 
-local function init()
+--- Interface for brightness management model.
+-- Contains the full set of functions to override in different implementations
+-- @table interface
+-- @field set Function to set the brightness value (in percent)
+-- @field get Function to get the brightness value (in percent)
+-- @field increase Function to increase the brightness value (no parameter required)
+-- @field decrease Function to decrease the brightness value (no parameter required)
+local interface = {
+    set = missing_implementation('set'),
+    get = missing_implementation('get'),
+    increase = missing_implementation('increase'),
+    decrease = missing_implementation('decrease')
+}
+
+
+--- Initial function runned to get supported classes.
+-- Find each available implementations and return its constructor
+-- @function load_backends
+-- @local
+-- @return A table containing all constructors
+local function load_backends()
+    local available_backends = {}
     -- Search for a supported backend
     for _, backend_import_name in ipairs(submodule.fetch_submodules(import_name)) do
         local backend = require(backend_import_name)
         if backend.is_supported() then
             log.info('backlight support : ON (' .. backend.name ..')')
-            _increase = backend.increase
-            _decrease = backend.decrease
-            _get = backend.get
-            _set = backend.set
+            available_backends[backend.name] = backend.constructor
         end
     end
-    -- If not found assign a warning function
-    if _get == nil then
-        log.info('backlight support : OFF')
-        local function fallback ()
-            log.warning('backlight not supported...')
-        end
-        _increase = fallback
-        _decrease = fallback
-        _get = fallback
-        _set = fallback
-    end
+    return available_backends
 end
 
-function brightness.increase()
-    _increase()
-    notify()
-end
-
-function brightness.decrease()
-    _decrease()
-    notify()
-end
-
-init()
-return brightness
+return load_backends()
