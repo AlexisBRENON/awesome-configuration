@@ -15,7 +15,7 @@ function rules.load(config)
     table.insert(rules, {
         match = {
             class = {
-                'Google%-chrome%-stable'
+                'google%-chrome'
             },
         },
         tag = "",
